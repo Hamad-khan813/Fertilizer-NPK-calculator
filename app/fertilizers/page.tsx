@@ -3,7 +3,7 @@
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import fertilizersData from '@/data/fertilizers.json';
-import { Fertilizer } from '@/lib/calculate';
+import { Fertilizer } from '@/app/lib/calculate';
 
 export default function FertilizersPage() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -95,7 +95,7 @@ export default function FertilizersPage() {
                       </tr>
                     </thead>
                     <tbody>
-                      {fertsInCategory.map((fert, idx) => (
+                      {fertsInCategory.map((fert: Fertilizer, idx: number) => (
                         <tr key={fert.id} className={idx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
                           <td className="px-6 py-4 text-sm font-medium text-gray-900">{fert.name}</td>
                           <td className="px-6 py-4 text-center text-sm text-gray-600">{fert.code}</td>
