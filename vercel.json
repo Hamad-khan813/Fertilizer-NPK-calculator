@@ -1,5 +1,15 @@
 {
-  "buildCommand": "next build",
-  "devCommand": "next dev",
-  "installCommand": "npm install"
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "ferti-calculator.vercel.app"
+        }
+      ],
+      "destination": "https://ferti-calculator.vercel.app/$1",
+      "permanent": true
+    }
+  ]
 }
