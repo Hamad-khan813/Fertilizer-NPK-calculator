@@ -25,6 +25,9 @@ export const metadata: Metadata = {
     type: 'website',
     siteName: 'FertiCalc',
   },
+  verification: {
+    google: 'nA6CNbhkt6FhyCDoQrXABe_G2lH00HfK4cikrh0TrWo',
+  },
 };
 
 export default function RootLayout({
