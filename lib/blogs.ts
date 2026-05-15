@@ -35,6 +35,10 @@ export async function getAllBlogs(): Promise<BlogMeta[]> {
       const fileContents = fs.readFileSync(filePath, 'utf8');
       const { data } = matter(fileContents);
 
+      if (!data.slug) {
+        return null;
+      }
+
       return {
         title: data.title,
         slug: data.slug,
@@ -45,7 +49,8 @@ export async function getAllBlogs(): Promise<BlogMeta[]> {
         category: data.category,
         coverImage: data.coverImage,
       } as BlogMeta;
-    });
+    })
+    .filter((blog): blog is BlogMeta => blog !== null);
 
   // Sort by date descending
   return blogs.sort(
