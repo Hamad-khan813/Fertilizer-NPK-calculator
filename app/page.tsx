@@ -212,12 +212,12 @@ export default function Home() {
               readTime="6 min read"
             />
             <BlogPreviewCard
-              title="Urea vs Ammonium Nitrate: Performance Comparison"
-              excerpt="Which nitrogen source is most efficient for your soil type and temperature?"
-              category="Comparison"
+              title="Urea vs Ammonium Nitrate: Which Nitrogen Fertilizer Is Right for You?"
+              excerpt="The ultimate guide to Nitrogen sources. We break down volatilization, cost-per-unit, and crop-specific efficiency."
+              category="Comparisons"
               slug="urea-vs-ammonium-nitrate"
-              date="Jan 10, 2024"
-              readTime="5 min read"
+              date="May 15, 2025"
+              readTime="18 min read"
             />
             <BlogPreviewCard
               title="Micronutrient Management Beyond NPK"
@@ -271,7 +271,7 @@ function BlogPreviewCard({
 }) {
   const categoryColors: Record<string, string> = {
     Basics: 'bg-blue-100 text-blue-800',
-    Comparison: 'bg-purple-100 text-purple-800',
+    Comparisons: 'bg-purple-100 text-purple-800',
     Guides: 'bg-green-100 text-green-800',
   };
 
