@@ -45,22 +45,32 @@ export default function Footer() {
 
           {/* Resources */}
           <div>
-            <h4 className="font-bold text-white uppercase tracking-widest text-xs mb-6">Learning</h4>
+            <h4 className="font-bold text-white uppercase tracking-widest text-xs mb-6">Agriculture Guides</h4>
             <ul className="space-y-4 text-sm">
               <li>
-                <Link href="/blog" className="hover:text-primary transition-colors">
-                  Agronomy Blog
+                <Link href="/guides/what-is-npk" className="hover:text-primary transition-colors">
+                  What is NPK?
                 </Link>
               </li>
               <li>
-                <Link href="/what-is-npk" className="hover:text-primary transition-colors">
-                  NPK Science
+                <Link href="/guides/foliar-spray-guide" className="hover:text-primary transition-colors">
+                  Foliar Spray Guide
                 </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-primary transition-colors">
-                  Privacy Policy
-                </a>
+                <Link href="/guides/ppm-conversion" className="hover:text-primary transition-colors">
+                  PPM Conversion
+                </Link>
+              </li>
+              <li>
+                <Link href="/guides/flowering-npk" className="hover:text-primary transition-colors">
+                  Flowering NPK
+                </Link>
+              </li>
+              <li>
+                <Link href="/sitemap.xml" className="hover:text-primary transition-colors">
+                  Sitemap
+                </Link>
               </li>
             </ul>
           </div>

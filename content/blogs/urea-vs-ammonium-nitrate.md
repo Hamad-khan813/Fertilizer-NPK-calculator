@@ -419,3 +419,11 @@ If you want to stop guessing at rates and actually calculate exactly how much of
 No spreadsheets. No manual formula. Just the number you need.
 
 [Try the NPK Calculator →](https://ferti-calc.vercel.app)
+
+---
+
+### Related Agriculture Guides
+- **[What is NPK?](/guides/what-is-npk)** - The fundamental science of Nitrogen, Phosphorus, and Potassium.
+- **[Fertilizer Compatibility](/guides/fertilizer-compatibility)** - Why you should never mix Calcium Nitrate with Sulfates.
+- **[Foliar Spray Guide](/guides/foliar-spray-guide)** - Safe application rates for Urea and other nitrogen sources.
+- **[PPM to Grams Conversion](/guides/ppm-conversion)** - Master the math of precision nutrient delivery.

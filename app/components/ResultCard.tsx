@@ -1,13 +1,50 @@
 'use client';
 
+import { useState } from 'react';
 import { CalcResult, Fertilizer } from '../lib/calculate';
 
 interface ResultCardProps {
   result: CalcResult | null;
   fertilizer: Fertilizer | null;
+  inputs?: {
+    targetN: number;
+    targetP: number;
+    targetK: number;
+    volumeLitres: number;
+    fertilizerId: string;
+  } | null;
 }
 
-export default function ResultCard({ result, fertilizer }: ResultCardProps) {
+export default function ResultCard({ result, fertilizer, inputs }: ResultCardProps) {
+  const [copied, setCopied] = useState(false);
+
+  const getShareUrl = () => {
+    if (!inputs) return '';
+    const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://ferti-calc.vercel.app';
+    const params = new URLSearchParams({
+      n: inputs.targetN.toString(),
+      p: inputs.targetP.toString(),
+      k: inputs.targetK.toString(),
+      v: inputs.volumeLitres.toString(),
+      f: inputs.fertilizerId
+    });
+    return `${baseUrl}/?${params.toString()}`;
+  };
+
+  const handleCopy = () => {
+    const url = getShareUrl();
+    navigator.clipboard.writeText(url);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleTweet = () => {
+    if (!result || !fertilizer) return;
+    const text = `I just calculated my fertilizer recipe using @ferticalc — ${result.amountG}${fertilizer.form === 'liquid' ? 'ml' : 'g'} for my target ratio 🍅 Try it free:`;
+    const url = getShareUrl();
+    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
+  };
+
   return (
     <div className="w-full space-y-6">
       {!result || !fertilizer ? (
@@ -26,7 +63,7 @@ export default function ResultCard({ result, fertilizer }: ResultCardProps) {
           {/* Header */}
           <div className="premium-gradient px-6 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="bg-slate-100 p-2 rounded-lg backdrop-blur-sm">
+              <div className="bg-slate-100/20 p-2 rounded-lg backdrop-blur-sm">
                 <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
                 </svg>
@@ -92,6 +129,35 @@ export default function ResultCard({ result, fertilizer }: ResultCardProps) {
                   </p>
                 </div>
               </div>
+            </div>
+
+            {/* Actions */}
+            <div className="grid grid-cols-2 gap-4 pt-4">
+              <button
+                onClick={handleCopy}
+                className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl border border-slate-200 font-bold text-slate-600 hover:bg-slate-50 transition-all active:scale-95"
+              >
+                {copied ? (
+                  <>
+                    <svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                    Copied!
+                  </>
+                ) : (
+                  <>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" /></svg>
+                    Copy Link
+                  </>
+                )}
+              </button>
+              <button
+                onClick={handleTweet}
+                className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#1DA1F2] text-white font-bold hover:brightness-110 transition-all active:scale-95"
+              >
+                <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                  <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.84 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                </svg>
+                Share
+              </button>
             </div>
 
             {/* Warnings/Notes */}

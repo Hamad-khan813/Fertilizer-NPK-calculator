@@ -69,8 +69,9 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={blog.coverImage}
-              alt={blog.title}
+              alt={`Cover image for ${blog.title} - FertiCalc Agronomy Blog`}
               className="w-full h-full object-cover"
+              loading="lazy"
             />
           </div>
         )}

@@ -17,15 +17,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://ferti-calculator.vercel.app'),
+  metadataBase: new URL('https://ferti-calc.vercel.app'),
   alternates: {
     canonical: '/',
   },
-  title: {
-    default: 'Free NPK Fertilizer Calculator | Precise Nutrient Recipes for Any Crop',
-    template: '%s | FertiCalc',
-  },
-  description: 'Calculate exact fertilizer requirements with the world\'s most precise NPK calculator. Access 52+ fertilizers, generate custom recipes, and optimize your fertigation strategy instantly. No registration required.',
+  title: 'NPK Fertilizer Calculator | Free Professional Nutrient Planning Tool',
+  description: 'Calculate exact fertilizer requirements for any NPK ratio. Free professional-grade calculator with 52+ fertilizers, limiting nutrient detection, and grams-per-liter precision. No registration required.',
   keywords: [
     'npk fertilizer calculator', 'nutrient recipe calculator', 'fertilizer dilution calculator', 
     'crop nutrition planning', 'commercial fertilizer calculator', 'liquid fertilizer mixing guide',
@@ -34,12 +31,26 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     siteName: 'FertiCalc',
-    url: 'https://ferti-calculator.vercel.app',
-    title: 'NPK Fertilizer Calculator — Professional Grade Nutrient Planning',
-    description: 'The #1 tool for professional agronomists and farmers. Calculate NPK ratios with 99.9% precision.',
+    url: 'https://ferti-calc.vercel.app',
+    title: 'Free NPK Fertilizer Calculator — Professional Grade',
+    description: 'Eliminate guesswork in crop nutrition. Get precise fertilizer requirements for any target ratio with our advanced agronomical calculator.',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'FertiCalc NPK Calculator',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Free NPK Fertilizer Calculator',
+    description: 'Professional-grade nutrient planning tool. 52+ fertilizers, instant results.',
+    images: ['/og-image.png'],
   },
   verification: {
-    google: 'nA6CNbhkt6FhyCDoQrXABe_G2lH00HfK4cikrh0TrWo',
+    google: 'YOUR_GSC_VERIFICATION_CODE_HERE',
   },
 };
 

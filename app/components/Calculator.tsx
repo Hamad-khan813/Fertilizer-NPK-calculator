@@ -1,15 +1,17 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { Fertilizer, CalcResult, calcAmount } from '../lib/calculate';
 import fertilizersData from '../data/fertilizers.json';
 
 interface CalculatorProps {
-  onResult: (result: CalcResult | null) => void;
+  onResult: (result: CalcResult | null, inputs: any) => void;
   onSelectedFertilizer: (fertilizer: Fertilizer | null) => void;
 }
 
-export default function Calculator({ onResult, onSelectedFertilizer }: CalculatorProps) {
+function CalculatorContent({ onResult, onSelectedFertilizer }: CalculatorProps) {
+  const searchParams = useSearchParams();
   const [targetN, setTargetN] = useState<number>(10);
   const [targetP, setTargetP] = useState<number>(5);
   const [targetK, setTargetK] = useState<number>(10);
@@ -25,11 +27,26 @@ export default function Calculator({ onResult, onSelectedFertilizer }: Calculato
     onSelectedFertilizer(selectedFertilizer);
   }, [selectedFertilizer, onSelectedFertilizer]);
 
-  const handleCalculate = (e: React.FormEvent) => {
-    e.preventDefault();
+  // Load from URL params
+  useEffect(() => {
+    const n = searchParams.get('n');
+    const p = searchParams.get('p');
+    const k = searchParams.get('k');
+    const v = searchParams.get('v');
+    const f = searchParams.get('f');
+
+    if (n) setTargetN(parseFloat(n));
+    if (p) setTargetP(parseFloat(p));
+    if (k) setTargetK(parseFloat(k));
+    if (v) setVolumeLitres(parseFloat(v));
+    if (f) setSelectedFertilizerId(f);
+  }, [searchParams]);
+
+  const handleCalculate = (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
 
     if (!selectedFertilizer) {
-      onResult(null);
+      onResult(null, null);
       return;
     }
 
@@ -41,8 +58,15 @@ export default function Calculator({ onResult, onSelectedFertilizer }: Calculato
       fertilizer: selectedFertilizer,
     });
 
-    onResult(result);
+    onResult(result, { targetN, targetP, targetK, volumeLitres, fertilizerId: selectedFertilizerId });
   };
+
+  // Run initial calculation if params are present
+  useEffect(() => {
+    if (searchParams.toString()) {
+      handleCalculate();
+    }
+  }, [searchParams, selectedFertilizerId]);
 
   // Group fertilizers by category
   const groupedFertilizers = fertilizers.reduce(
@@ -64,11 +88,12 @@ export default function Calculator({ onResult, onSelectedFertilizer }: Calculato
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Target N */}
           <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-2">
+            <label htmlFor="targetN" className="block text-sm font-semibold text-slate-700 mb-2">
               Target N <span className="text-xs text-slate-400 font-normal">(%)</span>
             </label>
             <div className="relative">
               <input
+                id="targetN"
                 type="number"
                 min="0"
                 max="100"
@@ -77,6 +102,7 @@ export default function Calculator({ onResult, onSelectedFertilizer }: Calculato
                 onChange={(e) => setTargetN(parseFloat(e.target.value) || 0)}
                 className="w-full pl-4 pr-10 py-3 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
                 placeholder="0–100"
+                aria-label="Target Nitrogen percentage"
               />
               <span className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-bold">N</span>
             </div>
@@ -84,11 +110,12 @@ export default function Calculator({ onResult, onSelectedFertilizer }: Calculato
 
           {/* Target P */}
           <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-2">
+            <label htmlFor="targetP" className="block text-sm font-semibold text-slate-700 mb-2">
               Target P <span className="text-xs text-slate-400 font-normal">(% P₂O₅)</span>
             </label>
             <div className="relative">
               <input
+                id="targetP"
                 type="number"
                 min="0"
                 max="100"
@@ -97,6 +124,7 @@ export default function Calculator({ onResult, onSelectedFertilizer }: Calculato
                 onChange={(e) => setTargetP(parseFloat(e.target.value) || 0)}
                 className="w-full pl-4 pr-12 py-3 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
                 placeholder="0–100"
+                aria-label="Target Phosphorus percentage"
               />
               <span className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-bold">P₂O₅</span>
             </div>
@@ -104,11 +132,12 @@ export default function Calculator({ onResult, onSelectedFertilizer }: Calculato
 
           {/* Target K */}
           <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-2">
+            <label htmlFor="targetK" className="block text-sm font-semibold text-slate-700 mb-2">
               Target K <span className="text-xs text-slate-400 font-normal">(% K₂O)</span>
             </label>
             <div className="relative">
               <input
+                id="targetK"
                 type="number"
                 min="0"
                 max="100"
@@ -117,6 +146,7 @@ export default function Calculator({ onResult, onSelectedFertilizer }: Calculato
                 onChange={(e) => setTargetK(parseFloat(e.target.value) || 0)}
                 className="w-full pl-4 pr-12 py-3 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
                 placeholder="0–100"
+                aria-label="Target Potassium percentage"
               />
               <span className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-bold">K₂O</span>
             </div>
@@ -126,11 +156,12 @@ export default function Calculator({ onResult, onSelectedFertilizer }: Calculato
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Volume */}
           <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-2">
+            <label htmlFor="volume" className="block text-sm font-semibold text-slate-700 mb-2">
               Target Volume <span className="text-xs text-slate-400 font-normal">(litres)</span>
             </label>
             <div className="relative">
               <input
+                id="volume"
                 type="number"
                 min="0.1"
                 step="0.1"
@@ -138,6 +169,7 @@ export default function Calculator({ onResult, onSelectedFertilizer }: Calculato
                 onChange={(e) => setVolumeLitres(parseFloat(e.target.value) || 1)}
                 className="w-full pl-4 pr-10 py-3 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
                 placeholder="1"
+                aria-label="Target volume in litres"
               />
               <div className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -149,14 +181,16 @@ export default function Calculator({ onResult, onSelectedFertilizer }: Calculato
 
           {/* Fertilizer Dropdown */}
           <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-2">
+            <label htmlFor="fertilizer" className="block text-sm font-semibold text-slate-700 mb-2">
               Select Source Fertilizer
             </label>
             <div className="relative">
               <select
+                id="fertilizer"
                 value={selectedFertilizerId}
                 onChange={(e) => setSelectedFertilizerId(e.target.value)}
                 className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none appearance-none cursor-pointer"
+                aria-label="Select source fertilizer from database"
               >
                 <option value="">-- Choose a fertilizer --</option>
                 {categoryOrder.map((category) => {
@@ -187,7 +221,7 @@ export default function Calculator({ onResult, onSelectedFertilizer }: Calculato
         <button
           type="submit"
           className="w-full py-4 px-6 bg-primary hover:bg-primary-dark text-white font-bold rounded-xl transition-all shadow-lg shadow-primary-20 hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2"
-          aria-label="Calculate fertilizer amount"
+          aria-label="Calculate fertilizer amount and run agronomical analysis"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
@@ -196,5 +230,13 @@ export default function Calculator({ onResult, onSelectedFertilizer }: Calculato
         </button>
       </form>
     </div>
+  );
+}
+
+export default function Calculator(props: CalculatorProps) {
+  return (
+    <Suspense fallback={<div className="h-64 flex items-center justify-center">Loading Calculator...</div>}>
+      <CalculatorContent {...props} />
+    </Suspense>
   );
 }

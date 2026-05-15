@@ -34,8 +34,9 @@ export default function BlogCard({ blog }: BlogCardProps) {
             // eslint-disable-next-line @next/next/no-img-element
             <img
               src={blog.coverImage}
-              alt={blog.title}
+              alt={`${blog.title} cover`}
               className="w-full h-full object-cover"
+              loading="lazy"
             />
           ) : (
             <div className="text-center">
