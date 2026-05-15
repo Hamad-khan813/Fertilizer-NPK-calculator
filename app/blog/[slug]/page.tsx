@@ -9,9 +9,10 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   try {
-    const blog = await getBlogBySlug(params.slug);
+    const { slug } = await params;
+    const blog = await getBlogBySlug(slug);
     return {
       title: blog.title,
       description: blog.excerpt,
@@ -24,9 +25,10 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 }
 
-export default async function BlogPostPage({ params }: { params: { slug: string } }) {
+export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   try {
-    const blog = await getBlogBySlug(params.slug);
+    const { slug } = await params;
+    const blog = await getBlogBySlug(slug);
     const allBlogs = await getAllBlogs();
     const relatedBlogs = allBlogs.filter((b) => b.slug !== blog.slug).slice(0, 2);
 

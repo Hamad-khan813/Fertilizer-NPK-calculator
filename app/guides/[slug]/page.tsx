@@ -10,9 +10,10 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   try {
-    const guide = await getGuideBySlug(params.slug);
+    const { slug } = await params;
+    const guide = await getGuideBySlug(slug);
     return {
       title: guide.title,
       description: guide.excerpt,
@@ -27,9 +28,10 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 }
 
-export default async function GuidePage({ params }: { params: { slug: string } }) {
+export default async function GuidePage({ params }: { params: Promise<{ slug: string }> }) {
   try {
-    const guide = await getGuideBySlug(params.slug);
+    const { slug } = await params;
+    const guide = await getGuideBySlug(slug);
     const allGuides = await getAllGuides();
     const relatedGuides = allGuides.filter((g) => g.slug !== guide.slug).slice(0, 3);
 
