@@ -7,6 +7,8 @@ interface ResultCardProps {
   fertilizer: Fertilizer | null;
 }
 
+export default function ResultCard({ result, fertilizer }: ResultCardProps) {
+  return (
     <div className="w-full space-y-6">
       {!result || !fertilizer ? (
         <div className="bg-white border-2 border-dashed border-slate-200 rounded-2xl p-12 text-center">
@@ -24,14 +26,14 @@ interface ResultCardProps {
           {/* Header */}
           <div className="premium-gradient px-6 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="bg-white/20 p-2 rounded-lg backdrop-blur-sm">
+              <div className="bg-slate-100 p-2 rounded-lg backdrop-blur-sm">
                 <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
                 </svg>
               </div>
               <h3 className="text-white font-bold tracking-wide uppercase text-sm">Analysis Report</h3>
             </div>
-            <span className="text-white/80 text-xs font-mono">{new Date().toLocaleDateString()}</span>
+            <span className="text-slate-100 text-xs font-mono">{new Date().toLocaleDateString()}</span>
           </div>
 
           <div className="p-6 space-y-8">
@@ -72,9 +74,9 @@ interface ResultCardProps {
 
             {/* Insight Box */}
             <div className="bg-slate-900 rounded-2xl p-5 text-white relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full -mr-16 -mt-16 blur-3xl"></div>
+              <div className="absolute top-0 right-0 w-32 h-32 bg-primary-20 rounded-full -mr-16 -mt-16 blur-3xl"></div>
               <div className="relative z-10 flex items-start gap-4">
-                <div className="bg-primary/20 p-2 rounded-lg">
+                <div className="bg-primary-20 p-2 rounded-lg">
                   <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
@@ -114,3 +116,5 @@ interface ResultCardProps {
         </div>
       )}
     </div>
+  );
+}

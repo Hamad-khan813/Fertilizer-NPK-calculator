@@ -14,7 +14,7 @@ export default function Home() {
     <div className="min-h-screen bg-background subtle-grid">
       {/* Hero Section */}
       <section className="relative overflow-hidden pt-20 pb-32 sm:pt-32 sm:pb-40">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(16,185,129,0.1),transparent_50%)]"></div>
+        <div className="absolute inset-0 hero-gradient"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <h1 className="text-6xl sm:text-7xl font-extrabold tracking-tight text-foreground mb-6">
             Calculate Your <span className="text-primary">Perfect</span> NPK Ratio
@@ -149,7 +149,7 @@ export default function Home() {
           <div className="text-center">
             <Link
               href="/blog"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-white hover:bg-slate-100 text-primary font-bold rounded-xl border border-primary/20 transition-all shadow-sm"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-white hover:bg-slate-100 text-primary font-bold rounded-xl border border-primary-20 transition-all shadow-sm"
             >
               Explore All Expert Posts
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -176,7 +176,6 @@ export default function Home() {
           </Link>
         </div>
       </section>
-    </div>
     </div>
   );
 }
@@ -226,4 +225,3 @@ function BlogPreviewCard({
 
   return <Link href={`/blog/${slug}`}>{content}</Link>;
 }
-

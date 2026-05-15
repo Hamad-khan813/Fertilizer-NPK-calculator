@@ -46,4 +46,16 @@
     background-image: radial-gradient(#e2e8f0 0.5px, transparent 0.5px);
     background-size: 24px 24px;
   }
+
+  .hero-gradient {
+    background: radial-gradient(circle at top right, rgba(16, 185, 129, 0.1), transparent 50%);
+  }
+
+  .border-primary-20 {
+    border-color: rgba(16, 185, 129, 0.2);
+  }
+
+  .bg-primary-20 {
+    background-color: rgba(16, 185, 129, 0.2);
+  }
 }
