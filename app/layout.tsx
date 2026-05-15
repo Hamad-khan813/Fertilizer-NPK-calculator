@@ -22,15 +22,21 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   title: {
-    default: 'FertiCalc — NPK Fertilizer Calculator',
+    default: 'Free NPK Fertilizer Calculator | Precise Nutrient Recipes for Any Crop',
     template: '%s | FertiCalc',
   },
-  description: 'Free NPK fertilizer calculator. Calculate exact fertilizer amounts for any target NPK ratio. Plus guides and resources for farmers and agronomists.',
-  keywords: ['npk calculator', 'fertilizer calculator', 'npk ratio', 'urea calculator', 'DAP calculator', 'fertilizer dilution'],
+  description: 'Calculate exact fertilizer requirements with the world\'s most precise NPK calculator. Access 52+ fertilizers, generate custom recipes, and optimize your fertigation strategy instantly. No registration required.',
+  keywords: [
+    'npk fertilizer calculator', 'nutrient recipe calculator', 'fertilizer dilution calculator', 
+    'crop nutrition planning', 'commercial fertilizer calculator', 'liquid fertilizer mixing guide',
+    'hydroponic nutrient calculator', 'soil amendment calculator', 'fertigation basics'
+  ],
   openGraph: {
     type: 'website',
     siteName: 'FertiCalc',
     url: 'https://ferti-calculator.vercel.app',
+    title: 'NPK Fertilizer Calculator — Professional Grade Nutrient Planning',
+    description: 'The #1 tool for professional agronomists and farmers. Calculate NPK ratios with 99.9% precision.',
   },
   verification: {
     google: 'nA6CNbhkt6FhyCDoQrXABe_G2lH00HfK4cikrh0TrWo',
