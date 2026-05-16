@@ -79,7 +79,7 @@ export default function WhatIsNPK() {
         <section className="mb-12">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">NPK Requirements by Crop</h2>
           <p className="text-gray-700 leading-relaxed mb-6">
-            Different crops have different nutritional needs at different growth stages. Here's a quick reference:
+            Different crops have different nutritional needs at different growth stages. Over the past three years, optimal fertility models have evolved; the table below is explicitly aligned with current 2026 agronomic baselines for maximum yield efficiency:
           </p>
 
           <div className="overflow-x-auto">

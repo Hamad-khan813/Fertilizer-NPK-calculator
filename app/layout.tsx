@@ -65,6 +65,8 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
+        <meta property="article:published_time" content="2026-03-15" />
+        <meta property="article:modified_time" content="2026-05-17" />
         <JsonLd />
         {/* Google Analytics 4 */}
         <Script

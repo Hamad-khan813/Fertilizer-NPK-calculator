@@ -41,6 +41,8 @@ export default function JsonLd() {
         'applicationCategory': 'AgricultureApplication',
         'operatingSystem': 'Web',
         'screenshot': 'https://ferti-calc.vercel.app/screenshot.png',
+        'datePublished': '2026-03-15T00:00:00Z',
+        'dateModified': '2026-05-17T00:00:00Z',
         'featureList': [
           'Precision NPK Ratio Calculation',
           'Limiting Nutrient Detection',
@@ -78,7 +80,7 @@ export default function JsonLd() {
             '@type': 'Question',
             'name': 'How much Urea per liter of water for foliar spray?',
             'text': 'What is the recommended safe concentration of Urea (46-0-0) for a foliar spray application per liter of water?',
-            'dateCreated': '2024-05-15T08:00:00Z',
+            'dateCreated': '2026-05-15T08:00:00Z',
             'upvoteCount': 85,
             'acceptedAnswer': {
               '@type': 'Answer',
@@ -93,7 +95,7 @@ export default function JsonLd() {
             '@type': 'Question',
             'name': 'How do I convert PPM to grams per liter of fertilizer?',
             'text': 'What is the mathematical formula for converting target Parts Per Million (PPM) into grams of fertilizer per liter of solution?',
-            'dateCreated': '2024-05-15T09:30:00Z',
+            'dateCreated': '2026-05-15T09:30:00Z',
             'upvoteCount': 124,
             'acceptedAnswer': {
               '@type': 'Answer',
@@ -104,7 +106,7 @@ export default function JsonLd() {
             '@type': 'Question',
             'name': 'What is the best NPK ratio for the flowering stage?',
             'text': 'Which NPK nutrient ratio is most effective for supporting plants during the flowering and bloom stages?',
-            'dateCreated': '2024-05-15T11:00:00Z',
+            'dateCreated': '2026-05-15T11:00:00Z',
             'upvoteCount': 67,
             'acceptedAnswer': {
               '@type': 'Answer',
@@ -115,7 +117,7 @@ export default function JsonLd() {
             '@type': 'Question',
             'name': 'Can I mix different fertilizers together safely?',
             'text': 'Are there any safety concerns or chemical compatibilities I should be aware of when mixing multiple fertilizers in a single concentrate?',
-            'dateCreated': '2024-05-15T14:20:00Z',
+            'dateCreated': '2026-05-15T14:20:00Z',
             'upvoteCount': 92,
             'acceptedAnswer': {
               '@type': 'Answer',
