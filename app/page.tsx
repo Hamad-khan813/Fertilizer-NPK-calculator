@@ -25,7 +25,7 @@ export default function Home() {
           <h1 className="text-5xl sm:text-7xl font-extrabold tracking-tight text-foreground mb-6">
             Free <span className="text-primary">NPK Fertilizer</span> Calculator
           </h1>
-          <p className="text-xl text-slate-600 mb-10 max-w-3xl mx-auto leading-relaxed font-medium">
+          <p className="text-xl hero-description text-slate-600 mb-10 max-w-3xl mx-auto leading-relaxed font-medium">
             Professional-grade nutrient planning for any crop. Calculate precise grams-per-liter recipes instantly. No registration required.
           </p>
           
@@ -60,7 +60,7 @@ export default function Home() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
                   </svg>
                 </div>
-                <h2 className="text-3xl font-bold text-slate-900">Precision Engine</h2>
+                <h2 id="calculator-heading" className="text-3xl font-bold text-slate-900">Precision Engine</h2>
               </div>
               <Calculator onResult={handleResult} onSelectedFertilizer={setSelectedFertilizer} />
             </div>
