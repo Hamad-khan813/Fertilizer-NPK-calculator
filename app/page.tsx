@@ -37,7 +37,7 @@ export default function Home() {
             </span>
           </div>
           <p className="text-xl hero-description text-slate-600 mb-10 max-w-3xl mx-auto leading-relaxed font-medium">
-            Unlike traditional static spreadsheets that require manual conversion factors, FertiCalc provides real-time elemental-to-oxide parsing instantly in the browser. Achieve absolute nutrient precision, protect your soil health, and maximize crop yields with the industry's most advanced open-access engine.
+            Unlike traditional static spreadsheets that require manual conversion factors, FertiCalc provides real-time elemental-to-oxide parsing instantly in the browser. Achieve absolute nutrient precision, protect your soil health, and maximize crop yields with the industry&apos;s most advanced open-access engine.
           </p>
           
           {/* Trust Signals */}
@@ -74,7 +74,7 @@ export default function Home() {
               </li>
               <li className="flex items-start gap-3 text-slate-700 font-medium">
                 <span className="text-primary font-bold">03.</span>
-                <p>Designed for <Link href="#agronomical-features" className="text-primary hover:underline">hydroponic and soil applications</ുവันที่ 17 พฤษภาคม 2026</p>
+                <p>Designed for <Link href="#agronomical-features" className="text-primary hover:underline">hydroponic and soil applications</Link>.</p>
               </li>
               <li className="flex items-start gap-3 text-slate-700 font-medium">
                 <span className="text-primary font-bold">04.</span>
@@ -97,7 +97,7 @@ export default function Home() {
                 </h2>
                 <h3 className="text-4xl font-bold text-slate-900 mb-6">The High Cost of Blending Errors</h3>
                 <p className="text-lg text-slate-600 leading-relaxed">
-                  Manual fertilizer blending is a high-stakes guessing game. Spend hours fighting with confusing elemental vs. oxide conversions for Phosphorus (P₂O₅) and Potassium (K₂O), or risk devastating **crop burn** due to a single misplaced decimal point. Most growers rely on static spreadsheets that can't account for real-time chemical compatibility or varied reservoir scales.
+                  Manual fertilizer blending is a high-stakes guessing game. Spend hours fighting with confusing elemental vs. oxide conversions for Phosphorus (P₂O₅) and Potassium (K₂O), or risk devastating **crop burn** due to a single misplaced decimal point. Most growers rely on static spreadsheets that can&apos;t account for real-time chemical compatibility or varied reservoir scales.
                 </p>
               </div>
               <ul className="space-y-4">
@@ -118,7 +118,7 @@ export default function Home() {
                 </h2>
                 <h3 className="text-4xl font-bold mb-6">Zero Guesswork. Total Precision.</h3>
                 <p className="text-slate-300 text-lg leading-relaxed">
-                  FertiCalc eliminates the technical friction of crop nutrition. Our engine performs real-time, high-density parsing for **52+ fertilizer types** instantly. By automating the agronomical heavy lifting, we help you achieve absolute nutrient precision in under 60 seconds, ensuring every drop contributes to your harvest's success.
+                  FertiCalc eliminates the technical friction of crop nutrition. Our engine performs real-time, high-density parsing for **52+ fertilizer types** instantly. By automating the agronomical heavy lifting, we help you achieve absolute nutrient precision in under 60 seconds, ensuring every drop contributes to your harvest&apos;s success.
                 </p>
               </div>
               <ul className="space-y-4">
@@ -194,7 +194,7 @@ export default function Home() {
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
               </div>
               <h3 className="text-xl font-bold text-slate-900 mb-4">Precision Dosing</h3>
-              <p className="text-slate-600">We've personally tested these mathematical ratios against standard formulations to ensure 99.9% precision for high-value hydroponic and soil systems.</p>
+              <p className="text-slate-600">We&apos;ve personally tested these mathematical ratios against standard formulations to ensure 99.9% precision for high-value hydroponic and soil systems.</p>
             </div>
           </div>
         </div>
@@ -294,7 +294,7 @@ export default function Home() {
             <div>
               <h2 className="text-2xl font-bold text-slate-900 mb-4">Agronomic Standards & Data Origins</h2>
               <p className="text-slate-600 leading-relaxed max-w-4xl">
-                The mathematical core of FertiCalc is built upon verified open-source agricultural data and certified extension methodologies. Our database of 52+ professional-grade fertilizers is cross-referenced against public datasets, including the <a href="https://fdc.nal.usda.gov/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-bold">USDA FoodData Central agricultural datasets</a><sup id="ref-3-source"><a href="#ref-3" className="text-xs text-primary ml-0.5 align-super">[3]</a></sup> and the <a href="https://www.nrcs.usda.gov/resources/guides-and-instructions/nutrient-management-standards" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-bold">NRCS nutrient management standards</a><sup id="ref-4-source"><a href="#ref-4" className="text-xs text-primary ml-0.5 align-super">[4]</a></sup>. Unlike proprietary "black box" tools, our transparency ensures that your recipes are based on proven agronomical science, not marketing hype.
+                The mathematical core of FertiCalc is built upon verified open-source agricultural data and certified extension methodologies. Our database of 52+ professional-grade fertilizers is cross-referenced against public datasets, including the <a href="https://fdc.nal.usda.gov/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-bold">USDA FoodData Central agricultural datasets</a><sup id="ref-3-source"><a href="#ref-3" className="text-xs text-primary ml-0.5 align-super">[3]</a></sup> and the <a href="https://www.nrcs.usda.gov/resources/guides-and-instructions/nutrient-management-standards" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-bold">NRCS nutrient management standards</a><sup id="ref-4-source"><a href="#ref-4" className="text-xs text-primary ml-0.5 align-super">[4]</a></sup>. Unlike proprietary &quot;black box&quot; tools, our transparency ensures that your recipes are based on proven agronomical science, not marketing hype.
               </p>
             </div>
           </div>
@@ -374,7 +374,7 @@ export default function Home() {
                     <svg key={j} className="w-5 h-5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
                   ))}
                 </div>
-                <p className="text-slate-600 italic leading-relaxed mb-8">"{testi.quote}"</p>
+                <p className="text-slate-600 italic leading-relaxed mb-8">&quot;{testi.quote}&quot;</p>
                 <div className="flex items-center gap-4">
                   <div className="w-10 h-10 bg-slate-100 rounded-full shrink-0 flex items-center justify-center font-bold text-slate-400 text-sm">
                     {testi.author.charAt(0)}
@@ -402,8 +402,7 @@ export default function Home() {
           {/* WebMCP Declarative Search FAQ Tool */}
           <div className="mb-12">
             <form 
-              toolname="searchFAQ" 
-              tooldescription="Queries the repository of fertilizer, NPK calculation rules, and soil amendment documentation for quick answers."
+              {...{ toolname: "searchFAQ", tooldescription: "Queries the repository of fertilizer, NPK calculation rules, and soil amendment documentation for quick answers." }}
               className="relative max-w-lg mx-auto"
               onSubmit={(e) => e.preventDefault()}
             >
@@ -413,7 +412,7 @@ export default function Home() {
                 name="faq_query"
                 type="text" 
                 placeholder="Search FAQs (e.g. converting NPK to PPM)..."
-                toolparamdescription="The search keywords or natural language question regarding fertilizer, calculations, or agronomical guidelines."
+                {...{ toolparamdescription: "The search keywords or natural language question regarding fertilizer, calculations, or agronomical guidelines." }}
                 className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all pr-12 text-slate-700"
               />
               <button 
@@ -513,48 +512,3 @@ function GuideCard({ title, description, href }: { title: string; description: s
   );
 }
 
-function BlogPreviewCard({
-  title,
-  excerpt,
-  category,
-  slug,
-  date,
-  readTime,
-  disabled = false,
-}: {
-  title: string;
-  excerpt: string;
-  category: string;
-  slug: string;
-  date: string;
-  readTime: string;
-  disabled?: boolean;
-}) {
-  const categoryColors: Record<string, string> = {
-    Basics: 'bg-blue-100 text-blue-800',
-    Comparisons: 'bg-purple-100 text-purple-800',
-    Guides: 'bg-green-100 text-green-800',
-  };
-
-  const content = (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-lg transition-shadow p-6 h-full flex flex-col text-left">
-      <div className="mb-4">
-        <span className={`inline-block px-2.5 py-0.5 rounded-full text-xs font-medium ${categoryColors[category] || 'bg-gray-100 text-gray-800'}`}>
-          {category}
-        </span>
-      </div>
-      <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2 flex-grow">{title}</h3>
-      <p className="text-sm text-gray-600 mb-4 line-clamp-3">{excerpt}</p>
-      <div className="flex items-center justify-between text-xs text-gray-500 mt-auto pt-4 border-t border-gray-100">
-        <span>{date}</span>
-        <span>{readTime}</span>
-      </div>
-    </div>
-  );
-
-  if (disabled) {
-    return content;
-  }
-
-  return <Link href={`/blog/${slug}`}>{content}</Link>;
-}

@@ -186,7 +186,7 @@ export default function WhatIsNPK() {
         <section>
           <h2 className="text-2xl font-bold text-gray-900 mb-6">The Bottom Line</h2>
           <p className="text-gray-700 leading-relaxed mb-4">
-            NPK ratios are not mysterious or intimidating — they're simply a recipe that tells you the nutritional composition of your fertilizer. By understanding what each number means and matching it to your crop's growth stage and soil conditions, you can:
+            NPK ratios are not mysterious or intimidating &mdash; they&apos;re simply a recipe that tells you the nutritional composition of your fertilizer. By understanding what each number means and matching it to your crop&apos;s growth stage and soil conditions, you can:
           </p>
           <ul className="space-y-2 text-gray-700 mb-6 ml-4">
             <li>✓ Optimize yields and crop quality</li>
