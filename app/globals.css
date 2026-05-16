@@ -58,4 +58,24 @@
   .bg-primary-20 {
     background-color: rgba(16, 185, 129, 0.2);
   }
+
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 9999;
+    padding: 1rem 1.5rem;
+    background-color: var(--primary);
+    color: white;
+    font-weight: 800;
+    border-bottom-right-radius: 0.75rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    transition: left 0.2s ease-in-out;
+  }
+
+  .skip-link:focus {
+    left: 0;
+    outline: 2px solid white;
+    outline-offset: -4px;
+  }
 }

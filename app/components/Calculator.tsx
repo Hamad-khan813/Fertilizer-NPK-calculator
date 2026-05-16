@@ -68,6 +68,49 @@ function CalculatorContent({ onResult, onSelectedFertilizer }: CalculatorProps) 
     }
   }, [searchParams, selectedFertilizerId]);
 
+  // Imperative WebMCP Tool Registration
+  useEffect(() => {
+    if (typeof window !== 'undefined' && (window as any).navigator?.modelContext?.registerTool) {
+      try {
+        (window as any).navigator.modelContext.registerTool({
+          toolname: "calculateNPKMix",
+          tooldescription: "Computes the precise percentage weights and mixing values for Nitrogen (N), Phosphorus (P), and Potassium (K) based on user crop targets",
+          inputSchema: {
+            type: "object",
+            properties: {
+              targetN: { type: "number", description: "Target Nitrogen percentage (0-100)" },
+              targetP: { type: "number", description: "Target Phosphorus (P2O5) percentage (0-100)" },
+              targetK: { type: "number", description: "Target Potassium (K2O) percentage (0-100)" },
+              volume: { type: "number", description: "Total water reservoir volume in litres" },
+              fertilizerId: { type: "string", description: "The ID of the source fertilizer from the database" }
+            },
+            required: ["targetN", "targetP", "targetK", "volume", "fertilizerId"]
+          },
+          execute: async (params: any) => {
+            const fert = fertilizers.find(f => f.id === params.fertilizerId);
+            if (!fert) throw new Error("Fertilizer not found");
+            
+            const calcRes = calcAmount({
+              targetN: params.targetN,
+              targetP: params.targetP,
+              targetK: params.targetK,
+              volumeLitres: params.volume,
+              fertilizer: fert,
+            });
+
+            return JSON.stringify({
+              success: true,
+              result: calcRes,
+              inputs: params
+            });
+          }
+        });
+      } catch (err) {
+        console.warn("WebMCP registration failed:", err);
+      }
+    }
+  }, [fertilizers]);
+
   // Group fertilizers by category
   const groupedFertilizers = fertilizers.reduce(
     (acc, fert) => {
@@ -84,7 +127,13 @@ function CalculatorContent({ onResult, onSelectedFertilizer }: CalculatorProps) 
 
   return (
     <div className="w-full">
-      <form onSubmit={handleCalculate} className="space-y-8">
+      <form 
+        onSubmit={handleCalculate} 
+        className="space-y-8"
+        toolname="calculateNPKMix"
+        tooldescription="Computes the precise percentage weights and mixing values for Nitrogen (N), Phosphorus (P), and Potassium (K) based on user crop targets"
+        toolautosubmit
+      >
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Target N */}
           <div>
@@ -94,6 +143,7 @@ function CalculatorContent({ onResult, onSelectedFertilizer }: CalculatorProps) 
             <div className="relative">
               <input
                 id="targetN"
+                name="nitrogen_input"
                 type="number"
                 min="0"
                 max="100"
@@ -103,6 +153,7 @@ function CalculatorContent({ onResult, onSelectedFertilizer }: CalculatorProps) 
                 className="w-full pl-4 pr-10 py-3 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
                 placeholder="0–100"
                 aria-label="Target Nitrogen percentage"
+                toolparamdescription="The desired target percentage of Nitrogen, entered as a float from 0 to 100."
               />
               <span className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-bold">N</span>
             </div>
@@ -116,6 +167,7 @@ function CalculatorContent({ onResult, onSelectedFertilizer }: CalculatorProps) 
             <div className="relative">
               <input
                 id="targetP"
+                name="phosphorus_input"
                 type="number"
                 min="0"
                 max="100"
@@ -125,6 +177,7 @@ function CalculatorContent({ onResult, onSelectedFertilizer }: CalculatorProps) 
                 className="w-full pl-4 pr-12 py-3 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
                 placeholder="0–100"
                 aria-label="Target Phosphorus percentage"
+                toolparamdescription="The desired target percentage of Phosphorus (P2O5), entered as a float from 0 to 100."
               />
               <span className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-bold">P₂O₅</span>
             </div>
@@ -138,6 +191,7 @@ function CalculatorContent({ onResult, onSelectedFertilizer }: CalculatorProps) 
             <div className="relative">
               <input
                 id="targetK"
+                name="potassium_input"
                 type="number"
                 min="0"
                 max="100"
@@ -147,6 +201,7 @@ function CalculatorContent({ onResult, onSelectedFertilizer }: CalculatorProps) 
                 className="w-full pl-4 pr-12 py-3 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
                 placeholder="0–100"
                 aria-label="Target Potassium percentage"
+                toolparamdescription="The desired target percentage of Potassium (K2O), entered as a float from 0 to 100."
               />
               <span className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-bold">K₂O</span>
             </div>
@@ -162,6 +217,7 @@ function CalculatorContent({ onResult, onSelectedFertilizer }: CalculatorProps) 
             <div className="relative">
               <input
                 id="volume"
+                name="volume_litres"
                 type="number"
                 min="0.1"
                 step="0.1"
@@ -170,6 +226,7 @@ function CalculatorContent({ onResult, onSelectedFertilizer }: CalculatorProps) 
                 className="w-full pl-4 pr-10 py-3 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
                 placeholder="1"
                 aria-label="Target volume in litres"
+                toolparamdescription="The total target volume of the nutrient solution in litres."
               />
               <div className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -187,10 +244,12 @@ function CalculatorContent({ onResult, onSelectedFertilizer }: CalculatorProps) 
             <div className="relative">
               <select
                 id="fertilizer"
+                name="fertilizer_id"
                 value={selectedFertilizerId}
                 onChange={(e) => setSelectedFertilizerId(e.target.value)}
                 className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none appearance-none cursor-pointer"
                 aria-label="Select source fertilizer from database"
+                toolparamdescription="The unique identifier of the source fertilizer to be used in the calculation."
               >
                 <option value="">-- Choose a fertilizer --</option>
                 {categoryOrder.map((category) => {

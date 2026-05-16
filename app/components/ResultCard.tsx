@@ -87,14 +87,14 @@ export default function ResultCard({ result, fertilizer, inputs }: ResultCardPro
             </div>
 
             {/* Nutrients Delivered */}
-            <div className="space-y-4">
-              <h4 className="text-slate-900 font-bold flex items-center gap-2">
+            <figure className="space-y-4">
+              <figcaption className="text-slate-900 font-bold flex items-center gap-2">
                 <svg className="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
                   <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd" />
                 </svg>
                 Delivered Nutrients
-              </h4>
+              </figcaption>
               <div className="grid grid-cols-3 gap-4">
                 {[
                   { label: 'N', val: result.actualN, color: 'text-blue-600', bg: 'bg-blue-50' },
@@ -107,10 +107,10 @@ export default function ResultCard({ result, fertilizer, inputs }: ResultCardPro
                   </div>
                 ))}
               </div>
-            </div>
+            </figure>
 
             {/* Insight Box */}
-            <div className="bg-slate-900 rounded-2xl p-5 text-white relative overflow-hidden">
+            <figure className="bg-slate-900 rounded-2xl p-5 text-white relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-primary-20 rounded-full -mr-16 -mt-16 blur-3xl"></div>
               <div className="relative z-10 flex items-start gap-4">
                 <div className="bg-primary-20 p-2 rounded-lg">
@@ -119,7 +119,7 @@ export default function ResultCard({ result, fertilizer, inputs }: ResultCardPro
                   </svg>
                 </div>
                 <div>
-                  <p className="text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">Limiting Factor</p>
+                  <figcaption className="text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">Limiting Factor</figcaption>
                   <p className="text-sm font-medium leading-relaxed">
                     {result.limitingNutrient ? (
                       <>The target for <span className="text-primary font-bold">{result.limitingNutrient === 'P' ? 'P₂O₅' : result.limitingNutrient === 'K' ? 'K₂O' : result.limitingNutrient}</span> is the limiting factor in this calculation.</>
@@ -129,7 +129,7 @@ export default function ResultCard({ result, fertilizer, inputs }: ResultCardPro
                   </p>
                 </div>
               </div>
-            </div>
+            </figure>
 
             {/* Actions */}
             <div className="grid grid-cols-2 gap-4 pt-4">

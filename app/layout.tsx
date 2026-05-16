@@ -79,10 +79,31 @@ export default function RootLayout({
             gtag('config', 'G-XXXXXXXXXX');
           `}
         </Script>
+        {/* WebMCP (Web Model Context Protocol) Early-Adoption Polyfill */}
+        <Script id="webmcp-polyfill" strategy="beforeInteractive">
+          {`
+            (function() {
+              if (typeof navigator.modelContext === 'undefined') {
+                console.log('WebMCP not found, initializing polyfill surface...');
+                // Placeholder for @mcp-b/global surface initialization
+                window.navigator.modelContext = {
+                  registerTool: function(tool) {
+                    console.info('WebMCP Tool Registered (Polyfilled):', tool.toolname);
+                  }
+                };
+              }
+            })();
+          `}
+        </Script>
       </head>
       <body className="min-h-full flex flex-col">
-        <Navbar />
-        <div className="flex-grow">{children}</div>
+        <a href="#main-content" className="skip-link">Skip to Content</a>
+        <header role="banner">
+          <Navbar />
+        </header>
+        <main id="main-content" role="main" tabIndex={-1} className="flex-grow">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>

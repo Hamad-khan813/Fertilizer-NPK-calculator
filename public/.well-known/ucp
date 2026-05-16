@@ -1,0 +1,29 @@
+{
+  "ucp_version": "1.0.0",
+  "business_profile": {
+    "name": "FertiCalc",
+    "description": "Precision agricultural calculations and NPK fertilizer recipe planning tools.",
+    "website": "https://ferti-calc.vercel.app",
+    "contact": {
+      "email": "support@ferti-calc.vercel.app",
+      "address": "123 Agri Lane, Harvest City, NY 10001"
+    }
+  },
+  "capabilities": {
+    "webmcp_tools": {
+      "discovery_endpoint": "/.well-known/ucp/tools",
+      "registered_tools": [
+        {
+          "name": "calculateNPKMix",
+          "description": "Computes the precise percentage weights and mixing values for Nitrogen (N), Phosphorus (P), and Potassium (K) based on user crop targets",
+          "endpoint": "/"
+        },
+        {
+          "name": "searchFAQ",
+          "description": "Queries the repository of fertilizer, NPK calculation rules, and soil amendment documentation for quick answers.",
+          "endpoint": "/"
+        }
+      ]
+    }
+  }
+}
