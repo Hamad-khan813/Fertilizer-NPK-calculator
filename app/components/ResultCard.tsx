@@ -55,7 +55,7 @@ export default function ResultCard({ result, fertilizer, inputs }: ResultCardPro
             </svg>
           </div>
           <p className="text-slate-500 font-medium">
-            Configure your targets and click "Run Analysis" to generate your fertilizer recipe.
+            Configure your targets and click &quot;Run Analysis&quot; to generate your fertilizer recipe.
           </p>
         </div>
       ) : (

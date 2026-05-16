@@ -5,8 +5,16 @@ import { useSearchParams } from 'next/navigation';
 import { Fertilizer, CalcResult, calcAmount } from '../lib/calculate';
 import fertilizersData from '../data/fertilizers.json';
 
+interface CalculatorInputs {
+  targetN: number;
+  targetP: number;
+  targetK: number;
+  volumeLitres: number;
+  fertilizerId: string;
+}
+
 interface CalculatorProps {
-  onResult: (result: CalcResult | null, inputs: any) => void;
+  onResult: (result: CalcResult | null, inputs: CalculatorInputs | null) => void;
   onSelectedFertilizer: (fertilizer: Fertilizer | null) => void;
 }
 
@@ -70,9 +78,9 @@ function CalculatorContent({ onResult, onSelectedFertilizer }: CalculatorProps) 
 
   // Imperative WebMCP Tool Registration
   useEffect(() => {
-    if (typeof window !== 'undefined' && (window as any).navigator?.modelContext?.registerTool) {
+    if (typeof window !== 'undefined' && 'modelContext' in navigator) {
       try {
-        (window as any).navigator.modelContext.registerTool({
+        (window as unknown as { navigator: { modelContext: { registerTool: (tool: Record<string, unknown>) => void } } }).navigator.modelContext.registerTool({
           toolname: "calculateNPKMix",
           tooldescription: "Computes the precise percentage weights and mixing values for Nitrogen (N), Phosphorus (P), and Potassium (K) based on user crop targets",
           inputSchema: {
@@ -86,15 +94,15 @@ function CalculatorContent({ onResult, onSelectedFertilizer }: CalculatorProps) 
             },
             required: ["targetN", "targetP", "targetK", "volume", "fertilizerId"]
           },
-          execute: async (params: any) => {
+          execute: async (params: Record<string, unknown>) => {
             const fert = fertilizers.find(f => f.id === params.fertilizerId);
             if (!fert) throw new Error("Fertilizer not found");
             
             const calcRes = calcAmount({
-              targetN: params.targetN,
-              targetP: params.targetP,
-              targetK: params.targetK,
-              volumeLitres: params.volume,
+              targetN: Number(params.targetN),
+              targetP: Number(params.targetP),
+              targetK: Number(params.targetK),
+              volumeLitres: Number(params.volume),
               fertilizer: fert,
             });
 

@@ -6,12 +6,20 @@ import Calculator from './components/Calculator';
 import ResultCard from './components/ResultCard';
 import { CalcResult, Fertilizer } from './lib/calculate';
 
+interface CalculatorInputs {
+  targetN: number;
+  targetP: number;
+  targetK: number;
+  volumeLitres: number;
+  fertilizerId: string;
+}
+
 export default function Home() {
   const [result, setResult] = useState<CalcResult | null>(null);
-  const [inputs, setInputs] = useState<any>(null);
+  const [inputs, setInputs] = useState<CalculatorInputs | null>(null);
   const [selectedFertilizer, setSelectedFertilizer] = useState<Fertilizer | null>(null);
 
-  const handleResult = (res: CalcResult | null, ins: any) => {
+  const handleResult = (res: CalcResult | null, ins: CalculatorInputs | null) => {
     setResult(res);
     setInputs(ins);
   };
