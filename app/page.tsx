@@ -33,7 +33,7 @@ export default function Home() {
           <h1 className="text-5xl sm:text-7xl font-extrabold tracking-tight text-foreground mb-6">
             Free <span className="text-primary">NPK Fertilizer</span> Calculator
           </h1>
-          <div className="flex items-center justify-center gap-4 text-xs sm:text-sm text-slate-400 mb-8 font-semibold uppercase tracking-wider">
+          <div className="flex items-center justify-center gap-4 text-xs sm:text-sm text-slate-600 mb-8 font-semibold uppercase tracking-wider">
             <span>By Hamad Khan • Updated: <time dateTime="2026-05-17">May 17, 2026</time></span>
           </div>
           <p className="text-xl hero-description text-slate-600 mb-6 max-w-3xl mx-auto leading-relaxed font-medium">
@@ -42,10 +42,10 @@ export default function Home() {
 
           {/* Visually Distinct TL;DR Summary Box */}
           <div className="mb-10 p-8 bg-emerald-50/50 backdrop-blur-sm border border-primary/20 rounded-3xl text-left max-w-4xl mx-auto shadow-sm">
-            <h3 id="tldr-summary" className="text-sm font-black uppercase tracking-widest text-primary mb-4 flex items-center gap-2">
+            <h2 id="tldr-summary" className="text-sm font-black uppercase tracking-widest text-primary mb-4 flex items-center gap-2">
               <span className="w-8 h-px bg-primary"></span>
               Quick Summary &amp; Key Takeaways
-            </h3>
+            </h2>
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <li className="flex items-start gap-3 text-slate-700 font-medium">
                 <span className="text-primary font-bold">01.</span>
@@ -214,26 +214,26 @@ export default function Home() {
                   <table className="w-full text-left border-collapse">
                     <thead>
                       <tr className="bg-slate-50 border-b border-slate-100">
-                        <th className="px-4 py-3 text-xs font-black uppercase text-slate-400">Crop Group</th>
-                        <th className="px-4 py-3 text-xs font-black uppercase text-slate-400">Target Ratio</th>
+                        <th className="px-4 py-3 text-xs font-bold uppercase text-slate-700">Crop Group</th>
+                        <th className="px-4 py-3 text-xs font-bold uppercase text-slate-700">Target Ratio</th>
                       </tr>
                     </thead>
                     <tbody className="text-sm">
                       <tr className="border-b border-slate-50">
                         <td className="px-4 py-3 font-bold text-slate-700">Leafy Greens</td>
-                        <td className="px-4 py-3 text-primary font-mono text-[10px] leading-tight">Applying a 3-1-2 blend delivers exactly 3 parts Nitrogen to 1 part Phosphate and 2 parts Potash, which directly maximizes vegetative canopy expansion.</td>
+                        <td className="px-4 py-3 text-emerald-800 font-mono text-[10px] leading-tight">Applying a 3-1-2 blend delivers exactly 3 parts Nitrogen to 1 part Phosphate and 2 parts Potash, which directly maximizes vegetative canopy expansion.</td>
                       </tr>
                       <tr className="border-b border-slate-50">
                         <td className="px-4 py-3 font-bold text-slate-700">Flowering Phase</td>
-                        <td className="px-4 py-3 text-primary font-mono text-[10px] leading-tight">Applying a 1-3-2 blend delivers exactly 3 parts Phosphorus, which directly triggers robust bud formation and heavy fruit sets.</td>
+                        <td className="px-4 py-3 text-emerald-800 font-mono text-[10px] leading-tight">Applying a 1-3-2 blend delivers exactly 3 parts Phosphorus, which directly triggers robust bud formation and heavy fruit sets.</td>
                       </tr>
                       <tr className="border-b border-slate-50">
                         <td className="px-4 py-3 font-bold text-slate-700">Root Vegetables</td>
-                        <td className="px-4 py-3 text-primary font-mono text-[10px] leading-tight">Applying a 1-2-2 blend balances Phosphorus and Potassium, which directly optimizes dense subsurface root mass development.</td>
+                        <td className="px-4 py-3 text-emerald-800 font-mono text-[10px] leading-tight">Applying a 1-2-2 blend balances Phosphorus and Potassium, which directly optimizes dense subsurface root mass development.</td>
                       </tr>
                       <tr>
                         <td className="px-4 py-3 font-bold text-slate-700">General Growth</td>
-                        <td className="px-4 py-3 text-primary font-mono text-[10px] leading-tight">Applying a balanced 1-1-1 blend delivers equal nutrient distributions, which directly maintains baseline soil fertility across all phases.</td>
+                        <td className="px-4 py-3 text-emerald-800 font-mono text-[10px] leading-tight">Applying a balanced 1-1-1 blend delivers equal nutrient distributions, which directly maintains baseline soil fertility across all phases.</td>
                       </tr>
                     </tbody>
                   </table>
@@ -257,7 +257,7 @@ export default function Home() {
             <h3 id="terminology" className="text-2xl font-bold text-slate-900 mb-6">Understanding NPK Ratios and Elemental-to-Oxide Conversions</h3>
             <div className="text-slate-600 text-base leading-relaxed space-y-6">
               <p>
-                Standard commercial fertilizer labels display NPK values as weight percentages of oxide compounds rather than raw elemental forms. According to the academic guide by the <cite>University of Minnesota Extension</cite><sup><a href="#ref-1" id="ref-1-source-1" className="text-xs text-primary ml-0.5 align-super font-bold hover:underline">[1]</a></sup>, applying a balanced 10-10-10 NPK blend delivers exactly 10% each of Nitrogen, available Phosphate, and soluble Potash by total weight, which directly prevents standard soil depletion during heavy vegetative growth phases, but actually only yields 4.4% available elemental phosphorus and 8.3% available elemental potassium due to oxide molecular weight.
+                Standard commercial fertilizer labels display NPK values as weight percentages of oxide compounds rather than raw elemental forms. According to the academic guide by the <cite>University of Minnesota Extension</cite><sup><a href="#ref-1" id="ref-1-source-1" className="text-xs text-slate-900 ml-0.5 align-super font-bold hover:underline">[1]</a></sup>, applying a balanced 10-10-10 NPK blend delivers exactly 10% each of Nitrogen, available Phosphate, and soluble Potash by total weight, which directly prevents standard soil depletion during heavy vegetative growth phases, but actually only yields 4.4% available elemental phosphorus and 8.3% available elemental potassium due to oxide molecular weight.
               </p>
               <p>
                 To convert P₂O₅ back to its elemental form, we apply a specific conversion constant of 0.4364, which is derived directly from the molar mass ratio of phosphorus to oxygen. In phosphorus compounds, the two phosphorus atoms contribute 61.94 g/mol relative to the compound total of 141.94 g/mol, which directly indicates that more than half of the oxide weight consists of heavier oxygen atoms that do not feed the plant. Similarly, Potassium oxide (K₂O) requires a conversion factor of 0.8302 based on potassium&apos;s atomic weight contribution of 78.2 g/mol per 94.2 g/mol total, which directly indicates that potash applications must be scaled down by exactly 16.98% to represent actual elemental potassium available in the root zone.
@@ -547,12 +547,12 @@ export default function Home() {
                   type="text" 
                   placeholder="Search FAQs (e.g. converting NPK to PPM)..."
                   {...{ toolparamdescription: "The search keywords or natural language question regarding fertilizer, calculations, or agronomical guidelines." }}
-                  className="w-full px-5 py-4 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all pr-12 text-slate-700 shadow-sm"
+                  className="w-full py-3.5 px-5 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all pr-12 text-slate-700 shadow-sm"
                 />
                 <button 
                   type="submit" 
                   aria-label="Submit search query" 
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-primary transition-colors"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 w-11 h-11 flex items-center justify-center p-3 text-slate-600 hover:text-primary transition-colors"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -567,8 +567,8 @@ export default function Home() {
                 <div className="text-slate-600 space-y-4">
                   <p>Converting parts-per-million (PPM) to grams per liter requires dividing the target PPM by the active nutrient percentage, then dividing by 1,000. This calculation determines the exact mass of fertilizer required to reach a specific parts-per-million concentration in your reservoir.</p>
                   <figure className="bg-slate-50 p-4 rounded-xl border border-slate-200 overflow-x-auto">
-                    <code className="text-primary font-mono text-sm">Grams/L = (Target PPM / (Fertilizer % / 100)) / 1000</code>
-                    <figcaption className="text-[10px] text-slate-400 mt-2 uppercase tracking-widest font-bold">Equation 1.1: PPM to Mass Conversion</figcaption>
+                    <code className="text-emerald-800 font-mono text-sm">Grams/L = (Target PPM / (Fertilizer % / 100)) / 1000</code>
+                    <figcaption className="text-[10px] text-slate-600 mt-2 uppercase tracking-widest font-bold">Equation 1.1: PPM to Mass Conversion</figcaption>
                   </figure>
                   <p>Our engine performs this calculation automatically across all supported fertilizers to ensure zero margin for error.</p>
                 </div>
@@ -598,19 +598,19 @@ export default function Home() {
             <ol className="references list-decimal list-outside ml-6 space-y-4 text-sm text-slate-600 text-left">
               <li id="ref-1">
                 <cite>University of Minnesota Extension. (2024). Understanding Phosphorus Fertilizers. Retrieved from <a href="https://extension.umn.edu/how/manage-soil-nutrients" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">extension.umn.edu</a>.</cite>
-                <a href="#ref-1-source-1" aria-label="Back to content" className="ml-2 text-slate-400 hover:text-primary">↩</a>
+                <a href="#ref-1-source-1" aria-label="Back to content" className="ml-2 text-slate-600 hover:text-primary">↩</a>
               </li>
               <li id="ref-2">
                 <cite>International Plant Nutrition Institute (IPNI). (2018). Fertilizer Compatibility Matrix & Guidelines. Retrieved from <a href="https://www.ipni.net/article/IPNI-3240" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">ipni.net</a>.</cite>
-                <a href="#ref-2-source-1" aria-label="Back to content" className="ml-2 text-slate-400 hover:text-primary">↩</a>
+                <a href="#ref-2-source-1" aria-label="Back to content" className="ml-2 text-slate-600 hover:text-primary">↩</a>
               </li>
               <li id="ref-3">
                 <cite>U.S. Department of Agriculture (USDA). (2026). FoodData Central: Agricultural Foundation Data. Retrieved from <a href="https://fdc.nal.usda.gov/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">fdc.nal.usda.gov</a>.</cite>
-                <a href="#ref-3-source-1" aria-label="Back to content" className="ml-2 text-slate-400 hover:text-primary">↩</a>
+                <a href="#ref-3-source-1" aria-label="Back to content" className="ml-2 text-slate-600 hover:text-primary">↩</a>
               </li>
               <li id="ref-4">
                 <cite>Natural Resources Conservation Service (NRCS). (2025). Nutrient Management Standard (Code 590). Retrieved from <a href="https://www.nrcs.usda.gov/resources/guides-and-instructions" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">nrcs.usda.gov</a>.</cite>
-                <a href="#ref-4-source-1" aria-label="Back to content" className="ml-2 text-slate-400 hover:text-primary">↩</a>
+                <a href="#ref-4-source-1" aria-label="Back to content" className="ml-2 text-slate-600 hover:text-primary">↩</a>
               </li>
             </ol>
           </div>

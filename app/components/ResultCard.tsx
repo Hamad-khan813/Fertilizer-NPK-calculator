@@ -79,7 +79,7 @@ export default function ResultCard({ result, fertilizer, inputs }: ResultCardPro
               <p className="text-slate-500 text-sm font-semibold uppercase tracking-wider mb-2">Required Amount</p>
               <div className="flex items-baseline justify-center gap-2">
                 <span className="text-6xl font-black text-slate-900 tracking-tight">{result.amountG}</span>
-                <span className="text-2xl font-bold text-slate-400">{fertilizer.form === 'liquid' ? 'ml' : 'g'}</span>
+                <span className="text-2xl font-bold text-slate-600">{fertilizer.form === 'liquid' ? 'ml' : 'g'}</span>
               </div>
               <p className="mt-4 text-slate-600 font-medium px-4 py-2 bg-slate-50 rounded-full inline-block">
                 Using {fertilizer.name}
@@ -119,7 +119,7 @@ export default function ResultCard({ result, fertilizer, inputs }: ResultCardPro
                   </svg>
                 </div>
                 <div>
-                  <figcaption className="text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">Limiting Factor</figcaption>
+                  <figcaption className="text-slate-600 text-xs font-bold uppercase tracking-widest mb-1">Limiting Factor</figcaption>
                   <p className="text-sm font-medium leading-relaxed">
                     {result.limitingNutrient ? (
                       <>The target for <span className="text-primary font-bold">{result.limitingNutrient === 'P' ? 'P₂O₅' : result.limitingNutrient === 'K' ? 'K₂O' : result.limitingNutrient}</span> is the limiting factor in this calculation.</>

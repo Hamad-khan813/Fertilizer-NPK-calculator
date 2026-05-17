@@ -27,7 +27,7 @@ export default function Navbar() {
   ];
 
   return (
-    <nav role="navigation" aria-label="Main Navigation" className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200/60 shadow-sm">
+    <nav role="navigation" aria-label="Main Navigation" className="sticky top-0 z-50 bg-white backdrop-blur-md border-b border-slate-200/60 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
@@ -49,7 +49,7 @@ export default function Navbar() {
                   className={`text-sm font-bold tracking-wide uppercase transition-all relative py-2 flex items-center gap-1 ${
                     isActive(link.href)
                       ? 'text-primary'
-                      : 'text-slate-600 hover:text-primary'
+                      : 'text-slate-900 hover:text-primary'
                   }`}
                 >
                   {link.label}
@@ -65,7 +65,7 @@ export default function Navbar() {
                       <Link
                         key={guide.href}
                         href={guide.href}
-                        className="block px-6 py-2.5 text-sm font-medium text-slate-600 hover:text-primary hover:bg-slate-50"
+                        className="block px-6 py-2.5 text-sm font-medium text-slate-900 hover:text-primary hover:bg-slate-50"
                       >
                         {guide.label}
                       </Link>
@@ -80,7 +80,7 @@ export default function Navbar() {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-3 rounded-xl text-slate-600 hover:bg-slate-100 focus:outline-none transition-colors"
+              className="inline-flex items-center justify-center p-3 rounded-xl text-slate-900 hover:bg-slate-100 focus:outline-none transition-colors"
               aria-expanded={isOpen}
               aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
             >
@@ -110,7 +110,7 @@ export default function Navbar() {
                   className={`block px-4 py-3 rounded-xl text-base font-bold uppercase tracking-wider ${
                     isActive(link.href)
                       ? 'bg-primary/10 text-primary border-l-4 border-primary'
-                      : 'text-slate-600 hover:bg-slate-50'
+                      : 'text-slate-900 hover:bg-slate-50'
                   }`}
                   onClick={() => !link.isDropdown && setIsOpen(false)}
                 >
@@ -122,7 +122,7 @@ export default function Navbar() {
                       <Link
                         key={guide.href}
                         href={guide.href}
-                        className="block py-2 text-slate-500 font-medium text-sm hover:text-primary"
+                        className="block py-2 text-slate-700 font-medium text-sm hover:text-primary"
                         onClick={() => setIsOpen(false)}
                       >
                         {guide.label}
