@@ -250,7 +250,8 @@ export default function Home() {
           <h2 id="scientific-baselines-title" className="text-4xl font-extrabold text-slate-900 mb-6 text-center">3. Scientific Baselines and Atomic Conversion Chemistry</h2>
           <p className="text-slate-600 text-lg text-center max-w-3xl mx-auto mb-16">
             Understanding the atomic masses and chemical compositions of fertilizer salts is essential to prevent nutritional lockout and achieve precise crop development.
-              {/* Subheading: Terminology (demoted to H3) */}
+          </p>
+          {/* Subheading: Terminology (demoted to H3) */}
           <div className="mb-16">
             <h3 id="terminology" className="text-2xl font-bold text-slate-900 mb-6">Understanding NPK Ratios and Elemental-to-Oxide Conversions</h3>
             <div className="text-slate-600 text-base leading-relaxed space-y-6">
