@@ -597,7 +597,7 @@ export default function Home() {
 
             <ol className="references list-decimal list-outside ml-6 space-y-4 text-sm text-slate-600 text-left">
               <li id="ref-1">
-                <cite>University of Minnesota Extension. (2024). Understanding Phosphorus Fertilizers. Retrieved from <a href="https://extension.umn.edu/managing-soil-and-nutrients/understanding-phosphorus-fertilizers" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">extension.umn.edu</a>.</cite>
+                <cite>University of Minnesota Extension. (2024). Understanding Phosphorus Fertilizers. Retrieved from <a href="https://extension.umn.edu/how/manage-soil-nutrients" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">extension.umn.edu</a>.</cite>
                 <a href="#ref-1-source-1" aria-label="Back to content" className="ml-2 text-slate-400 hover:text-primary">↩</a>
               </li>
               <li id="ref-2">
@@ -609,7 +609,7 @@ export default function Home() {
                 <a href="#ref-3-source-1" aria-label="Back to content" className="ml-2 text-slate-400 hover:text-primary">↩</a>
               </li>
               <li id="ref-4">
-                <cite>Natural Resources Conservation Service (NRCS). (2025). Nutrient Management Standard (Code 590). Retrieved from <a href="https://www.nrcs.usda.gov/resources/guides-and-instructions/nutrient-management-standards" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">nrcs.usda.gov</a>.</cite>
+                <cite>Natural Resources Conservation Service (NRCS). (2025). Nutrient Management Standard (Code 590). Retrieved from <a href="https://www.nrcs.usda.gov/resources/guides-and-instructions" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">nrcs.usda.gov</a>.</cite>
                 <a href="#ref-4-source-1" aria-label="Back to content" className="ml-2 text-slate-400 hover:text-primary">↩</a>
               </li>
             </ol>
