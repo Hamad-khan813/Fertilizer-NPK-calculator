@@ -14,7 +14,7 @@ export default function Navbar() {
     { href: '/', label: 'Calculator' },
     { href: '/guides', label: 'Guides', isDropdown: true },
     { href: '/fertilizers', label: 'Fertilizers' },
-    { href: '/blog', label: 'About' },
+    { href: '/blog', label: 'Blogs' },
   ];
 
   const guideLinks = [

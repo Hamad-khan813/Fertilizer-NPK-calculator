@@ -26,7 +26,7 @@ export default function Footer() {
               </p>
               <p className="flex items-center gap-3">
                 <svg className="w-5 h-5 text-slate-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-                <a href="mailto:support@ferti-calc.vercel.app" className="hover:text-primary transition-colors">support@ferti-calc.vercel.app</a>
+                <a href="mailto:hamadkhan.hmd1@gmail.com" className="hover:text-primary transition-colors">hamadkhan.hmd1@gmail.com</a>
               </p>
             </address>
           </div>
@@ -60,7 +60,8 @@ export default function Footer() {
               <ul className="space-y-4 text-sm">
                 <li><Link href="/about" className="hover:text-primary transition-colors">About Us</Link></li>
                 <li><Link href="/contact" className="hover:text-primary transition-colors">Contact Us</Link></li>
-                <li><Link href="/editorial-policy" className="hover:text-primary transition-colors">Editorial & Methodology</Link></li>
+                <li><Link href="/editorial-policy" className="hover:text-primary transition-colors">Editorial Policy</Link></li>
+                <li><Link href="/methodology" className="hover:text-primary transition-colors">Methodology</Link></li>
                 <li><Link href="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link></li>
                 <li><Link href="/terms" className="hover:text-primary transition-colors">Terms of Use</Link></li>
               </ul>
