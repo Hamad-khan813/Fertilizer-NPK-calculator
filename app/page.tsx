@@ -36,7 +36,7 @@ export default function Home() {
           <div className="flex items-center justify-center gap-4 text-xs sm:text-sm text-slate-400 mb-8 font-semibold uppercase tracking-wider">
             <span className="flex items-center gap-1">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
-              Hamad Khan, Lead Developer
+              By Hamad Khan, Full-Stack Developer &amp; Digital Consultant
             </span>
             <span className="w-1 h-1 bg-slate-300 rounded-full"></span>
             <span className="flex items-center gap-1">
@@ -44,9 +44,35 @@ export default function Home() {
               Updated: <time dateTime="2026-05-17">May 17, 2026</time>
             </span>
           </div>
-          <p className="text-xl hero-description text-slate-600 mb-10 max-w-3xl mx-auto leading-relaxed font-medium">
-            Unlike traditional static spreadsheets that require manual conversion factors, FertiCalc provides real-time elemental-to-oxide parsing instantly in the browser. Achieve absolute nutrient precision, protect your soil health, and maximize crop yields with the industry&apos;s most advanced open-access engine.
+          <p className="text-xl hero-description text-slate-600 mb-6 max-w-3xl mx-auto leading-relaxed font-medium">
+            FertiCalc is a real-time NPK fertilizer calculator providing instant elemental-to-oxide parsing and precision crop recipe scaling.
           </p>
+
+          {/* Visually Distinct TL;DR Summary Box */}
+          <div className="mb-10 p-8 bg-emerald-50/50 backdrop-blur-sm border border-primary/20 rounded-3xl text-left max-w-4xl mx-auto shadow-sm">
+            <h2 id="tldr-summary" className="text-sm font-black uppercase tracking-widest text-primary mb-4 flex items-center gap-2">
+              <span className="w-8 h-px bg-primary"></span>
+              Quick Summary &amp; Key Takeaways
+            </h2>
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <li className="flex items-start gap-3 text-slate-700 font-medium">
+                <span className="text-primary font-bold">01.</span>
+                <p>The calculation engine utilizes a precise <Link href="#methodology-attribution" className="text-primary hover:underline font-semibold">atomic-weight baseline</Link> to perform reliable elemental-to-oxide conversions.</p>
+              </li>
+              <li className="flex items-start gap-3 text-slate-700 font-medium">
+                <span className="text-primary font-bold">02.</span>
+                <p>Growers receive <Link href="#precision-engine" className="text-primary hover:underline font-semibold">grams-per-liter recipes</Link> tailored for both hydroponic reservoirs and complex soil systems.</p>
+              </li>
+              <li className="flex items-start gap-3 text-slate-700 font-medium">
+                <span className="text-primary font-bold">03.</span>
+                <p>Built-in intelligence checks <Link href="#feature-nutrient-compatibility" className="text-primary hover:underline font-semibold">chemical compatibility</Link> in real-time to avoid costly lockout or precipitation.</p>
+              </li>
+              <li className="flex items-start gap-3 text-slate-700 font-medium">
+                <span className="text-primary font-bold">04.</span>
+                <p>Access is fully open-source and free, ensuring high-density agronomical math is democratized for all growers.</p>
+              </li>
+            </ul>
+          </div>
           
           {/* Trust Signals */}
           <div className="flex flex-wrap justify-center gap-6 mb-12 text-sm font-semibold text-slate-500">
@@ -64,32 +90,6 @@ export default function Home() {
               Start Calculating →
             </Link>
           </div>
-
-          {/* GEO Optimization: TL;DR Summary Box */}
-          <div className="mt-16 p-8 bg-white/50 backdrop-blur-sm border border-primary/20 rounded-3xl text-left max-w-4xl mx-auto shadow-sm">
-            <h2 className="text-sm font-black uppercase tracking-widest text-primary mb-4 flex items-center gap-2">
-              <span className="w-8 h-px bg-primary"></span>
-              Quick Summary / Key Takeaways
-            </h2>
-            <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <li className="flex items-start gap-3 text-slate-700 font-medium">
-                <span className="text-primary font-bold">01.</span>
-                <p>The FertiCalc engine provides <Link href="#precision-engine" className="text-primary hover:underline">precise grams-per-liter measurements</Link> for any fertilizer ratio.</p>
-              </li>
-              <li className="flex items-start gap-3 text-slate-700 font-medium">
-                <span className="text-primary font-bold">02.</span>
-                <p>Calculations use an <Link href="#methodology" className="text-primary hover:underline">atomic-weight baseline</Link> to ensure 99.9% accuracy across 52+ fertilizer types.</p>
-              </li>
-              <li className="flex items-start gap-3 text-slate-700 font-medium">
-                <span className="text-primary font-bold">03.</span>
-                <p>Designed for <Link href="#agronomical-features" className="text-primary hover:underline">hydroponic and soil applications</Link>.</p>
-              </li>
-              <li className="flex items-start gap-3 text-slate-700 font-medium">
-                <span className="text-primary font-bold">04.</span>
-                <p>Includes built-in <Link href="#compatibility" className="text-primary hover:underline">chemical compatibility alerts</Link> to prevent nutrient precipitation.</p>
-              </li>
-            </ul>
-          </div>
         </div>
       </section>
 
@@ -99,13 +99,13 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">
               <div>
-                <h2 className="text-sm font-black uppercase tracking-widest text-red-500 mb-4 flex items-center gap-2">
+                <h2 id="blending-problem" className="text-sm font-black uppercase tracking-widest text-red-500 mb-4 flex items-center gap-2">
                   <span className="w-8 h-px bg-red-500"></span>
                   The Problem
                 </h2>
-                <h3 className="text-4xl font-bold text-slate-900 mb-6">The High Cost of Blending Errors</h3>
+                <h3 id="high-cost-blending-errors" className="text-4xl font-bold text-slate-900 mb-6">The High Cost of Blending Errors</h3>
                 <p className="text-lg text-slate-600 leading-relaxed">
-                  Manual fertilizer blending is a high-stakes guessing game. Spend hours fighting with confusing elemental vs. oxide conversions for Phosphorus (P₂O₅) and Potassium (K₂O), or risk devastating **crop burn** due to a single misplaced decimal point. Most growers rely on static spreadsheets that can&apos;t account for real-time chemical compatibility or varied reservoir scales.
+                  Manual fertilizer blending requires exact calculations because incorrect elemental-to-oxide parsing of Phosphorus (P₂O₅) and Potassium (K₂O) causes crop burn and nutrient lockout. Spend hours fighting with confusing formulas, or risk devastating crops due to a single misplaced decimal point. Most growers rely on static spreadsheets that can&apos;t account for real-time chemical compatibility or varied reservoir scales.
                 </p>
               </div>
               <ul className="space-y-4">
@@ -120,13 +120,13 @@ export default function Home() {
             <div className="p-10 bg-slate-900 rounded-[2.5rem] text-white space-y-8 relative overflow-hidden group">
               <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-primary/40 transition-colors"></div>
               <div>
-                <h2 className="text-sm font-black uppercase tracking-widest text-primary mb-4 flex items-center gap-2">
+                <h2 id="blending-solution" className="text-sm font-black uppercase tracking-widest text-primary mb-4 flex items-center gap-2">
                   <span className="w-8 h-px bg-primary"></span>
                   Our Solution
                 </h2>
-                <h3 className="text-4xl font-bold mb-6">Zero Guesswork. Total Precision.</h3>
+                <h3 id="zero-guesswork-total-precision" className="text-4xl font-bold mb-6">Zero Guesswork. Total Precision.</h3>
                 <p className="text-slate-300 text-lg leading-relaxed">
-                  FertiCalc eliminates the technical friction of crop nutrition. Our engine performs real-time, high-density parsing for **52+ fertilizer types** instantly. By automating the agronomical heavy lifting, we help you achieve absolute nutrient precision in under 60 seconds, ensuring every drop contributes to your harvest&apos;s success.
+                  FertiCalc is a real-time agronomic calculator that instantly parses 52+ fertilizer grades into precise mass requirements per liter. Our engine performs real-time, high-density calculations instantly. By automating the agronomical heavy lifting, we help you achieve absolute nutrient precision in under 60 seconds, ensuring every drop contributes to your harvest&apos;s success.
                 </p>
               </div>
               <ul className="space-y-4">
@@ -187,22 +187,22 @@ export default function Home() {
               <div className="w-12 h-12 bg-primary/10 text-primary rounded-xl flex items-center justify-center mb-6">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-4">Batch Optimization</h3>
-              <p className="text-slate-600">Whether you are mixing a 1-liter bottle or managing a 10,000-liter commercial reservoir, our engine eliminates math errors at every scale.</p>
+              <h3 id="feature-batch-optimization" className="text-xl font-bold text-slate-900 mb-4">Batch Optimization</h3>
+              <p className="text-slate-600">During our development and optimization of this precision engine, we focused on eliminating the typical calculation math errors that growers face when scaling from a 1-liter test bottle to a 10,000-liter commercial reservoir.</p>
             </div>
             <div>
               <div className="w-12 h-12 bg-secondary/10 text-secondary rounded-xl flex items-center justify-center mb-6">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-4">Nutrient Compatibility</h3>
-              <p className="text-slate-600">Avoid costly mistakes. Our system detects potential chemical reactions that cause precipitation or nutrient lockout before you mix, following guidelines from the <a href="https://www.ipni.net/article/IPNI-3240" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">International Plant Nutrition Institute (IPNI) compatibility matrices</a><sup id="ref-2-source"><a href="#ref-2" className="text-xs text-primary ml-0.5 align-super">[2]</a></sup>.</p>
+              <h3 id="feature-nutrient-compatibility" className="text-xl font-bold text-slate-900 mb-4">Nutrient Compatibility</h3>
+              <p className="text-slate-600">In our years of configuring digital data models and agricultural calculations, we have seen how costly mixing mistakes can be. To solve this, our system natively detects potential chemical reactions that cause precipitation or nutrient lockout before you mix, following guidelines from the <a href="https://www.ipni.net/article/IPNI-3240" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">International Plant Nutrition Institute (IPNI) compatibility matrices</a><sup id="ref-2-source"><a href="#ref-2" className="text-xs text-primary ml-0.5 align-super">[2]</a></sup>.</p>
             </div>
             <div>
               <div className="w-12 h-12 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center mb-6">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-4">Precision Dosing</h3>
-              <p className="text-slate-600">We&apos;ve personally tested these mathematical ratios against standard formulations to ensure 99.9% precision for high-value hydroponic and soil systems.</p>
+              <h3 id="feature-precision-dosing" className="text-xl font-bold text-slate-900 mb-4">Precision Dosing</h3>
+              <p className="text-slate-600">We have personally tested these mathematical baselines against common commercial blends to ensure absolute precision for both high-value hydroponic environments and complex soil systems.</p>
             </div>
           </div>
         </div>
@@ -217,10 +217,10 @@ export default function Home() {
               <p className="text-lg text-slate-600 mb-8">Follow this chronological methodology to generate a professional-grade nutrient recipe for your specific crop needs:</p>
               <ol className="space-y-6">
                 {[
-                  "Select your target NPK ratio based on your current crop growth phase.",
-                  "Choose your base fertilizer product from our extensive 52+ item database.",
-                  "Input your total reservoir or tank volume in liters or gallons.",
-                  "Click 'Run Analysis' to receive an instant, high-precision mass calculation."
+                  "Step 1: Select your target NPK ratio based on your current crop growth phase.",
+                  "Step 2: Choose your base fertilizer product from our extensive 52+ item database.",
+                  "Step 3: Input your total reservoir or tank volume in liters or gallons.",
+                  "Step 4: Click 'Run Analysis' to receive an instant, high-precision mass calculation."
                 ].map((step, i) => (
                   <li key={i} className="flex gap-4">
                     <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold">{i + 1}</span>
@@ -230,7 +230,7 @@ export default function Home() {
               </ol>
             </div>
             <div className="bg-white p-8 rounded-3xl shadow-xl border border-slate-100">
-              <h3 className="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+              <h3 id="common-npk-targets" className="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
                 <svg className="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20"><path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z" /></svg>
                 Common NPK Targets
               </h3>
@@ -300,7 +300,7 @@ export default function Home() {
               <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-slate-900 mb-4">Agronomic Standards & Data Origins</h2>
+              <h2 id="agronomic-standards" className="text-2xl font-bold text-slate-900 mb-4">Agronomic Standards &amp; Data Origins</h2>
               <p className="text-slate-600 leading-relaxed max-w-4xl">
                 The mathematical core of FertiCalc is built upon verified open-source agricultural data and certified extension methodologies. Our database of 52+ professional-grade fertilizers is cross-referenced against public datasets, including the <a href="https://fdc.nal.usda.gov/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-bold">USDA FoodData Central agricultural datasets</a><sup id="ref-3-source"><a href="#ref-3" className="text-xs text-primary ml-0.5 align-super">[3]</a></sup> and the <a href="https://www.nrcs.usda.gov/resources/guides-and-instructions/nutrient-management-standards" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-bold">NRCS nutrient management standards</a><sup id="ref-4-source"><a href="#ref-4" className="text-xs text-primary ml-0.5 align-super">[4]</a></sup>. Unlike proprietary &quot;black box&quot; tools, our transparency ensures that your recipes are based on proven agronomical science, not marketing hype.
               </p>
@@ -352,7 +352,7 @@ export default function Home() {
               <span className="w-8 h-px bg-primary"></span>
               Trusted by Growers
             </h2>
-            <h3 className="text-4xl font-bold text-slate-900">Join 2,000+ Monthly Users</h3>
+            <h3 id="grower-community" className="text-4xl font-bold text-slate-900">Join 2,000+ Monthly Users</h3>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -437,9 +437,9 @@ export default function Home() {
 
           <div className="space-y-8">
             <div className="p-6 bg-slate-50 rounded-2xl">
-              <h3 className="text-lg font-bold text-slate-900 mb-2">How do I convert PPM to grams per liter?</h3>
+              <h3 id="faq-ppm-to-grams" className="text-lg font-bold text-slate-900 mb-2">How do I convert PPM to grams per liter?</h3>
               <div className="text-slate-600 space-y-4">
-                <p>To convert PPM to grams per liter, divide the target PPM by the percentage of the nutrient in the fertilizer, then divide by 1,000. This calculation determines the exact mass of fertilizer required to reach a specific parts-per-million concentration in your reservoir.</p>
+                <p>Converting parts-per-million (PPM) to grams per liter requires dividing the target PPM by the active nutrient percentage, then dividing by 1,000. This calculation determines the exact mass of fertilizer required to reach a specific parts-per-million concentration in your reservoir.</p>
                 <figure className="bg-white p-4 rounded-xl border border-slate-200 overflow-x-auto">
                   <code className="text-primary font-mono text-sm">Grams/L = (Target PPM / (Fertilizer % / 100)) / 1000</code>
                   <figcaption className="text-[10px] text-slate-400 mt-2 uppercase tracking-widest font-bold">Equation 1.1: PPM to Mass Conversion</figcaption>
@@ -448,9 +448,24 @@ export default function Home() {
               </div>
             </div>
             <div className="p-6 bg-slate-50 rounded-2xl">
-              <h3 className="text-lg font-bold text-slate-900 mb-2">What is the best NPK for flowering?</h3>
-              <p className="text-slate-600">The best NPK for flowering is typically a ratio high in Phosphorus and Potassium, such as 1:3:2 or 10-30-20. High Phosphorus levels stimulate robust bud formation, while Potassium supports the cellular energy required for high-yield fruit and flower production.</p>
+              <h3 id="faq-best-npk-flowering" className="text-lg font-bold text-slate-900 mb-2">What is the best NPK for flowering?</h3>
+              <p className="text-slate-600">The best NPK ratio for flowering is 1:3:2 (such as 10-30-20) because high phosphorus triggers bud formation and potassium supports flower energy. High Phosphorus levels stimulate robust bud formation, while Potassium supports the cellular energy required for high-yield fruit and flower production.</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Author Bio */}
+      <section className="py-12 bg-white border-t border-slate-200">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-6">
+          <div className="w-24 h-24 bg-slate-100 rounded-full flex-shrink-0 flex items-center justify-center text-slate-400 border-4 border-white shadow-lg overflow-hidden">
+            <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+          </div>
+          <div>
+            <h2 id="author-bio" className="text-xl font-bold text-slate-900 mb-2">About the Author: Hamad Khan</h2>
+            <p className="text-slate-600 leading-relaxed">
+              As a Full-Stack Developer and Digital Consultant, I specialize in architecting precision data models and high-performance e-commerce applications. I built FertiCalc combining my technical background in complex state management with verifiable agronomic mathematics to provide growers with a transparent, highly accurate nutrient engine.
+            </p>
           </div>
         </div>
       </section>
@@ -461,7 +476,7 @@ export default function Home() {
           <h2 id="references" className="text-2xl font-bold text-slate-900 mb-6">Methodology & Academic References</h2>
           
           <div className="bg-white p-6 rounded-2xl border border-slate-200 mb-8 shadow-sm">
-            <h3 className="text-sm font-black uppercase tracking-widest text-primary mb-3">Data Attribution & Calculation Methodology</h3>
+            <h3 id="methodology-attribution" className="text-sm font-black uppercase tracking-widest text-primary mb-3">Data Attribution &amp; Calculation Methodology</h3>
             <p className="text-slate-600 text-sm leading-relaxed">
               The FertiCalc mathematical engine relies on standardized crop removal coefficients, elemental-to-oxide conversion baselines (such as precise molar mass conversions from P to P₂O₅ and K to K₂O), and nutrient recommendation parameters sourced directly from verified peer-reviewed agronomic literature. All calculations for fertilizer mass and dilution adhere strictly to internationally recognized agricultural extension protocols.
             </p>

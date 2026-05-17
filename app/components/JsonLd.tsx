@@ -72,6 +72,20 @@ export default function JsonLd() {
         }
       },
       {
+        '@type': 'Article',
+        '@id': 'https://ferti-calc.vercel.app/#article',
+        'headline': 'Free NPK Fertilizer Calculator',
+        'author': {
+          '@type': 'Person',
+          'name': 'FertiCalc Agronomy Team',
+          'url': 'https://ferti-calc.vercel.app/about'
+        },
+        'datePublished': '2026-03-15',
+        'dateModified': '2026-05-17',
+        'publisher': { '@id': 'https://ferti-calc.vercel.app/#organization' },
+        'mainEntityOfPage': 'https://ferti-calc.vercel.app'
+      },
+      {
         '@type': 'FAQPage',
         '@id': 'https://ferti-calc.vercel.app/#faq',
         'description': 'Expert-verified answers to critical questions regarding fertilizer mixing, NPK ratios, and precision crop nutrition management.',
@@ -86,10 +100,16 @@ export default function JsonLd() {
               '@type': 'Answer',
               'text': 'For most crops, a safe foliar concentration is 5g to 10g of Urea (46-0-0) per 1 liter of water. Ensure application occurs during cooler morning or evening hours to prevent leaf burn. FertiCalc handles these dilution rates automatically.'
             },
-            'suggestedAnswer': {
-              '@type': 'Answer',
-              'text': 'A 0.5% to 1.0% solution is generally safe for most foliage, though testing on a small area is recommended.'
-            }
+            'suggestedAnswer': [
+              {
+                '@type': 'Answer',
+                'text': 'A 0.5% to 1.0% solution is generally safe for most foliage, though testing on a small area is recommended.'
+              },
+              {
+                '@type': 'Answer',
+                'text': 'Organic liquid urea alternatives may require slightly lower dilution ratios due to varying breakdown speeds compared to synthetic urea. Always refer to manufacturer specifications.'
+              }
+            ]
           },
           {
             '@type': 'Question',
@@ -100,7 +120,13 @@ export default function JsonLd() {
             'acceptedAnswer': {
               '@type': 'Answer',
               'text': 'To convert PPM to Grams/L, use the formula: Grams/L = (Target PPM / (Fertilizer Nutrient Percentage / 100)) / 1000. Our professional calculator performs this conversion automatically for all 52+ supported fertilizers.'
-            }
+            },
+            'suggestedAnswer': [
+              {
+                '@type': 'Answer',
+                'text': 'Keep in mind that tap water already contains baseline PPM (often 150-300 PPM). For high-precision hydroponic environments, you must subtract your starting water PPM from your target PPM before calculating the dry mass required.'
+              }
+            ]
           },
           {
             '@type': 'Question',
@@ -111,7 +137,13 @@ export default function JsonLd() {
             'acceptedAnswer': {
               '@type': 'Answer',
               'text': 'During the flowering stage, plants typically require higher Phosphorus (P) and Potassium (K) levels. A common effective ratio is 1:3:2 (e.g., 5-15-10), which supports reproductive growth and fruit development.'
-            }
+            },
+            'suggestedAnswer': [
+              {
+                '@type': 'Answer',
+                'text': 'While 1:3:2 is a solid synthetic baseline, organic growers often use top-dressed bone meal and kelp extracts which release phosphorus and potassium more slowly over a 3-week period.'
+              }
+            ]
           },
           {
             '@type': 'Question',
@@ -122,7 +154,13 @@ export default function JsonLd() {
             'acceptedAnswer': {
               '@type': 'Answer',
               'text': 'Yes, but compatibility is critical. Never mix Calcium Nitrate with Magnesium Sulfate in the same concentrated stock solution as they will react to form insoluble Gypsum (precipitation). Always consult compatibility charts before mixing.'
-            }
+            },
+            'suggestedAnswer': [
+              {
+                '@type': 'Answer',
+                'text': 'When mixing organic suspensions with synthetic salts, ensure you agitate the reservoir constantly. Organic particulates can act as nucleation sites, accelerating salt precipitation if left stagnant.'
+              }
+            ]
           }
         ]
       }
