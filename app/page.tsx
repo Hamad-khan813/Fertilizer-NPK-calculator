@@ -109,10 +109,10 @@ export default function Home() {
               <h3 className="text-3xl font-bold text-slate-900 mb-6">The High Cost of Agronomical Blending Errors</h3>
               <div className="text-slate-600 text-base leading-relaxed space-y-4">
                 <p>
-                  Traditional fertilizer mixing is plagued by complex math errors, particularly when navigating confusing elemental-to-oxide conversion scales for Phosphorus (P) and Potassium (K). Manual calculations of standard NPK grades introduce structural rounding deviations that misrepresent actual nutrient availability in the root zone.
+                  Traditional mixing often leads to complex math errors. This is especially true when using confusing elemental-to-oxide scales for Phosphorus (P) and Potassium (K). Manual calculations also introduce rounding errors. These errors misrepresent the actual nutrient availability in the root zone.
                 </p>
                 <p>
-                  These calculation blind spots carry significant financial risk, often resulting in severe crop burn, unintended nutrient lockouts, and toxic salt accumulation. Relying on guesswork rather than precision elemental mass targets directly jeopardizes crop yields and wastes expensive raw materials.
+                  These calculations carry high financial risks. They can cause crop burn, nutrient lockouts, and toxic salt buildup. Guesswork jeopardizes crop yields and wastes expensive raw materials. You should target precise elemental masses instead.
                 </p>
               </div>
             </section>
@@ -122,10 +122,10 @@ export default function Home() {
               <h3 className="text-3xl font-bold text-white mb-6">FertiCalc: Absolute Nutrient Blending Precision</h3>
               <div className="text-slate-300 text-base leading-relaxed space-y-4">
                 <p>
-                  Our precision engine solves these pain points in under 60 seconds by delivering error-free NPK breakdown metrics tailored to your specific crop volume. The algorithm fully automates the complex oxide math, ensuring exact elemental-to-oxide parsing without manual spreadsheets.
+                  Our precision engine solves these problems in under 60 seconds. It delivers error-free NPK recipes tailored to your crop volume. The algorithm fully automates the complex oxide calculations. You do not need manual spreadsheets.
                 </p>
                 <p>
-                  Growers can optimize custom fertilizer blending to exact grams-per-liter targets instantly, with zero signup requirements. This guarantees that your reservoirs are filled with chemically stable, high-efficiency nutrient profiles every time.
+                  Growers can calculate custom fertilizer recipes down to exact grams-per-liter instantly. There are no signup requirements. This guarantees chemically stable, high-efficiency nutrients every time.
                 </p>
               </div>
             </section>
@@ -178,10 +178,10 @@ export default function Home() {
             <h3 id="usage-guide" className="text-2xl font-bold text-slate-900 mb-6 text-center">How to Use the FertiCalc Precision Engine</h3>
             <div className="text-slate-600 text-base leading-relaxed space-y-6 mb-12">
               <p>
-                Generating a stable and nutritionally balanced crop recipe requires a systematic, four-step chronological mixing workflow. According to a study by the <cite>International Plant Nutrition Institute (IPNI)</cite><sup><a href="#ref-2" id="ref-2-source-2" className="text-xs text-primary ml-0.5 align-super font-bold hover:underline">[2]</a></sup>, proper preparation sequences ensure nutrient distribution, preventing salt shock in soil micro-ecosystems.
+                Generating a balanced crop recipe requires a systematic, four-step mixing workflow. A study by the <cite>International Plant Nutrition Institute (IPNI)</cite><sup><a href="#ref-2" id="ref-2-source-2" className="text-xs text-primary ml-0.5 align-super font-bold hover:underline">[2]</a></sup> shows that proper preparation sequences ensure even nutrient distribution. This prevents salt shock in the soil micro-ecosystem.
               </p>
               <p>
-                The target 3-1-2 NPK ratio yields exactly 300% more available Nitrogen relative to Phosphorus, which directly indicates that vegetative crop canopy expansion will be prioritized without triggering early soil phosphorus depletion spikes. When you input this target ratio, FertiCalc calculates exact mass targets using our database of 52+ fertilizer products, which directly indicates that growers can bypass the tedious, error-prone manual conversion of oxide percentages back to their elemental equivalents. Once the inputs are processed, FertiCalc outputs the exact mass requirements for your specific water volume, which directly indicates that trace minerals will remain fully dissolved at the correct electrical conductivity levels.
+                A 3-1-2 NPK ratio yields 300% more Nitrogen than Phosphorus. This ratio prioritizes vegetative canopy growth without depleting soil phosphorus. When you input your target, FertiCalc calculates exact mass requirements from a database of 52+ fertilizers. This bypasses tedious, error-prone oxide conversions. Finally, FertiCalc scales the recipe to your exact water volume. This ensures all minerals remain fully dissolved at optimal conductivity levels.
               </p>
               <p className="font-semibold text-slate-900">
                 Follow this step-by-step procedure in order to ensure that your crop feed mixes are perfectly aligned with crop extraction rates.
@@ -196,7 +196,7 @@ export default function Home() {
                     "Step 1: Select your target NPK ratio based on your current crop growth phase.",
                     "Step 2: Choose your base fertilizer product from our extensive 52+ item database.",
                     "Step 3: Input your total reservoir or tank volume in liters or gallons.",
-                    "Step 4: Click 'Run Analysis'. The calculator outputs a precise mass requirement because a custom soil mix requires exact part-per-million (PPM) balancing to avoid root-zone salinity spikes and optimize osmotic nutrient uptake."
+                    "Step 4: Click 'Run Analysis'. The calculator outputs precise mass requirements. This helps avoid root-zone salinity spikes and optimizes nutrient uptake."
                   ].map((step, i) => (
                     <li key={i} className="flex gap-4">
                       <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xs">{i + 1}</span>
@@ -250,20 +250,18 @@ export default function Home() {
           <h2 id="scientific-baselines-title" className="text-4xl font-extrabold text-slate-900 mb-6 text-center">3. Scientific Baselines and Atomic Conversion Chemistry</h2>
           <p className="text-slate-600 text-lg text-center max-w-3xl mx-auto mb-16">
             Understanding the atomic masses and chemical compositions of fertilizer salts is essential to prevent nutritional lockout and achieve precise crop development.
-          </p>
-
-          {/* Subheading: Terminology (demoted to H3) */}
+              {/* Subheading: Terminology (demoted to H3) */}
           <div className="mb-16">
             <h3 id="terminology" className="text-2xl font-bold text-slate-900 mb-6">Understanding NPK Ratios and Elemental-to-Oxide Conversions</h3>
             <div className="text-slate-600 text-base leading-relaxed space-y-6">
               <p>
-                Standard commercial fertilizer labels display NPK values as weight percentages of oxide compounds rather than raw elemental forms. According to the academic guide by the <cite>University of Minnesota Extension</cite><sup><a href="#ref-1" id="ref-1-source-1" className="text-xs text-slate-900 ml-0.5 align-super font-bold hover:underline">[1]</a></sup>, applying a balanced 10-10-10 NPK blend delivers exactly 10% each of Nitrogen, available Phosphate, and soluble Potash by total weight, which directly prevents standard soil depletion during heavy vegetative growth phases, but actually only yields 4.4% available elemental phosphorus and 8.3% available elemental potassium due to oxide molecular weight.
+                Commercial fertilizer labels display NPK values as oxide weight percentages, not raw elemental forms. A <cite>University of Minnesota Extension</cite> guide<sup><a href="#ref-1" id="ref-1-source-1" className="text-xs text-slate-900 ml-0.5 align-super font-bold hover:underline">[1]</a></sup> explains this difference. For example, a 10-10-10 NPK blend contains 10% each of Nitrogen, Phosphate, and Potash. However, due to oxide weights, it actually yields only 4.4% elemental Phosphorus and 8.3% elemental Potassium.
               </p>
               <p>
-                To convert P₂O₅ back to its elemental form, we apply a specific conversion constant of 0.4364, which is derived directly from the molar mass ratio of phosphorus to oxygen. In phosphorus compounds, the two phosphorus atoms contribute 61.94 g/mol relative to the compound total of 141.94 g/mol, which directly indicates that more than half of the oxide weight consists of heavier oxygen atoms that do not feed the plant. Similarly, Potassium oxide (K₂O) requires a conversion factor of 0.8302 based on potassium&apos;s atomic weight contribution of 78.2 g/mol per 94.2 g/mol total, which directly indicates that potash applications must be scaled down by exactly 16.98% to represent actual elemental potassium available in the root zone.
+                To convert P₂O₅ to elemental Phosphorus, we multiply by 0.4364. This constant is derived from the molar mass ratio of phosphorus to oxygen. Two phosphorus atoms contribute 61.94 g/mol of the 141.94 g/mol total. This means more than half of the oxide weight is oxygen, which does not feed the plant. Similarly, Potassium oxide (K₂O) requires a 0.8302 conversion factor. This is based on potassium contributing 78.2 g/mol of the 94.2 g/mol total. You must scale potash down by 16.98% to find the actual elemental potassium available.
               </p>
               <p>
-                The resulting calculation delivers a precise mass target because a 50lb bag of 10-10-10 contains exactly 5lbs of actual elemental Nitrogen, requiring precise filler offsets to match custom soil volume targets. Using FertiCalc to automate these conversions resolves a typical 20% to 30% calculation gap, which directly indicates that accidental salt overload and crop root cell plasmolysis are eliminated.
+                A 50lb bag of 10-10-10 contains exactly 5lbs of elemental Nitrogen. We use filler offsets to match your target soil volume. Automating these conversions with FertiCalc resolves a typical 20% to 30% calculation error. This eliminates accidental salt overload and root cell damage.
               </p>
               
               <div className="my-8 overflow-hidden rounded-2xl border border-slate-200 shadow-sm bg-white">
@@ -309,10 +307,10 @@ export default function Home() {
             <h3 id="agronomic-standards" className="text-2xl font-bold text-slate-900 mb-6">Agronomic Standards and Scientific Data Origins</h3>
             <div className="text-slate-600 text-base leading-relaxed space-y-6">
               <p>
-                The mathematical equations governing FertiCalc calculations are derived from public datasets and peer-reviewed agricultural research to guarantee scientific transparency. As detailed in the <cite>USDA FoodData Central</cite><sup><a href="#ref-3" id="ref-3-source-1" className="text-xs text-primary ml-0.5 align-super font-bold hover:underline">[3]</a></sup> and the <cite>Natural Resources Conservation Service (NRCS) Nutrient Management Standard (Code 590)</cite><sup><a href="#ref-4" id="ref-4-source-1" className="text-xs text-primary ml-0.5 align-super font-bold hover:underline">[4]</a></sup>, nutrient targets must map to exact crop removal metrics.
+                FertiCalc's equations are derived from public datasets and peer-reviewed research. These sources ensure scientific transparency. As shown by the <cite>USDA FoodData Central</cite><sup><a href="#ref-3" id="ref-3-source-1" className="text-xs text-primary ml-0.5 align-super font-bold hover:underline">[3]</a></sup> and the <cite>Natural Resources Conservation Service (NRCS) Nutrient Management Standard (Code 590)</cite><sup><a href="#ref-4" id="ref-4-source-1" className="text-xs text-primary ml-0.5 align-super font-bold hover:underline">[4]</a></sup>, nutrient targets must match exact crop removal metrics.
               </p>
               <p>
-                For example, high-yield commercial tomato crops exhibit a crop removal rate of 2.5 kg of Nitrogen, 0.4 kg of elemental Phosphorus, and 3.2 kg of elemental Potassium per metric ton of harvested fruit, which directly indicates that arbitrary nutrient applications cause heavy metal accumulation and toxic agricultural runoff. FertiCalc translates these complex removal dynamics into precise PPM concentrations, which directly indicates that growers can customize their fertilizer blends based on crop phase extraction volumes.
+                For example, commercial tomato crops remove 2.5 kg of Nitrogen, 0.4 kg of Phosphorus, and 3.2 kg of Potassium per metric ton of fruit. Arbitrary applications cause nutrient toxicity and agricultural runoff. FertiCalc translates crop removal rates into precise PPM targets. This allows you to customize blends based on crop growth phases.
               </p>
               <p className="font-semibold text-slate-900">
                 Verify all custom outputs against local agronomic extension guidelines to ensure compliance with regional soil nutrient regulations.
@@ -335,13 +333,13 @@ export default function Home() {
             <h3 id="agronical-features" className="text-2xl font-bold text-slate-900 mb-6 text-center">Advanced Agronomical Features and Safety Frameworks</h3>
             <div className="text-slate-600 text-base leading-relaxed space-y-6 text-left">
               <p>
-                Modern crop science requires multi-dimensional safety frameworks to prevent chemical precipitation and reservoir lockout during high-density nutrient preparation. According to research published by the <cite>International Plant Nutrition Institute (IPNI)</cite><sup><a href="#ref-2" id="ref-2-source-3" className="text-xs text-primary ml-0.5 align-super font-bold hover:underline">[2]</a></sup>, mixing incompatible salts triggers rapid precipitation reactions in solution.
+                Precision farming requires safety frameworks to prevent chemical precipitation. Mixing incompatible salts triggers rapid reactions in solution. This causes nutrients to fall out of solution, making them unavailable.
               </p>
               <p>
-                The batch optimizer eliminates the scaling math errors that occur when scaling from a 1-liter test bottle to a 10,000-liter commercial reservoir, which directly indicates that commercial growers can safely mix uniform large-scale batches without encountering regional trace element deficiencies. The compatibility module utilizes standard solubility indexes to identify when mixing calcium salts with sulfate salts in a single tank will cause calcium sulfate (gypsum) precipitation, which directly indicates that 98% of potential precipitate locking is avoided, protecting commercial hydroponic drip emitters from severe mineral clogging.
+                Our batch optimizer eliminates errors when scaling from a 1-liter bottle to a 10,000-liter reservoir. Commercial growers can mix large batches safely, without trace element deficiencies. The compatibility module uses standard solubility indexes to check for precipitation risks. For example, it warns you if mixing calcium and sulfate in the same tank will form gypsum. This avoids 98% of mineral clogging in commercial drip lines.
               </p>
               <p>
-                The resulting calculation delivers a precise mass target because a 50lb bag of 10-10-10 contains exactly 5lbs of actual elemental Nitrogen, requiring precise filler offsets to match custom soil volume targets. By evaluating compatibility tables before mixing, growers protect crop root systems from irreversible chemical clogging.
+                The calculation provides precise mass targets by calculating the exact weight of active nutrients your soil needs. By checking compatibility tables first, growers protect crop root systems from chemical clogging.
               </p>
               <p className="font-semibold text-slate-900">
                 Always review the compatibility warning system outputs before pouring any dry minerals into your mixing tank.
@@ -386,10 +384,10 @@ export default function Home() {
             <h3 id="agriculture-guides" className="text-2xl font-bold text-slate-900 mb-6 text-center">Verified Agriculture Guides and Academic Resources</h3>
             <div className="text-slate-600 text-base leading-relaxed space-y-6 text-left mb-8">
               <p>
-                Developing a high-performance crop management plan relies on understanding core agronomical science, water quality parameters, and compound solubility. As detailed in the <cite>USDA Agricultural Extension Guidelines</cite><sup><a href="#ref-3" id="ref-3-source-2" className="text-xs text-primary ml-0.5 align-super font-bold hover:underline">[3]</a></sup>, proper compound dissolving patterns are essential for leafy green development.
+                Successful crop management relies on basic plant science, water quality, and mineral solubility. According to the <cite>USDA Agricultural Extension Guidelines</cite><sup><a href="#ref-3" id="ref-3-source-2" className="text-xs text-primary ml-0.5 align-super font-bold hover:underline">[3]</a></sup>, proper mixing is essential for healthy leafy greens.
               </p>
               <p>
-                Our PPM conversion guide establishes that a target concentration of 150 PPM of Nitrogen requires exactly 0.97 grams of Calcium Nitrate per liter of pure water, which directly indicates that root zones will receive a balanced mineral profile without triggering root rot or leaf tip burn. Mastery of these scientific guidelines reduces fertilizer waste by 18% to 25%, which directly indicates that commercial agricultural operations can dramatically reduce input expenses while maximizing leaf absorption rates.
+                Our PPM guide shows that a target of 150 PPM Nitrogen requires 0.97 grams of Calcium Nitrate per liter of water. This gives crops a balanced profile without root rot or leaf burn. Mastering these guidelines reduces fertilizer waste by 18% to 25%. This lowers input costs while maximizing nutrient absorption.
               </p>
               <p className="font-semibold text-slate-900">
                 Read these integrated training manuals to fully master custom crop feeding protocols.
@@ -497,10 +495,10 @@ export default function Home() {
             <h3 id="author-bio" className="text-2xl font-bold text-slate-900 mb-6 text-center">About the Author &amp; Developer: Hamad Khan</h3>
             <div className="text-slate-600 text-base leading-relaxed space-y-6 text-left">
               <p>
-                Designing high-precision agronomical tools requires a combination of software engineering expertise and rigorous mathematical modeling. As a Full-Stack Developer and Digital Consultant, I specialize in building robust e-commerce solutions, advanced state engines, and scientific calculators.
+                Designing precision agricultural tools requires software engineering expertise and mathematical modeling. As a Full-Stack Developer, I specialize in building e-commerce systems, state engines, and scientific calculators.
               </p>
               <p>
-                I developed FertiCalc to provide growers with a fully open-source, highly accurate calculation engine that operates with zero usage barriers. The resulting calculation delivers a precise mass target because a 50lb bag of 10-10-10 contains exactly 5lbs of actual elemental Nitrogen, requiring precise filler offsets to match custom soil volume targets. This system replaces outdated agronomic spreadsheets with a modern reactive application that processes nutrient ratios in under 60 seconds, which directly indicates that agricultural mixing workflows are accelerated by 10x.
+                I built FertiCalc to provide a free, open-source, and highly accurate calculator. It replaces outdated spreadsheets with a modern reactive web application. The engine calculates the exact weight of active nutrients your soil needs in under 60 seconds. This speeds up agricultural mixing workflows by 10x.
               </p>
               <p className="font-semibold text-slate-900 text-center">
                 Feel free to explore the codebase or contact me directly to discuss custom enterprise agricultural integrations.
@@ -523,10 +521,10 @@ export default function Home() {
             <h3 id="faq" className="text-2xl font-bold text-slate-900 mb-6 text-center">Frequently Asked Questions &amp; Diagnostic Database</h3>
             <div className="text-slate-600 text-base leading-relaxed space-y-6 text-left mb-8">
               <p>
-                Solving crop nutrition issues requires instant access to verified formulas, PPM conversions, and growth phase guidelines. Our agronomical database provides immediate answers to standard mixing questions.
+                Solving crop nutrition issues requires instant access to verified formulas. Our database provides immediate answers to standard mixing questions.
               </p>
               <p>
-                For instance, converting parts-per-million (PPM) to grams per liter requires dividing the target PPM by the active nutrient percentage, then dividing by 1,000, which directly indicates that raw dry fertilizer weight is calculated to 99.9% accuracy. In flowering systems, the best NPK ratio is 1:3:2 (such as 10-30-20) because high phosphorus triggers bud formation and potassium supports flower energy. The resulting calculation delivers a precise mass target because a 50lb bag of 10-10-10 contains exactly 5lbs of actual elemental Nitrogen, requiring precise filler offsets to match custom soil volume targets. By answering these questions automatically, the software removes the agronomical confusion that causes nutrient lockout.
+                For instance, converting PPM to grams per liter requires dividing the target PPM by the active nutrient percentage, then dividing by 1,000. In flowering systems, a 1:3:2 ratio is ideal because Phosphorus triggers blooms and Potassium supports crop energy. Our tool calculates the exact weight of active nutrients your soil needs. This removes the math confusion that causes nutrient lockouts.
               </p>
               <p className="font-semibold text-slate-900">
                 Search our FAQ database using the interactive query tool below to diagnose your mixing targets.
@@ -585,10 +583,10 @@ export default function Home() {
             <h3 id="references" className="text-2xl font-bold text-slate-900 mb-6 text-center">Scientific Methodology and Academic Reference Index</h3>
             <div className="text-slate-600 text-base leading-relaxed space-y-6 text-left mb-8">
               <p>
-                Peer-reviewed agronomic literature and government datasets form the scientific foundation of the FertiCalc calculator. All equations used in our calculations conform strictly to established agricultural extension protocols.
+                Peer-reviewed literature and government datasets form the foundation of FertiCalc. Our equations conform strictly to agricultural extension protocols.
               </p>
               <p>
-                We verify all mineral weights and conversion constants against official public databases, including the USDA FoodData Central and the NRCS Nutrient Management Standard Code 590 guidelines. For example, the NRCS standard establishes that nitrogen fertilizer applications must be offset by crop nitrogen removal metrics to prevent groundwater contamination. The 3-1-2 NPK ratio is optimized for vegetative growth because it yields exactly 300% more available Nitrogen relative to Phosphorus, preventing early soil depletion spikes. This standard prevents excess nitrogen leaching, protecting surrounding watersheds.
+                We verify all mineral weights and constants against USDA FoodData Central and NRCS Standard Code 590. The NRCS standard requires matching nitrogen applications to crop removal metrics. This prevents groundwater contamination. A 3-1-2 NPK ratio is optimized for vegetative growth. It prevents nitrogen leaching and protects surrounding watersheds.
               </p>
               <p className="font-semibold text-slate-900">
                 Review the numbered scientific citations below to verify the mathematical and chemical baselines of our engine.

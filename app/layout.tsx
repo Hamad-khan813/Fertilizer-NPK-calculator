@@ -74,8 +74,6 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
-        <meta property="article:published_time" content="2026-03-15" />
-        <meta property="article:modified_time" content="2026-05-17" />
         <JsonLd />
         {/* Google Analytics 4 */}
         <Script
@@ -112,9 +110,9 @@ export default function RootLayout({
         <header role="banner">
           <Navbar />
         </header>
-        <main id="main-content" role="main" tabIndex={-1} className="flex-grow">
+        <div className="flex-grow page-layout-wrapper">
           {children}
-        </main>
+        </div>
         <Footer />
       </body>
     </html>

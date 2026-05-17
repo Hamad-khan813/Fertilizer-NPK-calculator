@@ -9,7 +9,13 @@ export default function JsonLd() {
         '@id': 'https://ferti-calc.vercel.app/#website',
         'name': 'FertiCalc',
         'alternateName': ['FertiCalc NPK Calculator', 'Fertilizer Calculator'],
-        'url': 'https://ferti-calc.vercel.app'
+        'description': 'A professional-grade NPK fertilizer calculator providing instant elemental-to-oxide parsing and precision crop recipe scaling.',
+        'url': 'https://ferti-calc.vercel.app',
+        'potentialAction': {
+          '@type': 'SearchAction',
+          'target': 'https://ferti-calc.vercel.app/?q={search_term_string}',
+          'query-input': 'required name=search_term_string'
+        }
       },
       {
         '@type': 'Organization',
@@ -82,10 +88,21 @@ export default function JsonLd() {
         '@type': 'Article',
         '@id': 'https://ferti-calc.vercel.app/#article',
         'headline': 'Free NPK Fertilizer Calculator',
+        'description': 'A professional-grade NPK fertilizer calculator with 52+ database products, limiting nutrient detection, and precise grams-per-liter recipes.',
+        'image': [
+          'https://ferti-calc.vercel.app/assets/og-calculator-preview.png'
+        ],
+        'wordCount': 2185,
+        'articleSection': 'Agronomy and Crop Nutrition',
         'author': {
           '@type': 'Person',
-          'name': 'FertiCalc Agronomy Team',
-          'url': 'https://ferti-calc.vercel.app/about'
+          'name': 'Hamad Khan',
+          'jobTitle': 'Full-Stack Developer & Agronomic Tools Architect',
+          'url': 'https://ferti-calc.vercel.app/about',
+          'sameAs': [
+            'https://github.com/Hamad-khan813',
+            'https://linkedin.com/in/hamad-khan'
+          ]
         },
         'datePublished': '2026-03-15',
         'dateModified': '2026-05-17',
