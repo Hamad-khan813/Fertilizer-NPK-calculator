@@ -93,9 +93,40 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Problem / Solution Narrative with Agent-Legible Marketing Wrapper */}
-      <section className="py-24 bg-white border-b border-slate-100">
+      {/* Table of Contents */}
+      <nav className="table-of-contents max-w-4xl mx-auto px-6 py-6 my-8 bg-slate-50 border border-slate-200 rounded-3xl" aria-label="Page Outline">
+        <h3 className="text-sm font-black uppercase tracking-widest text-primary mb-4 flex items-center gap-2">
+          <span className="w-8 h-px bg-primary"></span>
+          Table of Contents
+        </h3>
+        <ol className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm font-bold text-slate-800">
+          <li className="flex items-center gap-2 hover:text-primary transition-colors">
+            <span className="text-primary font-mono text-xs">01.</span>
+            <Link href="#introduction-title" className="hover:underline">Introduction &amp; Blending Challenges</Link>
+          </li>
+          <li className="flex items-center gap-2 hover:text-primary transition-colors">
+            <span className="text-primary font-mono text-xs">02.</span>
+            <Link href="#npk-calculation-engine-title" className="hover:underline">The NPK Calculation Engine</Link>
+          </li>
+          <li className="flex items-center gap-2 hover:text-primary transition-colors">
+            <span className="text-primary font-mono text-xs">03.</span>
+            <Link href="#scientific-baselines-title" className="hover:underline">Scientific Baselines</Link>
+          </li>
+          <li className="flex items-center gap-2 hover:text-primary transition-colors">
+            <span className="text-primary font-mono text-xs">04.</span>
+            <Link href="#crop-optimization-matrix-title" className="hover:underline">Crop Optimization Matrix</Link>
+          </li>
+          <li className="flex items-center gap-2 hover:text-primary transition-colors">
+            <span className="text-primary font-mono text-xs">05.</span>
+            <Link href="#application-methodology-title" className="hover:underline">Application Methodology</Link>
+          </li>
+        </ol>
+      </nav>
+
+      {/* SECTION 1: INTRODUCTION AND BLENDING CHALLENGES */}
+      <section id="introduction" className="py-24 bg-white border-b border-slate-100 scroll-mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 id="introduction-title" className="text-4xl font-extrabold text-slate-900 mb-12 text-center">1. Introduction and Blending Challenges</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
             <section id="problem-framing" data-framework="problem" className="space-y-6">
               <h3 className="text-3xl font-bold text-slate-900 mb-6">The High Cost of Agronomical Blending Errors</h3>
@@ -134,10 +165,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION 1: THE PRECISE FERTILIZER CALCULATOR GUIDE */}
+      {/* SECTION 2: THE NPK CALCULATION ENGINE AND RECIPE GENERATOR */}
       <section id="calculator-guide" className="py-24 bg-slate-50 border-b border-slate-100 scroll-mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 id="calculator-guide-title" className="text-4xl font-extrabold text-slate-900 mb-6 text-center">The Precise Fertilizer Calculator Guide</h2>
+          <h2 id="npk-calculation-engine-title" className="text-4xl font-extrabold text-slate-900 mb-6 text-center">2. The NPK Calculation Engine and Recipe Generator</h2>
           <p className="text-slate-600 text-lg text-center max-w-4xl mx-auto mb-12">
             This technical resource provides a high-density, real-time agronomical blending interface to optimize raw fertilizer compounds down to the molecular level.
           </p>
@@ -245,10 +276,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION 2: NPK CHEMISTRY AND AGRONOMIC CALCULATION BASELINES */}
+      {/* SECTION 3: SCIENTIFIC BASELINES AND ATOMIC CONVERSION CHEMISTRY */}
       <section id="npk-chemistry" className="py-24 bg-white border-b border-slate-100 scroll-mt-20">
         <div className="max-w-4xl mx-auto px-4">
-          <h2 id="npk-chemistry-title" className="text-4xl font-extrabold text-slate-900 mb-6 text-center">NPK Chemistry and Agronomic Calculation Baselines</h2>
+          <h2 id="scientific-baselines-title" className="text-4xl font-extrabold text-slate-900 mb-6 text-center">3. Scientific Baselines and Atomic Conversion Chemistry</h2>
           <p className="text-slate-600 text-lg text-center max-w-3xl mx-auto mb-16">
             Understanding the atomic masses and chemical compositions of fertilizer salts is essential to prevent nutritional lockout and achieve precise crop development.
           </p>
@@ -266,6 +297,42 @@ export default function Home() {
               <p>
                 The resulting calculation delivers a precise mass target because a 50lb bag of 10-10-10 contains exactly 5lbs of actual elemental Nitrogen, requiring precise filler offsets to match custom soil volume targets. Using FertiCalc to automate these conversions resolves a typical 20% to 30% calculation gap, which directly indicates that accidental salt overload and crop root cell plasmolysis are eliminated.
               </p>
+              
+              <div className="my-8 overflow-hidden rounded-2xl border border-slate-200 shadow-sm bg-white">
+                <table className="w-full text-left border-collapse">
+                  <caption className="px-6 py-4 text-sm font-bold bg-slate-50 border-b border-slate-200 text-slate-700 text-center">
+                    Comparative Analysis of Oxide vs. Elemental Nutrient Availability (Based on a 10-10-10 Label)
+                  </caption>
+                  <thead>
+                    <tr className="bg-slate-100 border-b border-slate-200">
+                      <th className="px-6 py-4 text-xs font-black uppercase text-slate-500">Nutrient Component</th>
+                      <th className="px-6 py-4 text-xs font-black uppercase text-slate-500">Oxide Form on Label</th>
+                      <th className="px-6 py-4 text-xs font-black uppercase text-slate-500">Conversion Multiplier</th>
+                      <th className="px-6 py-4 text-xs font-black uppercase text-slate-500">Actual Elemental Availability</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-sm divide-y divide-slate-100 text-slate-600">
+                    <tr>
+                      <td className="px-6 py-4 font-bold text-slate-900">Nitrogen (N)</td>
+                      <td className="px-6 py-4 font-mono">10.0% (as Total N)</td>
+                      <td className="px-6 py-4 font-mono">1.0000</td>
+                      <td className="px-6 py-4 text-primary font-bold font-mono">10.0% N</td>
+                    </tr>
+                    <tr>
+                      <td className="px-6 py-4 font-bold text-slate-900">Phosphorus (P)</td>
+                      <td className="px-6 py-4 font-mono">10.0% (as P₂O₅)</td>
+                      <td className="px-6 py-4 font-mono">0.4364</td>
+                      <td className="px-6 py-4 text-primary font-bold font-mono">4.36% P</td>
+                    </tr>
+                    <tr>
+                      <td className="px-6 py-4 font-bold text-slate-900">Potassium (K)</td>
+                      <td className="px-6 py-4 font-mono">10.0% (as K₂O)</td>
+                      <td className="px-6 py-4 font-mono">0.8302</td>
+                      <td className="px-6 py-4 text-primary font-bold font-mono">8.30% K</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
 
@@ -287,10 +354,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION 3: SOIL AMENDMENT FRAMEWORKS AND SCIENTIFIC GUIDELINES */}
+      {/* SECTION 4: CROP OPTIMIZATION MATRIX AND SOIL AMENDMENT FRAMEWORKS */}
       <section id="soil-amendments" className="py-24 bg-slate-50 border-b border-slate-100 scroll-mt-20">
         <div className="max-w-4xl mx-auto px-4">
-          <h2 id="soil-amendments-title" className="text-4xl font-extrabold text-slate-900 mb-6 text-center">Soil Amendment Frameworks and Scientific Guidelines</h2>
+          <h2 id="crop-optimization-matrix-title" className="text-4xl font-extrabold text-slate-900 mb-6 text-center">4. Crop Optimization Matrix and Soil Amendment Frameworks</h2>
           <p className="text-slate-600 text-lg text-center max-w-3xl mx-auto mb-16">
             Implementing precision dosing and chemical compatibility rules protects biological crop systems and optimizes fertilizer utilization rates.
           </p>
@@ -311,6 +378,38 @@ export default function Home() {
               <p className="font-semibold text-slate-900">
                 Always review the compatibility warning system outputs before pouring any dry minerals into your mixing tank.
               </p>
+              
+              <div className="my-8 overflow-hidden rounded-2xl border border-slate-200 shadow-sm bg-white">
+                <table className="w-full text-left border-collapse">
+                  <caption className="px-6 py-4 text-sm font-bold bg-slate-50 border-b border-slate-200 text-slate-700 text-center">
+                    Comparative Analysis of Synthetic vs. Organic Fertilizer Inputs
+                  </caption>
+                  <thead>
+                    <tr className="bg-slate-100 border-b border-slate-200">
+                      <th className="px-6 py-4 text-xs font-black uppercase text-slate-500">Agronomic Factor</th>
+                      <th className="px-6 py-4 text-xs font-black uppercase text-slate-500">Synthetic Fertilizers (Precise Dosage)</th>
+                      <th className="px-6 py-4 text-xs font-black uppercase text-slate-500">Organic Amendments (Slow Release)</th>
+                    </tr>
+                  </thead>
+                  <tbody className="text-sm divide-y divide-slate-100 text-slate-600">
+                    <tr>
+                      <td className="px-6 py-4 font-bold text-slate-900">Release Profile</td>
+                      <td>Immediate ionic availability; quick response times but carries dynamic salt buildup risks.</td>
+                      <td>Gradual mineralization mediated by soil biology; highly stable but slow to correct acute deficiencies.</td>
+                    </tr>
+                    <tr>
+                      <td className="px-6 py-4 font-bold text-slate-900">EC Impact</td>
+                      <td>Elevates solution EC rapidly; requires high-precision metric tracking to avoid cell plasmolysis.</td>
+                      <td>Minimal immediate EC impact; organic molecules must be transformed by soil microbes first.</td>
+                    </tr>
+                    <tr>
+                      <td className="px-6 py-4 font-bold text-slate-900">Application Accuracy</td>
+                      <td>Calculable down to 0.001g/L using FertiCalc, eliminating raw material waste entirely.</td>
+                      <td>Subject to biological transformations; exact elemental weight values are approximate.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
 
@@ -355,10 +454,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION 4: GROWER VERIFICATION, REVIEWS AND CERTIFICATIONS */}
+      {/* SECTION 5: APPLICATION METHODOLOGY, CASE STUDIES, AND DIAGNOSTIC FAQ */}
       <section id="social-credibility" className="py-24 bg-white border-b border-slate-100 scroll-mt-20">
         <div className="max-w-4xl mx-auto px-4">
-          <h2 id="social-credibility-title" className="text-4xl font-extrabold text-slate-900 mb-6 text-center">Grower Verification, Reviews, and Certifications</h2>
+          <h2 id="application-methodology-title" className="text-4xl font-extrabold text-slate-900 mb-6 text-center">5. Application Methodology, Case Studies, and Diagnostic FAQ</h2>
           <p className="text-slate-600 text-lg text-center max-w-3xl mx-auto mb-16">
             FertiCalc is globally audited and verified to meet strict agricultural training compliance standards.
           </p>
@@ -479,10 +578,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION 5: TECHNICAL REFERENCE AND DIAGNOSTIC KNOWLEDGE BASE */}
+      {/* TECHNICAL REFERENCE AND DIAGNOSTIC KNOWLEDGE BASE */}
       <section id="knowledge-database" className="py-24 bg-slate-50 scroll-mt-20">
         <div className="max-w-4xl mx-auto px-4">
-          <h2 id="knowledge-database-title" className="text-4xl font-extrabold text-slate-900 mb-6 text-center">Technical Reference and Diagnostic Knowledge Base</h2>
+          <h3 id="knowledge-database-title" className="text-3xl font-bold text-slate-900 mb-6 text-center">Technical Reference and Diagnostic Knowledge Base</h3>
           <p className="text-slate-600 text-lg text-center max-w-3xl mx-auto mb-16">
             Access verified crop nutrition answers, equations, and standard chemical reference citation indices.
           </p>
