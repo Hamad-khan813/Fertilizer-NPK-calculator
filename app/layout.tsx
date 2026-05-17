@@ -28,6 +28,14 @@ export const metadata: Metadata = {
     'crop nutrition planning', 'commercial fertilizer calculator', 'liquid fertilizer mixing guide',
     'hydroponic nutrient calculator', 'soil amendment calculator', 'fertigation basics'
   ],
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/icon', type: 'image/png' },
+    ],
+    shortcut: '/favicon.svg',
+    apple: '/apple-icon',
+  },
   openGraph: {
     type: 'website',
     siteName: 'FertiCalc',
@@ -36,7 +44,7 @@ export const metadata: Metadata = {
     description: 'Eliminate guesswork in crop nutrition. Get precise fertilizer requirements for any target ratio with our advanced agronomical calculator.',
     images: [
       {
-        url: '/favicon.ico',
+        url: '/og-image.png',
         width: 1200,
         height: 630,
         alt: 'FertiCalc NPK Calculator',
