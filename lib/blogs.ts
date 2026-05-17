@@ -68,7 +68,7 @@ export async function getBlogBySlug(slug: string): Promise<BlogPost> {
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const { data, content } = matter(fileContents);
 
-  const processedContent = await remark().use(remarkHtml).process(content);
+  const processedContent = await remark().use(remarkHtml, { sanitize: false }).process(content);
   const htmlContent = processedContent.toString();
 
   return {

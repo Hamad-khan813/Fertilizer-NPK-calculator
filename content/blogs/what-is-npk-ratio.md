@@ -6,12 +6,14 @@ excerpt: "NPK stands for Nitrogen, Phosphorus, and Potassium. Learn what each nu
 author: "Sarah Chen"
 readTime: "6 min read"
 category: "Basics"
-coverImage: "/images/npk-basics.jpg"
+coverImage: "/images/what-is-NPK.png"
 ---
 
 # Understanding NPK: The Foundation of Plant Nutrition
 
 When you pick up a bag of fertilizer, the first thing you'll notice is three numbers, like 10-20-10 or 46-0-0. These numbers are the NPK ratio, the cornerstone of modern agriculture and gardening. But what do they actually mean, and why should you care?
+
+![Three piles of vibrant fertilizer powders representing Nitrogen, Phosphorus, and Potassium on a clean surface](/images/what-is-NPK.png)
 
 ## What Does NPK Stand For?
 
@@ -53,13 +55,42 @@ The remaining percentage is inert filler, micronutrients, or other components. A
 
 Different crops need different ratios at different growth stages:
 
-| Crop | Growth Stage | Recommended Ratio |
-|------|--------------|------------------|
-| Leafy Greens | Vegetative | 20-10-10 |
-| Wheat | Tillering to Grain Fill | 15-10-15 |
-| Tomatoes | Flowering & Fruiting | 10-20-20 |
-| Legumes | Pre-bloom | 5-10-15 |
-| Turf Grass | Maintenance | 15-5-10 |
+<table>
+  <thead>
+    <tr>
+      <th>Crop</th>
+      <th>Growth Stage</th>
+      <th>Recommended Ratio</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Leafy Greens</td>
+      <td>Vegetative</td>
+      <td>20-10-10</td>
+    </tr>
+    <tr>
+      <td>Wheat</td>
+      <td>Tillering to Grain Fill</td>
+      <td>15-10-15</td>
+    </tr>
+    <tr>
+      <td>Tomatoes</td>
+      <td>Flowering & Fruiting</td>
+      <td>10-20-20</td>
+    </tr>
+    <tr>
+      <td>Legumes</td>
+      <td>Pre-bloom</td>
+      <td>5-10-15</td>
+    </tr>
+    <tr>
+      <td>Turf Grass</td>
+      <td>Maintenance</td>
+      <td>15-5-10</td>
+    </tr>
+  </tbody>
+</table>
 
 ## Common Fertilizer Types
 

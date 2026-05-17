@@ -601,7 +601,7 @@ export default function Home() {
                 <a href="#ref-1-source-1" aria-label="Back to content" className="ml-2 text-slate-600 hover:text-primary">↩</a>
               </li>
               <li id="ref-2">
-                <cite>International Plant Nutrition Institute (IPNI). (2018). Fertilizer Compatibility Matrix & Guidelines. Retrieved from <a href="https://www.ipni.net/article/IPNI-3240" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">ipni.net</a>.</cite>
+                <cite>International Plant Nutrition Institute (IPNI). (2018). Fertilizer Compatibility Matrix & Guidelines. Retrieved from <a href="https://www.nutrientstewardship.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Nutrient Stewardship Portal</a>.</cite>
                 <a href="#ref-2-source-1" aria-label="Back to content" className="ml-2 text-slate-600 hover:text-primary">↩</a>
               </li>
               <li id="ref-3">

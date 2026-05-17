@@ -6,12 +6,14 @@ excerpt: "Compare Urea (46-0-0) and Ammonium Nitrate (34-0-0). We break down cos
 author: "FertiCalc Team"
 readTime: "18 min read"
 category: "Comparisons"
-coverImage: "/images/urea-vs-an.jpg"
+coverImage: "/images/urea-vs-amonium-nitrate.png"
 ---
 
 # Urea vs Ammonium Nitrate: Which Nitrogen Fertilizer Is Right for You?
 
 Let's just get into it.
+
+![A split view comparing white Urea fertilizer granules and Ammonium Nitrate prills on a clean surface](/images/urea-vs-amonium-nitrate.png)
 
 If you've spent any time managing crop nutrition, you've probably stood in a supplier's office or scrolled through prices online and wondered ,  urea or ammonium nitrate? Both supply nitrogen. Both are white-ish granules. Both end up doing the same job in the soil eventually. So why does it matter which one you pick?
 
