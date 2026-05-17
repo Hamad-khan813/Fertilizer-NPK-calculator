@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     description: 'Eliminate guesswork in crop nutrition. Get precise fertilizer requirements for any target ratio with our advanced agronomical calculator.',
     images: [
       {
-        url: '/og-image.png',
+        url: '/favicon.ico',
         width: 1200,
         height: 630,
         alt: 'FertiCalc NPK Calculator',
