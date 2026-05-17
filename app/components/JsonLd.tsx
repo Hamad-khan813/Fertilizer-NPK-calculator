@@ -5,6 +5,13 @@ export default function JsonLd() {
     '@context': 'https://schema.org',
     '@graph': [
       {
+        '@type': 'WebSite',
+        '@id': 'https://ferti-calc.vercel.app/#website',
+        'name': 'FertiCalc',
+        'alternateName': ['FertiCalc NPK Calculator', 'Fertilizer Calculator'],
+        'url': 'https://ferti-calc.vercel.app'
+      },
+      {
         '@type': 'Organization',
         '@id': 'https://ferti-calc.vercel.app/#organization',
         'name': 'FertiCalc',
