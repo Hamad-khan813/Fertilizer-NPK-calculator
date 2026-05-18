@@ -67,7 +67,7 @@ export async function getGuideBySlug(slug: string): Promise<GuidePost> {
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const { data, content } = matter(fileContents);
 
-  const processedContent = await remark().use(remarkHtml).process(content);
+  const processedContent = await remark().use(remarkHtml, { sanitize: false }).process(content);
   const htmlContent = processedContent.toString();
 
   return {
