@@ -15,10 +15,22 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     const { slug } = await params;
     const guide = await getGuideBySlug(slug);
     return {
-      title: guide.title,
+      title: `${guide.title} | FertiCalc Crop Guides`,
       description: guide.excerpt,
       alternates: {
         canonical: `/guides/${guide.slug}`,
+      },
+      robots: {
+        index: true,
+        follow: true,
+        nocache: true,
+        googleBot: {
+          index: true,
+          follow: true,
+          'max-video-preview': -1,
+          'max-image-preview': 'large',
+          'max-snippet': -1,
+        },
       },
     };
   } catch {
@@ -39,11 +51,30 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
       "@context": "https://schema.org",
       "@type": "Article",
       "headline": guide.title,
+      "description": guide.excerpt,
       "datePublished": "2026-05-15",
       "dateModified": "2026-05-15",
+      "image": ["https://ferti-calc.vercel.app/assets/og-calculator-preview.png"],
       "author": {
+        "@type": "Person",
+        "name": "Hamad Khan",
+        "jobTitle": "Full-Stack Developer & Agronomic Tools Architect",
+        "sameAs": [
+          "https://github.com/Hamad-khan813",
+          "https://linkedin.com/in/hamad-khan"
+        ]
+      },
+      "publisher": {
         "@type": "Organization",
-        "name": "FertiCalc"
+        "name": "FertiCalc",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://ferti-calc.vercel.app/favicon.svg"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": `https://ferti-calc.vercel.app/guides/${guide.slug}`
       }
     };
 

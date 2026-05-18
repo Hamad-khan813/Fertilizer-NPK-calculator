@@ -70,12 +70,39 @@ Many growers use a TDS (Total Dissolved Solids) meter to measure PPM. While usef
 
 Every plant has a "sweet spot" for nutrient concentration. Here are some general guidelines for the vegetative stage:
 
-| Crop | Target Nitrogen (N) PPM | Target Potassium (K) PPM |
-|------|-------------------------|--------------------------|
-| Lettuce / Herbs | 100 - 150 | 150 - 200 |
-| Tomatoes (Veg) | 150 - 200 | 200 - 300 |
-| Peppers | 120 - 160 | 160 - 240 |
-| Cannabis (Veg) | 150 - 250 | 200 - 350 |
+<div class="overflow-x-auto my-8 border border-slate-200 rounded-2xl shadow-sm bg-white">
+  <table class="min-w-full divide-y divide-slate-200">
+    <thead class="bg-slate-50">
+      <tr>
+        <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Crop</th>
+        <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Target Nitrogen (N) PPM</th>
+        <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Target Potassium (K) PPM</th>
+      </tr>
+    </thead>
+    <tbody class="bg-white divide-y divide-slate-100">
+      <tr class="hover:bg-slate-50/50 transition-colors">
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-slate-900">Lettuce / Herbs</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-emerald-600 font-mono">100 - 150</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-emerald-600 font-mono">150 - 200</td>
+      </tr>
+      <tr class="hover:bg-slate-50/50 transition-colors">
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-slate-900">Tomatoes (Veg)</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-emerald-600 font-mono">150 - 200</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-emerald-600 font-mono">200 - 300</td>
+      </tr>
+      <tr class="hover:bg-slate-50/50 transition-colors">
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-slate-900">Peppers</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-emerald-600 font-mono">120 - 160</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-emerald-600 font-mono">160 - 240</td>
+      </tr>
+      <tr class="hover:bg-slate-50/50 transition-colors">
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-slate-900">Cannabis (Veg)</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-emerald-600 font-mono">150 - 250</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-emerald-600 font-mono">200 - 350</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 *Note: These ranges vary based on the growth stage and environmental conditions (temperature/light).*
 
