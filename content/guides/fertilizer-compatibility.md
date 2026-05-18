@@ -43,12 +43,140 @@ Because of these incompatibilities, commercial hydroponic operations use a two-t
 
 ## Master Compatibility Chart
 
-| Fertilizer | Calcium Nitrate | Magnesium Sulfate | Potassium Nitrate | MAP/DAP |
-|------------|-----------------|-------------------|-------------------|---------|
-| **Calcium Nitrate** | -- | **INCOMPATIBLE** | Compatible | **INCOMPATIBLE** |
-| **Magnesium Sulfate** | **INCOMPATIBLE** | -- | Compatible | Compatible |
-| **Potassium Nitrate** | Compatible | Compatible | -- | Compatible |
-| **Urea** | Compatible | Compatible | Compatible | Compatible |
+<div class="overflow-x-auto my-8 border border-slate-200 rounded-2xl shadow-sm bg-white">
+  <table class="min-w-full divide-y divide-slate-200">
+    <thead class="bg-slate-50">
+      <tr>
+        <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Fertilizer</th>
+        <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Calcium Nitrate</th>
+        <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Magnesium Sulfate</th>
+        <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Potassium Nitrate</th>
+        <th scope="col" class="px-6 py-4 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">MAP/DAP</th>
+      </tr>
+    </thead>
+    <tbody class="bg-white divide-y divide-slate-100">
+      <tr class="hover:bg-slate-50/50 transition-colors">
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-slate-900 bg-slate-50/30">Calcium Nitrate</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-400 font-mono">--</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200">
+            <svg class="w-3.5 h-3.5 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+            INCOMPATIBLE
+          </span>
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+            <svg class="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+            </svg>
+            Compatible
+          </span>
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200">
+            <svg class="w-3.5 h-3.5 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+            INCOMPATIBLE
+          </span>
+        </td>
+      </tr>
+      <tr class="hover:bg-slate-50/50 transition-colors">
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-slate-900 bg-slate-50/30">Magnesium Sulfate</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200">
+            <svg class="w-3.5 h-3.5 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+            INCOMPATIBLE
+          </span>
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-400 font-mono">--</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+            <svg class="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+            </svg>
+            Compatible
+          </span>
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+            <svg class="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+            </svg>
+            Compatible
+          </span>
+        </td>
+      </tr>
+      <tr class="hover:bg-slate-50/50 transition-colors">
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-slate-900 bg-slate-50/30">Potassium Nitrate</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+            <svg class="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+            </svg>
+            Compatible
+          </span>
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+            <svg class="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+            </svg>
+            Compatible
+          </span>
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-400 font-mono">--</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+            <svg class="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+            </svg>
+            Compatible
+          </span>
+        </td>
+      </tr>
+      <tr class="hover:bg-slate-50/50 transition-colors">
+        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-slate-900 bg-slate-50/30">Urea</td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+            <svg class="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+            </svg>
+            Compatible
+          </span>
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+            <svg class="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+            </svg>
+            Compatible
+          </span>
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+            <svg class="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+            </svg>
+            Compatible
+          </span>
+        </td>
+        <td class="px-6 py-4 whitespace-nowrap text-sm">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+            <svg class="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+            </svg>
+            Compatible
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 ---
 
