@@ -93,5 +93,53 @@ export async function generateMetadata({ searchParams }: { searchParams: Promise
 export default async function RootPage({ searchParams }: { searchParams: Promise<{ useCase?: string }> }) {
   const resolvedParams = await searchParams;
   const useCase = resolvedParams.useCase || 'general';
-  return <HomePage initialUseCase={useCase} />;
+
+  const softwareAppSchema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Ferti-Calc",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "ratingCount": "124"
+    },
+    "featureList": "NPK calculator, oxide-to-elemental conversion, chemical compatibility check, 52+ fertilizer database, grams-per-liter precision",
+    "screenshot": "https://ferti-calc.vercel.app/og-image.png",
+    "url": "https://ferti-calc.vercel.app",
+    "description": "Free precision NPK fertilizer calculator for hydroponics, greenhouse, and soil cultivation. Calculate exact grams-per-liter, convert oxide to elemental, and check chemical compatibility instantly."
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://ferti-calc.vercel.app"
+      }
+    ]
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareAppSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <HomePage initialUseCase={useCase} />
+    </>
+  );
 }

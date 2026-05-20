@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import fertilizersData from '@/data/fertilizers.json';
 import { Fertilizer } from '@/app/lib/calculate';
+import { FERTILIZERS } from '@/lib/fertilizer-data';
 
 export default function FertilizersPage() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -113,13 +114,28 @@ export default function FertilizersPage() {
                               {fert.form === 'liquid' ? '💧 Liquid' : '🪨 Granular'}
                             </span>
                           </td>
-                          <td className="px-6 py-4 text-center text-sm">
-                            <Link
-                              href={`/?id=${fert.id}`}
-                              className="text-primary hover:text-primary-dark font-semibold"
-                            >
-                              Use
-                            </Link>
+                          <td className="px-6 py-4 text-center text-sm font-semibold">
+                            {(() => {
+                              const match = FERTILIZERS.find((f) => f.id === fert.id);
+                              if (match) {
+                                return (
+                                  <Link
+                                    href={`/fertilizers/${match.slug}`}
+                                    className="text-primary hover:text-primary-dark"
+                                  >
+                                    View Calculator
+                                  </Link>
+                                );
+                              }
+                              return (
+                                <Link
+                                  href={`/?f=${fert.id}`}
+                                  className="text-slate-600 hover:text-primary"
+                                >
+                                  Use
+                                </Link>
+                              );
+                            })()}
                           </td>
                         </tr>
                       ))}

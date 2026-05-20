@@ -21,16 +21,29 @@ interface CalculatorInputs {
 interface CalculatorProps {
   onResult: (result: CalcResult | null, inputs: CalculatorInputs | null) => void;
   onSelectedFertilizer: (fertilizer: Fertilizer | null) => void;
+  initialFertilizerId?: string;
+  initialVolume?: number;
+  initialTargetN?: number;
+  initialTargetP?: number;
+  initialTargetK?: number;
 }
 
-function CalculatorContent({ onResult, onSelectedFertilizer }: CalculatorProps) {
+function CalculatorContent({
+  onResult,
+  onSelectedFertilizer,
+  initialFertilizerId,
+  initialVolume,
+  initialTargetN,
+  initialTargetP,
+  initialTargetK
+}: CalculatorProps) {
   const searchParams = useSearchParams();
-  const [targetN, setTargetN] = useState<number>(10);
-  const [targetP, setTargetP] = useState<number>(5);
-  const [targetK, setTargetK] = useState<number>(10);
-  const [volumeLitres, setVolumeLitres] = useState<number>(1);
+  const [targetN, setTargetN] = useState<number>(initialTargetN ?? 10);
+  const [targetP, setTargetP] = useState<number>(initialTargetP ?? 5);
+  const [targetK, setTargetK] = useState<number>(initialTargetK ?? 10);
+  const [volumeLitres, setVolumeLitres] = useState<number>(initialVolume ?? 1);
   const [selectedFertilizerId, setSelectedFertilizerId] = useState<string>(
-    fertilizersData.length > 0 ? fertilizersData[0].id : ''
+    initialFertilizerId ?? (fertilizersData.length > 0 ? fertilizersData[0].id : '')
   );
   
   const { system } = useUnitSystem();

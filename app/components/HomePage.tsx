@@ -386,6 +386,38 @@ export default function Home({ initialUseCase = 'general', cropType, unit }: Hom
               })}
             </div>
           </div>
+
+          {/* Specific Fertilizer Calculators Section */}
+          <div className="mt-12 pt-12 border-t border-slate-200">
+            <h3 className="text-2xl font-bold text-slate-900 mb-6 text-center">Specific Fertilizer Calculators</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+              {[
+                { slug: "urea-46-0-0", name: "Urea (46-0-0)" },
+                { slug: "calcium-nitrate-15-5-0-0", name: "Calcium Nitrate (15.5-0-0)" },
+                { slug: "dap-18-46-0", name: "DAP (18-46-0)" },
+                { slug: "mop-0-0-60", name: "MOP (0-0-60)" },
+                { slug: "potassium-sulfate-0-0-50", name: "Potassium Sulfate (0-0-50)" },
+                { slug: "ammonium-nitrate-34-0-0", name: "Ammonium Nitrate (34-0-0)" },
+                { slug: "ammonium-sulfate-21-0-0", name: "Ammonium Sulfate (21-0-0)" },
+                { slug: "map-12-61-0", name: "MAP (12-61-0)" },
+                { slug: "potassium-nitrate-13-0-46", name: "Potassium Nitrate (13-0-46)" },
+                { slug: "magnesium-sulfate-epsom", name: "Epsom Salt" }
+              ].map(({ slug, name }) => (
+                <Link
+                  key={slug}
+                  href={`/fertilizers/${slug}`}
+                  className="p-4 bg-white border border-slate-200 rounded-2xl hover:border-primary/50 hover:shadow-md transition-all text-center group flex flex-col justify-center items-center"
+                >
+                  <span className="text-sm font-bold text-slate-800 group-hover:text-primary transition-colors block mb-1 leading-snug">
+                    {name} Calculator
+                  </span>
+                  <span className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">
+                    Dosage Guide
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
