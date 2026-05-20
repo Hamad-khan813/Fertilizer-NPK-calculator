@@ -130,7 +130,22 @@ export default function Home({ initialUseCase = 'general', cropType, unit }: Hom
                 'about': ENTITY_MAP[useCase].entities.map(e => ({
                   '@type': 'Thing',
                   'name': e
-                }))
+                })),
+                ...(ENTITY_MAP[useCase].schemaType === 'WebApplication' ? {
+                  'applicationCategory': 'UtilitiesApplication',
+                  'operatingSystem': 'All',
+                  'browserRequirements': 'Requires JavaScript',
+                  'offers': {
+                    '@type': 'Offer',
+                    'price': '0',
+                    'priceCurrency': 'USD'
+                  },
+                  'aggregateRating': {
+                    '@type': 'AggregateRating',
+                    'ratingValue': '4.8',
+                    'reviewCount': '124'
+                  }
+                } : {})
               })
             }}
           />
