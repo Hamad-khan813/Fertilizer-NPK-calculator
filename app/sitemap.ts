@@ -1,78 +1,39 @@
 import { MetadataRoute } from 'next';
+import { getAllCombinations, BASE_URL, CROPS } from '@/lib/calculator-data';
 
-const cropUnitCombinations = [
-  { cropType: "turf-grass",         unit: "lbs"    },
-  { cropType: "hydroponic-tomato",  unit: "grams"  },
-  { cropType: "wheat",              unit: "kg"     },
-  { cropType: "sugarcane",          unit: "kg"     },
-  { cropType: "rice",               unit: "kg"     },
-  { cropType: "maize",              unit: "kg"     },
-  { cropType: "lawn-grass",         unit: "lbs"    },
-  { cropType: "indoor-cannabis",    unit: "grams"  },
-  { cropType: "vegetable-garden",   unit: "oz"     },
-  { cropType: "cotton",             unit: "kg"     },
-];
-
-export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://ferti-calc.vercel.app';
-  
-  const baseSitemap: MetadataRoute.Sitemap = [
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  // Static root pages
+  const staticRoutes: MetadataRoute.Sitemap = [
     {
-      url: baseUrl,
+      url: BASE_URL,
       lastModified: new Date(),
       changeFrequency: 'weekly',
-      priority: 1,
+      priority: 1.0,
     },
     {
-      url: `${baseUrl}/calculator`,
+      url: `${BASE_URL}/calculator`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/guides`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/what-is-npk`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/guides/what-is-npk`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/guides/foliar-spray-guide`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/guides/ppm-conversion`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/guides/hydroponic-nutrients`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.6,
+      priority: 0.9,
     },
   ];
 
-  const dynamicSitemap = cropUnitCombinations.map(({ cropType, unit }) => ({
-    url: `${baseUrl}/calculator/${cropType}/${unit}`,
+  // One entry per crop category landing page
+  const categories = Array.from(new Set(CROPS.map(c => c.category)));
+  const categoryRoutes: MetadataRoute.Sitemap = categories.map(cat => ({
+    url: `${BASE_URL}/calculator/category/${cat}`,
     lastModified: new Date(),
-    changeFrequency: 'monthly' as const,
+    changeFrequency: 'monthly',
+    priority: 0.85,
+  }));
+
+  // Full crop × unit matrix
+  const dynamicRoutes: MetadataRoute.Sitemap = getAllCombinations().map(({ url }) => ({
+    url,
+    lastModified: new Date(),
+    changeFrequency: 'monthly',
     priority: 0.8,
   }));
 
-  return [...baseSitemap, ...dynamicSitemap];
+  return [...staticRoutes, ...categoryRoutes, ...dynamicRoutes];
 }

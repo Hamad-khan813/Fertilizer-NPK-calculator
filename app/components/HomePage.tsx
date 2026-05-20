@@ -8,6 +8,7 @@ import Calculator from './Calculator';
 import ResultCard from './ResultCard';
 import { CalcResult, Fertilizer } from '../lib/calculate';
 import { useUnitSystem } from './UnitSystemProvider';
+import { getAllCombinations } from '@/lib/calculator-data';
 
 interface CalculatorInputs {
   targetN: number;
@@ -17,18 +18,10 @@ interface CalculatorInputs {
   fertilizerId: string;
 }
 
-const cropUnitCombinations = [
-  { cropType: "turf-grass",         unit: "lbs"    },
-  { cropType: "hydroponic-tomato",  unit: "grams"  },
-  { cropType: "wheat",              unit: "kg"     },
-  { cropType: "sugarcane",          unit: "kg"     },
-  { cropType: "rice",               unit: "kg"     },
-  { cropType: "maize",              unit: "kg"     },
-  { cropType: "lawn-grass",         unit: "lbs"    },
-  { cropType: "indoor-cannabis",    unit: "grams"  },
-  { cropType: "vegetable-garden",   unit: "oz"     },
-  { cropType: "cotton",             unit: "kg"     },
-];
+const cropUnitCombinations = getAllCombinations().map(combo => ({
+  cropType: combo.crop,
+  unit: combo.unit
+}));
 
 function getUseCaseFromCrop(crop: string): UseCase {
   const turfCrops = ['turf-grass', 'lawn-grass', 'turf', 'lawn', 'grass'];
