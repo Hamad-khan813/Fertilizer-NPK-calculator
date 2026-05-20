@@ -2,6 +2,10 @@
 
 import { useState } from 'react';
 import { CalcResult, Fertilizer } from '../lib/calculate';
+import { useUnitSystem } from './UnitSystemProvider';
+import { generateMarkdownReport, UseCase } from '../lib/seoEntities';
+import { LogApplicationModal } from './tracker/LogApplicationModal';
+import ProductRecommendation from './ProductRecommendation';
 
 interface ResultCardProps {
   result: CalcResult | null;
@@ -13,10 +17,14 @@ interface ResultCardProps {
     volumeLitres: number;
     fertilizerId: string;
   } | null;
+  useCase?: UseCase;
 }
 
-export default function ResultCard({ result, fertilizer, inputs }: ResultCardProps) {
+export default function ResultCard({ result, fertilizer, inputs, useCase = 'general' }: ResultCardProps) {
   const [copied, setCopied] = useState(false);
+  const [mdCopied, setMdCopied] = useState(false);
+  const [showSaveModal, setShowSaveModal] = useState(false);
+  const { system } = useUnitSystem();
 
   const getShareUrl = () => {
     if (!inputs) return '';
@@ -36,6 +44,15 @@ export default function ResultCard({ result, fertilizer, inputs }: ResultCardPro
     navigator.clipboard.writeText(url);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleMarkdownCopy = () => {
+    if (!result || !inputs || !fertilizer) return;
+    const isLiquid = fertilizer.form === 'liquid';
+    const md = generateMarkdownReport(result, inputs, system, isLiquid, useCase);
+    navigator.clipboard.writeText(md);
+    setMdCopied(true);
+    setTimeout(() => setMdCopied(false), 2000);
   };
 
   const handleTweet = () => {
@@ -75,11 +92,48 @@ export default function ResultCard({ result, fertilizer, inputs }: ResultCardPro
 
           <div className="p-6 space-y-8">
             {/* Main Result */}
-            <div className="text-center pb-8 border-b border-slate-100">
+            <div className="text-center pb-8 border-b border-slate-100" aria-live="polite">
               <p className="text-slate-500 text-sm font-semibold uppercase tracking-wider mb-2">Required Amount</p>
               <div className="flex items-baseline justify-center gap-2">
-                <span className="text-6xl font-black text-slate-900 tracking-tight">{result.amountG}</span>
-                <span className="text-2xl font-bold text-slate-600">{fertilizer.form === 'liquid' ? 'ml' : 'g'}</span>
+                {(() => {
+                  const g = result.amountG;
+                  const isLiquid = fertilizer.form === 'liquid';
+                  
+                  let displayAmount = g.toString();
+                  let displayUnit = isLiquid ? 'ml' : 'g';
+
+                  if (system === 'imperial') {
+                    if (isLiquid) {
+                      if (g < 3785.41) {
+                        displayAmount = (g / 29.5735).toFixed(2);
+                        displayUnit = 'fl oz';
+                      } else {
+                        displayAmount = (g / 3785.41).toFixed(2);
+                        displayUnit = 'gal';
+                      }
+                    } else {
+                      if (g < 453.592) {
+                        displayAmount = (g / 28.3495).toFixed(2);
+                        displayUnit = 'oz';
+                      } else {
+                        displayAmount = (g / 453.592).toFixed(2);
+                        displayUnit = 'lbs';
+                      }
+                    }
+                  } else {
+                    if (g >= 1000) {
+                      displayAmount = (g / 1000).toFixed(2);
+                      displayUnit = isLiquid ? 'L' : 'kg';
+                    }
+                  }
+
+                  return (
+                    <>
+                      <span className="text-6xl font-black text-slate-900 tracking-tight">{displayAmount}</span>
+                      <span className="text-2xl font-bold text-slate-600">{displayUnit}</span>
+                    </>
+                  );
+                })()}
               </div>
               <p className="mt-4 text-slate-600 font-medium px-4 py-2 bg-slate-50 rounded-full inline-block">
                 Using {fertilizer.name}
@@ -132,26 +186,22 @@ export default function ResultCard({ result, fertilizer, inputs }: ResultCardPro
             </figure>
 
             {/* Actions */}
-            <div className="grid grid-cols-2 gap-4 pt-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
+              <button
+                onClick={handleMarkdownCopy}
+                className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl border-2 border-emerald-500 text-emerald-700 bg-emerald-50 font-bold hover:bg-emerald-100 transition-all active:scale-95 sm:col-span-1"
+              >
+                {mdCopied ? "Copied!" : "📋 Markdown"}
+              </button>
               <button
                 onClick={handleCopy}
-                className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl border border-slate-200 font-bold text-slate-600 hover:bg-slate-50 transition-all active:scale-95"
+                className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl border border-slate-200 font-bold text-slate-600 hover:bg-slate-50 transition-all active:scale-95 sm:col-span-1"
               >
-                {copied ? (
-                  <>
-                    <svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
-                    Copied!
-                  </>
-                ) : (
-                  <>
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" /></svg>
-                    Copy Link
-                  </>
-                )}
+                {copied ? "Copied!" : "🔗 Copy Link"}
               </button>
               <button
                 onClick={handleTweet}
-                className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#1DA1F2] text-white font-bold hover:brightness-110 transition-all active:scale-95"
+                className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#1DA1F2] text-white font-bold hover:brightness-110 transition-all active:scale-95 sm:col-span-1"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
                   <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.84 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
@@ -159,6 +209,24 @@ export default function ResultCard({ result, fertilizer, inputs }: ResultCardPro
                 Share
               </button>
             </div>
+
+            {/* Save to Tracker */}
+            <button
+              onClick={() => setShowSaveModal(true)}
+              className="w-full py-3 px-4 rounded-xl bg-slate-900 text-white font-bold hover:bg-slate-800 transition-all active:scale-[0.98] flex items-center justify-center gap-2"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" /></svg>
+              💾 Save to Tracker
+            </button>
+
+            {/* Product Recommendation based on Target NPK */}
+            {inputs && (
+              <ProductRecommendation 
+                targetN={inputs.targetN} 
+                targetP={inputs.targetP} 
+                targetK={inputs.targetK} 
+              />
+            )}
 
             {/* Warnings/Notes */}
             {(result.warning || fertilizer.notes) && (
@@ -180,6 +248,18 @@ export default function ResultCard({ result, fertilizer, inputs }: ResultCardPro
             )}
           </div>
         </div>
+      )}
+
+      {/* Save Modal */}
+      {result && fertilizer && inputs && (
+        <LogApplicationModal
+          isOpen={showSaveModal}
+          onClose={() => setShowSaveModal(false)}
+          result={result}
+          inputs={inputs}
+          fertilizer={fertilizer}
+          useCase={useCase}
+        />
       )}
     </div>
   );

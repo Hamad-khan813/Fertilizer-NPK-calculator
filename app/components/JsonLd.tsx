@@ -48,40 +48,28 @@ export default function JsonLd() {
         ]
       },
       {
-        '@type': 'SoftwareApplication',
-        '@id': 'https://ferti-calc.vercel.app/#software',
-        'name': 'FertiCalc NPK Calculator',
-        'applicationCategory': 'AgricultureApplication',
-        'operatingSystem': 'Web',
+        '@type': 'WebApplication',
+        '@id': 'https://ferti-calc.vercel.app/#webapplication',
+        'name': 'Ferti-Calc',
+        'applicationCategory': 'BusinessApplication',
+        'operatingSystem': 'All',
+        'browserRequirements': 'Requires HTML5, JavaScript',
+        'url': 'https://ferti-calc.vercel.app',
         'screenshot': 'https://ferti-calc.vercel.app/screenshot.png',
         'datePublished': '2026-03-15T00:00:00Z',
-        'dateModified': '2026-05-17T00:00:00Z',
+        'dateModified': '2026-05-20T00:00:00Z',
         'featureList': [
-          'Precision NPK Ratio Calculation',
-          'Limiting Nutrient Detection',
+          'Dynamically computes Nitrogen (N) weight requirements',
+          'Dynamically computes Phosphorus (P) weight requirements',
+          'Dynamically computes Potassium (K) weight requirements',
           'Batch Optimization (1L to 10,000L+)',
-          'Nutrient Compatibility & Precipitation Logic',
-          'Professional-grade Accuracy (0.001g/L)',
-          '52+ Fertilizer Database Integration'
+          'Nutrient Compatibility & Precipitation Logic'
         ],
         'publisher': { '@id': 'https://ferti-calc.vercel.app/#organization' },
         'offers': {
           '@type': 'Offer',
           'price': '0',
           'priceCurrency': 'USD'
-        },
-        'aggregateRating': {
-          '@type': 'AggregateRating',
-          'ratingValue': '4.9',
-          'ratingCount': '1250'
-        },
-        'speakable': {
-          '@type': 'SpeakableSpecification',
-          'cssSelector': [
-            'h1',
-            '.hero-description',
-            '#calculator-heading'
-          ]
         }
       },
       {

@@ -80,13 +80,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     };
 
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-slate-50">
         {/* Header */}
-        <div className="bg-gradient-to-br from-green-50 to-green-100 py-12 sm:py-16">
+        <div className="bg-gradient-to-br from-primary/5 to-primary-20/40 py-12 sm:py-16">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <Link
               href="/blog"
-              className="inline-flex items-center gap-2 text-green-600 hover:text-green-700 font-medium mb-4"
+              className="inline-flex items-center gap-2 text-primary hover:text-primary-dark font-medium mb-4"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -95,14 +95,14 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             </Link>
 
             <div className="mb-4">
-              <span className="inline-block px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+              <span className="inline-block px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-20 text-primary-dark">
                 {blog.category}
               </span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">{blog.title}</h1>
+            <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">{blog.title}</h1>
 
-            <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600">
+            <div className="flex flex-wrap items-center gap-4 text-sm text-slate-600">
               <span>{blog.author}</span>
               <span>•</span>
               <span>{new Date(blog.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
@@ -114,7 +114,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
         {/* Cover Image */}
         {blog.coverImage && (
-          <div className="bg-gray-200 h-96 w-full">
+          <div className="bg-slate-200 h-96 w-full">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={blog.coverImage}
@@ -128,18 +128,18 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         {/* Content */}
         <article className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
           <div
-            className="prose prose-lg max-w-none text-gray-700"
+            className="prose prose-lg max-w-none text-slate-700"
             dangerouslySetInnerHTML={{
               __html: blog.htmlContent,
             }}
             style={{
-              '--tw-prose-headings': '#111827',
-              '--tw-prose-body': '#374151',
-              '--tw-prose-bold': '#1f2937',
-              '--tw-prose-links': '#059669',
-              '--tw-prose-quotes': '#6b7280',
-              '--tw-prose-code': '#1f2937',
-              '--tw-prose-pre-bg': '#f3f4f6',
+              '--tw-prose-headings': '#0f172a',
+              '--tw-prose-body': '#334155',
+              '--tw-prose-bold': '#0f172a',
+              '--tw-prose-links': 'var(--primary)',
+              '--tw-prose-quotes': '#64748b',
+              '--tw-prose-code': '#0f172a',
+              '--tw-prose-pre-bg': '#f8fafc',
             } as React.CSSProperties}
           />
 
@@ -150,19 +150,19 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               font-weight: 700;
               margin-top: 2rem;
               margin-bottom: 1rem;
-              color: #111827;
+              color: #0f172a;
             }
             .prose h3 {
               font-size: 1.5rem;
               font-weight: 600;
               margin-top: 1.5rem;
               margin-bottom: 0.75rem;
-              color: #1f2937;
+              color: #1e293b;
             }
             .prose p {
               margin-bottom: 1rem;
               line-height: 1.75;
-              color: #374151;
+              color: #334155;
             }
             .prose ul, .prose ol {
               margin-bottom: 1.25rem;
@@ -170,11 +170,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             }
             .prose li {
               margin-bottom: 0.5rem;
-              color: #374151;
+              color: #334155;
             }
             .prose strong {
               font-weight: 600;
-              color: #1f2937;
+              color: #0f172a;
             }
             .prose table {
               margin: 1.5rem 0;
@@ -182,39 +182,39 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               width: 100%;
             }
             .prose table th {
-              background-color: #f3f4f6;
+              background-color: #f8fafc;
               padding: 0.75rem;
               text-align: left;
               font-weight: 600;
-              border: 1px solid #e5e7eb;
+              border: 1px solid var(--border-medium);
             }
             .prose table td {
               padding: 0.75rem;
-              border: 1px solid #e5e7eb;
-              color: #374151;
+              border: 1px solid var(--border-medium);
+              color: #334155;
             }
             .prose blockquote {
-              border-left: 4px solid #059669;
+              border-left: 4px solid var(--primary);
               padding-left: 1rem;
               margin: 1.5rem 0;
-              color: #6b7280;
+              color: #64748b;
               font-style: italic;
             }
             .prose code {
-              background-color: #f3f4f6;
+              background-color: #f8fafc;
               padding: 0.25rem 0.5rem;
               border-radius: 0.25rem;
               font-size: 0.875em;
-              color: #1f2937;
+              color: #0f172a;
             }
           `}</style>
         </article>
 
         {/* Related Posts */}
         {relatedBlogs.length > 0 && (
-          <section className="bg-white border-t border-gray-200 py-12 sm:py-16">
+          <section className="bg-white border-t border-slate-250 py-12 sm:py-16">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <h2 className="text-3xl font-bold text-gray-900 mb-8">Related Posts</h2>
+              <h2 className="text-3xl font-bold text-slate-900 mb-8">Related Posts</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {relatedBlogs.map((relatedBlog) => (
                   <BlogCard key={relatedBlog.slug} blog={relatedBlog} />
@@ -225,15 +225,15 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         )}
 
         {/* CTA Back to Blog */}
-        <section className="bg-green-50 py-12 sm:py-16 border-t border-gray-200">
+        <section className="bg-primary-20/10 py-12 sm:py-16 border-t border-slate-200">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Want to learn more?</h2>
-            <p className="text-gray-600 mb-6">
+            <h2 className="text-2xl font-bold text-slate-900 mb-4">Want to learn more?</h2>
+            <p className="text-slate-600 mb-6">
               Explore more guides, comparisons, and tips on our blog.
             </p>
             <Link
               href="/blog"
-              className="inline-block bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg px-6 py-3 transition-colors"
+              className="inline-block bg-primary hover:bg-primary-dark text-white font-semibold rounded-lg px-6 py-3 transition-colors"
             >
               Explore All Posts
             </Link>
@@ -248,13 +248,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     );
   } catch {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Post Not Found</h1>
-          <p className="text-gray-600 mb-6">The blog post you're looking for doesn't exist.</p>
+          <h1 className="text-4xl font-bold text-slate-900 mb-4">Post Not Found</h1>
+          <p className="text-slate-600 mb-6">The blog post you're looking for doesn't exist.</p>
           <Link
             href="/blog"
-            className="inline-block bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg px-6 py-3 transition-colors"
+            className="inline-block bg-primary hover:bg-primary-dark text-white font-semibold rounded-lg px-6 py-3 transition-colors"
           >
             Back to Blog
           </Link>

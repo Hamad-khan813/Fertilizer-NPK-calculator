@@ -8,6 +8,19 @@
   --secondary: #3b82f6;
   --accent: #f59e0b;
   --glass: rgba(255, 255, 255, 0.7);
+  
+  /* Semantic Tokens */
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --info: #3b82f6;
+  --twitter: #1DA1F2;
+  
+  /* Neutral scale aliases */
+  --surface: #ffffff;
+  --border-light: #f1f5f9;
+  --border-medium: #e2e8f0;
+  --muted-text: #64748b;
 }
 
 @theme inline {
@@ -17,8 +30,38 @@
   --color-primary-dark: var(--primary-dark);
   --color-secondary: var(--secondary);
   --color-accent: var(--accent);
+  
+  /* Semantics */
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-info: var(--info);
+  --color-twitter: var(--twitter);
+  
+  /* Custom Neutrals */
+  --color-surface: var(--surface);
+  --color-border-light: var(--border-light);
+  --color-border-medium: var(--border-medium);
+  --color-muted: var(--muted-text);
+
+  /* Fonts */
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular;
+
+  /* Border Radius System */
+  --radius-sm: 0.75rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+
+  /* Shadows System */
+  --shadow-card: 0 1px 3px rgba(15, 23, 42, 0.05);
+  --shadow-elevated: 0 10px 25px rgba(15, 23, 42, 0.08);
+  --shadow-primary-glow: 0 8px 20px rgba(16, 185, 129, 0.2);
+
+  /* Z-Index System */
+  --z-sticky: 40;
+  --z-overlay: 50;
+  --z-modal: 60;
 }
 
 @layer base {

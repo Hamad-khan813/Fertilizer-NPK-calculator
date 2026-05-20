@@ -1,9 +1,14 @@
 'use client';
 
-import { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect, Suspense, useCallback, useRef } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Fertilizer, CalcResult, calcAmount } from '../lib/calculate';
 import fertilizersData from '../data/fertilizers.json';
+import UnitToggle from './UnitToggle';
+import { useUnitSystem } from './UnitSystemProvider';
+import { NitrogenRisk } from './widgets/NitrogenRisk';
+import { MicroCompanions } from './widgets/MicroCompanions';
+import { RunoffRisk } from './widgets/RunoffRisk';
 
 interface CalculatorInputs {
   targetN: number;
@@ -27,6 +32,8 @@ function CalculatorContent({ onResult, onSelectedFertilizer }: CalculatorProps) 
   const [selectedFertilizerId, setSelectedFertilizerId] = useState<string>(
     fertilizersData.length > 0 ? fertilizersData[0].id : ''
   );
+  
+  const { system } = useUnitSystem();
 
   const fertilizers = fertilizersData as Fertilizer[];
   const selectedFertilizer = fertilizers.find((f) => f.id === selectedFertilizerId) || null;
@@ -50,9 +57,7 @@ function CalculatorContent({ onResult, onSelectedFertilizer }: CalculatorProps) 
     if (f) setSelectedFertilizerId(f);
   }, [searchParams]);
 
-  const handleCalculate = (e?: React.FormEvent) => {
-    if (e) e.preventDefault();
-
+  const handleCalculate = useCallback(() => {
     if (!selectedFertilizer) {
       onResult(null, null);
       return;
@@ -62,19 +67,24 @@ function CalculatorContent({ onResult, onSelectedFertilizer }: CalculatorProps) 
       targetN,
       targetP,
       targetK,
-      volumeLitres,
+      volumeLitres, // Underlying calculation stays in metric, UI handles display
       fertilizer: selectedFertilizer,
     });
 
     onResult(result, { targetN, targetP, targetK, volumeLitres, fertilizerId: selectedFertilizerId });
-  };
+  }, [selectedFertilizer, targetN, targetP, targetK, volumeLitres, selectedFertilizerId, onResult]);
 
-  // Run initial calculation if params are present
+  const lastCalculatedRef = useRef<string>('');
+
+  // Reactive calculation
   useEffect(() => {
-    if (searchParams.toString()) {
-      handleCalculate();
+    const currentInputs = JSON.stringify({ targetN, targetP, targetK, volumeLitres, selectedFertilizerId });
+    if (lastCalculatedRef.current === currentInputs) {
+      return; // Skip if inputs haven't changed to prevent infinite loops
     }
-  }, [searchParams, selectedFertilizerId]);
+    lastCalculatedRef.current = currentInputs;
+    handleCalculate();
+  }, [handleCalculate, targetN, targetP, targetK, volumeLitres, selectedFertilizerId]);
 
   // Imperative WebMCP Tool Registration
   useEffect(() => {
@@ -135,8 +145,9 @@ function CalculatorContent({ onResult, onSelectedFertilizer }: CalculatorProps) 
 
   return (
     <div className="w-full">
+      <UnitToggle />
       <form 
-        onSubmit={handleCalculate} 
+        onSubmit={(e) => e.preventDefault()} 
         className="space-y-8"
         {...{ 
           toolname: "calculateNPKMix",
@@ -219,10 +230,10 @@ function CalculatorContent({ onResult, onSelectedFertilizer }: CalculatorProps) 
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Volume */}
+          {/* Volume / Area (Display adapted based on system, though technically volume for calc) */}
           <div>
             <label htmlFor="volume" className="block text-sm font-semibold text-slate-700 mb-2">
-              Target Volume <span className="text-xs text-slate-600 font-medium">(litres)</span>
+              Target Volume <span className="text-xs text-slate-600 font-medium">({system === 'imperial' ? 'gallons' : 'litres'})</span>
             </label>
             <div className="relative">
               <input
@@ -285,19 +296,13 @@ function CalculatorContent({ onResult, onSelectedFertilizer }: CalculatorProps) 
             </div>
           </div>
         </div>
-
-        {/* Calculate Button */}
-        <button
-          type="submit"
-          className="w-full py-4 px-6 bg-primary hover:bg-primary-dark text-white font-bold rounded-xl transition-all shadow-lg shadow-primary-20 hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2"
-          aria-label="Calculate fertilizer amount and run agronomical analysis"
-        >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-          </svg>
-          Run Analysis
-        </button>
       </form>
+
+      <div className="space-y-4">
+        <NitrogenRisk nValue={targetN} />
+        <MicroCompanions targetN={targetN} targetP={targetP} targetK={targetK} />
+        <RunoffRisk targetP={targetP} />
+      </div>
     </div>
   );
 }

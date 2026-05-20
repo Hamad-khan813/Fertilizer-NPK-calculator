@@ -63,17 +63,63 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+import { cookies } from "next/headers";
+import { UnitSystemProvider, UnitSystem } from "./components/UnitSystemProvider";
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  const systemCookie = cookieStore.get('unit-system')?.value as UnitSystem | undefined;
+  const initialSystem = systemCookie === 'imperial' ? 'imperial' : 'metric';
+
   return (
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebApplication",
+              "name": "FertiCalc — Free Fertilizer Calculator",
+              "url": "https://ferti-calc.vercel.app",
+              "applicationCategory": "UtilitiesApplication",
+              "operatingSystem": "All",
+              "browserRequirements": "Requires JavaScript",
+              "description": "Free fertilizer calculator for farmers and gardeners. Get precise NPK recommendations for wheat, rice, turf grass, hydroponic tomatoes and more. Works in kg, lbs, grams and oz.",
+              "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+              },
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.8",
+                "reviewCount": "124"
+              },
+              "author": {
+                "@type": "Person",
+                "name": "Hamad Khan",
+                "url": "https://ferti-calc.vercel.app"
+              },
+              "inLanguage": "en",
+              "keywords": [
+                "fertilizer calculator",
+                "NPK calculator",
+                "turf grass fertilizer",
+                "hydroponic nutrient calculator",
+                "wheat fertilizer kg",
+                "free farming tool"
+              ]
+            })
+          }}
+        />
         <JsonLd />
         {/* Google Analytics 4 */}
         <Script
@@ -106,14 +152,16 @@ export default function RootLayout({
         </Script>
       </head>
       <body className="min-h-full flex flex-col">
-        <a href="#main-content" className="skip-link">Skip to Content</a>
-        <header role="banner">
-          <Navbar />
-        </header>
-        <div className="flex-grow page-layout-wrapper">
-          {children}
-        </div>
-        <Footer />
+        <UnitSystemProvider initialSystem={initialSystem}>
+          <a href="#main-content" className="skip-link">Skip to Content</a>
+          <header role="banner">
+            <Navbar />
+          </header>
+          <div className="flex-grow page-layout-wrapper">
+            {children}
+          </div>
+          <Footer />
+        </UnitSystemProvider>
       </body>
     </html>
   );

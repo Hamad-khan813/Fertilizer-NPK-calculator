@@ -8,17 +8,17 @@ interface BlogCardProps {
 const categoryColors: Record<string, string> = {
   Basics: 'bg-blue-100 text-blue-800',
   Comparison: 'bg-purple-100 text-purple-800',
-  Guides: 'bg-green-100 text-green-800',
+  Guides: 'bg-primary-20 text-primary-dark',
   Tips: 'bg-orange-100 text-orange-800',
-  default: 'bg-gray-100 text-gray-800',
+  default: 'bg-slate-100 text-slate-800',
 };
 
 const placeholderColors: Record<string, string> = {
   Basics: 'bg-blue-50',
   Comparison: 'bg-purple-50',
-  Guides: 'bg-green-50',
+  Guides: 'bg-primary-20/50',
   Tips: 'bg-orange-50',
-  default: 'bg-gray-50',
+  default: 'bg-slate-50',
 };
 
 export default function BlogCard({ blog }: BlogCardProps) {
@@ -27,7 +27,7 @@ export default function BlogCard({ blog }: BlogCardProps) {
 
   return (
     <Link href={`/blog/${blog.slug}`}>
-      <article className="bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-lg transition-shadow overflow-hidden h-full flex flex-col cursor-pointer">
+      <article className="bg-white rounded-xl shadow-sm border border-slate-100 hover:shadow-lg transition-shadow overflow-hidden h-full flex flex-col cursor-pointer">
         {/* Cover Image or Placeholder */}
         <div className={`w-full h-48 ${placeholderColor} flex items-center justify-center`}>
           {blog.coverImage ? (
@@ -41,7 +41,7 @@ export default function BlogCard({ blog }: BlogCardProps) {
           ) : (
             <div className="text-center">
               <svg
-                className="w-12 h-12 mx-auto text-gray-300"
+                className="w-12 h-12 mx-auto text-slate-300"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -67,17 +67,17 @@ export default function BlogCard({ blog }: BlogCardProps) {
           </div>
 
           {/* Title */}
-          <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2 flex-grow">
+          <h3 className="text-lg font-bold text-slate-900 mb-2 line-clamp-2 flex-grow">
             {blog.title}
           </h3>
 
           {/* Excerpt */}
-          <p className="text-sm text-gray-600 mb-4 line-clamp-3">
+          <p className="text-sm text-slate-600 mb-4 line-clamp-3">
             {blog.excerpt}
           </p>
 
           {/* Meta Footer */}
-          <div className="flex items-center justify-between text-xs text-gray-500 mt-auto pt-4 border-t border-gray-100">
+          <div className="flex items-center justify-between text-xs text-slate-500 mt-auto pt-4 border-t border-slate-100">
             <div className="flex gap-3">
               <span>{blog.author}</span>
               <span>•</span>
