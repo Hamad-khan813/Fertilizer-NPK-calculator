@@ -18,17 +18,72 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://ferti-calc.vercel.app'),
-  applicationName: 'FertiCalc',
-  alternates: {
-    canonical: '/',
+  title: {
+    default: 'Ferti-Calc | Free NPK Fertilizer Calculator & Hydroponic Nutrient Blender',
+    template: '%s | Ferti-Calc'
   },
-  title: 'NPK Fertilizer Calculator | Free Professional Nutrient Planning Tool',
-  description: 'Calculate exact fertilizer requirements for any NPK ratio. Free professional-grade calculator with 52+ fertilizers, limiting nutrient detection, and grams-per-liter precision. No registration required.',
+  description: 'Free NPK calculator for gardeners and professional growers. Convert bag NPK ratios, lbs/acre, kg/ha, P2O5/K2O, PPM, and liquid nutrient recipes in cups, gallons, grams and liters.',
   keywords: [
-    'npk fertilizer calculator', 'nutrient recipe calculator', 'fertilizer dilution calculator', 
-    'crop nutrition planning', 'commercial fertilizer calculator', 'liquid fertilizer mixing guide',
-    'hydroponic nutrient calculator', 'soil amendment calculator', 'fertigation basics'
+    'NPK calculator',
+    'fertilizer calculator',
+    'NPK converter',
+    'fertilizer application rate calculator',
+    'plant nutrient calculator',
+    'fertilizer requirement calculator',
+    'NPK ratio converter',
+    'garden fertilizer calculator',
+    'lbs per acre to lbs per 1000 sq ft',
+    'kg per hectare to kg per square meter',
+    'pounds per acre to grams per plot',
+    'fertilizer rate per 1000 sq ft',
+    'fertilizer bag weight to nutrient content',
+    'pounds to kilograms fertilizer converter',
+    'ounces to grams fertilizer',
+    'gallons per acre to ml per gallon',
+    'liters per hectare to liters per acre',
+    'fluid ounces to liters fertilizer',
+    'P to P2O5 converter',
+    'K to K2O converter',
+    'elemental phosphorus to phosphate calculator',
+    'potassium to potash conversion',
+    'oxide to elemental fertilizer converter',
+    'calculate actual NPK from bag label',
+    'Urea (46-0-0) calculator',
+    'DAP application rate',
+    'MOP conversion',
+    'nitrogen requirement calculator',
+    'how much urea for 1 acre',
+    'ammonium nitrate application rate',
+    'PPM to lbs per acre',
+    'mg/kg to kg/ha',
+    'PPM to pounds per 1000 sq ft',
+    'soil test nutrient converter',
+    'parts per million to fertilizer rate',
+    'fertigation calculator',
+    'liquid NPK converter',
+    'EC to PPM converter',
+    'hydroponic nutrient calculator',
+    'grams per liter fertilizer converter',
+    'nutrient solution calculator',
+    'how much 10-10-10 fertilizer per 1000 square feet',
+    'convert fertilizer recommendations from kg/ha to lbs/acre',
+    'how to calculate NPK for a custom fertilizer blend',
+    'formula for nitrogen application rate',
+    'calculate fertilizer price per pound of nitrogen',
+    'difference between NPK 20-20-20 and 10-10-10 application rate',
+    '10-10-10',
+    '20-20-20',
+    '46-0-0',
+    '18-46-0',
+    '0-0-60',
+    '13-13-13',
+    '5-10-5',
   ],
+  authors: [{ name: 'Hamad Khan', url: 'https://ferti-calc.vercel.app' }],
+  creator: 'Hamad Khan',
+  alternates: {
+    canonical: 'https://ferti-calc.vercel.app',
+  },
   icons: {
     icon: [
       { url: '/favicon.svg', type: 'image/svg+xml' },
@@ -38,25 +93,36 @@ export const metadata: Metadata = {
     apple: '/apple-icon',
   },
   openGraph: {
-    type: 'website',
-    siteName: 'FertiCalc',
+    title: 'Ferti-Calc | Free NPK Fertilizer Calculator & Hydroponic Nutrient Blender',
+    description: 'Convert bag NPK labels and professional fertilizer recommendations. Free fertilizer calculator for home gardens and commercial acres in kg, lbs, grams, oz and ml.',
     url: 'https://ferti-calc.vercel.app',
-    title: 'Free NPK Fertilizer Calculator — Professional Grade',
-    description: 'Eliminate guesswork in crop nutrition. Get precise fertilizer requirements for any target ratio with our advanced agronomical calculator.',
+    siteName: 'Ferti-Calc',
+    type: 'website',
+    locale: 'en_US',
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'FertiCalc NPK Calculator',
-      },
+        alt: 'Ferti-Calc NPK Fertilizer Calculator',
+      }
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Free NPK Fertilizer Calculator',
-    description: 'Professional-grade nutrient planning tool. 52+ fertilizers, instant results.',
+    title: 'Ferti-Calc | Free NPK Fertilizer Calculator',
+    description: 'Convert bag NPK, lbs/acre, kg/ha, P2O5/K2O and liquid nutrient recipes. Free for gardeners and growers.',
     images: ['/og-image.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
   verification: {
     google: 'YOUR_GSC_VERIFICATION_CODE_HERE',
@@ -112,21 +178,26 @@ export default async function RootLayout({
               "keywords": [
                 "fertilizer calculator",
                 "NPK calculator",
-                "turf grass fertilizer",
-                "hydroponic nutrient calculator",
-                "wheat fertilizer kg",
-                "free farming tool"
+                "NPK converter",
+                "fertilizer application rate calculator",
+                "bag NPK calculator",
+                "P to P2O5 converter",
+                "K to K2O converter",
+                "PPM to lbs per acre",
+                "kg per hectare to kg per square meter",
+                "gallons per acre to ml per gallon",
+                "hydroponic nutrient calculator"
               ]
             })
           }}
         />
         <JsonLd />
-        {/* Google Analytics 4 */}
+        {/* Google Analytics 4 — lazyOnload defers until after hydration to reduce TBT */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script id="google-analytics" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
@@ -134,22 +205,7 @@ export default async function RootLayout({
             gtag('config', 'G-XXXXXXXXXX');
           `}
         </Script>
-        {/* WebMCP (Web Model Context Protocol) Early-Adoption Polyfill */}
-        <Script id="webmcp-polyfill" strategy="beforeInteractive">
-          {`
-            (function() {
-              if (typeof navigator.modelContext === 'undefined') {
-                console.log('WebMCP not found, initializing polyfill surface...');
-                // Placeholder for @mcp-b/global surface initialization
-                window.navigator.modelContext = {
-                  registerTool: function(tool) {
-                    console.info('WebMCP Tool Registered (Polyfilled):', tool.toolname);
-                  }
-                };
-              }
-            })();
-          `}
-        </Script>
+
       </head>
       <body className="min-h-full flex flex-col">
         <UnitSystemProvider initialSystem={initialSystem}>

@@ -28,7 +28,7 @@ const SEO_LOCALE_MAP: Record<string, SEOMetadata> = {
   NL: { title: "NPK Meststof Calculator | FertiCalc Netherlands", desc: "Greenhouse and hydroponics nutrient calculator for the Netherlands.", lang: "en-NL" },
   SE: { title: "Gödselkalkylator | FertiCalc Sweden", desc: "Precision nutrient tool for Swedish agriculture.", lang: "en-SE" },
   DK: { title: "Gødningsberegner | FertiCalc Denmark", desc: "Advanced fertilizer calculator for Denmark.", lang: "en-DK" },
-  DEFAULT: { title: "Free NPK Fertilizer Calculator | Professional Grade | FertiCalc", desc: "Calculate exact fertilizer requirements for any NPK ratio. Free professional-grade calculator with grams-per-liter precision.", lang: "en" }
+  DEFAULT: { title: "Free NPK Fertilizer Calculator | Professional Grade | FertiCalc", desc: "Calculate exact fertilizer requirements for any NPK ratio. Free professional-grade calculator with grams-per-liter precision, bag label conversions, and lbs/acre to sq ft rate translation.", lang: "en" }
 };
 
 export async function generateMetadata({ searchParams }: { searchParams: Promise<{ useCase?: string }> }): Promise<Metadata> {
@@ -51,9 +51,9 @@ export async function generateMetadata({ searchParams }: { searchParams: Promise
   if (useCase === 'agriculture') title = "Commercial Crop Production NPK Calculator | FertiCalc";
 
   let desc = localeData.desc;
-  if (useCase === 'hydroponics') desc = "Calculate hydroponic liquid nutrient solution recipes. Parse elemental NPK values to oxide & elemental ratios instantly for water reservoirs.";
-  if (useCase === 'turf') desc = "Calculate turf grass fertilizer spreader application rates. Enter target NPK in lbs per 1,000 sq ft or kg per sq meter.";
-  if (useCase === 'agriculture') desc = "Calculate commercial crop fertilizer blends. Optimize NPK inputs to meet agronomic crop needs with elemental oxide conversions.";
+  if (useCase === 'hydroponics') desc = "Calculate hydroponic liquid nutrient solution recipes. Parse elemental NPK values to oxide & elemental ratios instantly for water reservoirs and fertigation systems.";
+  if (useCase === 'turf') desc = "Calculate turf grass fertilizer spreader application rates. Enter target NPK in lbs per 1,000 sq ft, cups, or kg per sq meter for home lawns and sports turf.";
+  if (useCase === 'agriculture') desc = "Calculate commercial crop fertilizer blends. Optimize NPK inputs for acres and hectares with elemental oxide conversions and bag label nutrient math.";
 
   // Construct hreflang dictionary for alternates
   const languages: Record<string, string> = {

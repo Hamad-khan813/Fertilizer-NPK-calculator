@@ -22,29 +22,30 @@ export async function generateStaticParams() {
   }));
 }
 
+function slugToLabel(slug: string): string {
+  return slug
+    .split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const resolvedParams = await params;
   const { crop, unit } = resolvedParams;
-
-  const cropData = CROPS.find(c => c.slug === crop);
-  const unitData = UNITS.find(u => u.slug === unit);
-
-  // Graceful fallback if slug not found in arrays
-  const cropLabel = cropData?.label ?? crop;
-  const unitLabel = unitData?.label ?? unit;
+  
+  const cropLabel = slugToLabel(crop);
+  const unitLabel = unit.toLowerCase();
 
   return {
-    title: `${cropLabel} Fertilizer Calculator in ${unitLabel} | FertiCalc`,
-    description: `Calculate exact NPK fertilizer quantities for ${cropLabel}. Free calculator — results in ${unitLabel}. No signup required.`,
+    title: `${cropLabel} Fertilizer Calculator in ${unitLabel}`,
+    description: `Calculate exact NPK fertilizer amounts for ${cropLabel}. Free calculator, results in ${unitLabel}. Trusted by farmers and gardeners worldwide.`,
     alternates: {
       canonical: `https://ferti-calc.vercel.app/calculator/${crop}/${unit}`
     },
     openGraph: {
-      title: `${cropLabel} Fertilizer Calculator — FertiCalc`,
-      description: `Free NPK calculator for ${cropLabel} in ${unitLabel}.`,
+      title: `${cropLabel} Fertilizer Calculator in ${unitLabel} | Ferti-Calc`,
+      description: `Free NPK calculator for ${cropLabel}. Results in ${unitLabel}. No signup needed.`,
       url: `https://ferti-calc.vercel.app/calculator/${crop}/${unit}`,
-      siteName: 'FertiCalc',
-      type: 'website',
     }
   };
 }

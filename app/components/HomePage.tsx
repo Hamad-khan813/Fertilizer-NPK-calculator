@@ -111,7 +111,7 @@ export default function Home({ initialUseCase = 'general', cropType, unit }: Hom
             <span>By Hamad Khan • Updated: <time dateTime="2026-05-17">May 17, 2026</time></span>
           </div>
           <p className="text-xl hero-description text-slate-600 mb-4 max-w-3xl mx-auto leading-relaxed font-medium">
-            FertiCalc is a real-time NPK fertilizer calculator providing instant elemental-to-oxide parsing and precision crop recipe scaling.
+            FertiCalc is a real-time NPK fertilizer calculator providing instant elemental-to-oxide parsing, bag label conversions, and precision nutrient scaling for both home gardens and commercial acreage.
           </p>
           
           {/* Dynamic Entity Context for SEO */}
