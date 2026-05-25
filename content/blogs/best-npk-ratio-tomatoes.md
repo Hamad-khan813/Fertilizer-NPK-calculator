@@ -6,7 +6,7 @@ excerpt: "Learn the best NPK ratios for tomato seedlings, vegetative growth, flo
 author: "Hamad Khan"
 readTime: "12 min read"
 category: "Guides"
-coverImage: "/images/Gardening-fertilizer-mixing-setup.png"
+coverImage: "/images/NPK-Ratio-for-Tomatoes.png"
 ---
 
 # Best NPK Ratio for Tomatoes at Every Growth Stage
