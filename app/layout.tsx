@@ -81,9 +81,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: 'Hamad Khan', url: 'https://ferti-calc.vercel.app' }],
   creator: 'Hamad Khan',
-  alternates: {
-    canonical: 'https://ferti-calc.vercel.app',
-  },
+
   icons: {
     icon: [
       { url: '/favicon.svg', type: 'image/svg+xml' },

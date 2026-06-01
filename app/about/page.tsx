@@ -1,10 +1,15 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 
-export const metadata: Metadata = {
-  title: 'About Us | Ferti-Calc',
-  description: 'Learn about Ferti-Calc, our mission to democratize precision agriculture, and the story behind our professional-grade NPK fertilizer calculator.',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: 'About Us | Ferti-Calc',
+    description: 'Learn about Ferti-Calc, our mission to democratize precision agriculture, and the story behind our professional-grade NPK fertilizer calculator.',
+    alternates: {
+      canonical: 'https://ferti-calc.vercel.app/about',
+    },
+  };
+}
 
 export default function AboutPage() {
   return (
