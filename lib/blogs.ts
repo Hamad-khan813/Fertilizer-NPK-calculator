@@ -59,7 +59,20 @@ export async function getAllBlogs(): Promise<BlogMeta[]> {
 }
 
 export async function getBlogBySlug(slug: string): Promise<BlogPost> {
-  const filePath = path.join(blogsDirectory, `${slug}.md`);
+  let filePath = path.join(blogsDirectory, `${slug}.md`);
+
+  if (!fs.existsSync(filePath)) {
+    const files = fs.readdirSync(blogsDirectory).filter((file) => file.endsWith('.md'));
+    const matchedFile = files.find((file) => {
+      const fileContents = fs.readFileSync(path.join(blogsDirectory, file), 'utf8');
+      const { data } = matter(fileContents);
+      return data.slug === slug;
+    });
+
+    if (matchedFile) {
+      filePath = path.join(blogsDirectory, matchedFile);
+    }
+  }
 
   if (!fs.existsSync(filePath)) {
     throw new Error(`Blog post not found: ${slug}`);
