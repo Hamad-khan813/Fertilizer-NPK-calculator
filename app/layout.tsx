@@ -123,7 +123,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: 'YOUR_GSC_VERIFICATION_CODE_HERE',
+    google: 'nA6CNbhkt6FhyCDoQrXABe_G2lH00HfK4cikrh0TrWo',
   },
 };
 
@@ -145,6 +145,10 @@ export default async function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
+        <meta
+          name="google-site-verification"
+          content="nA6CNbhkt6FhyCDoQrXABe_G2lH00HfK4cikrh0TrWo"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
