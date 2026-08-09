@@ -140,13 +140,16 @@ export default async function RootLayout({
   const initialSystem = systemCookie === 'imperial' ? 'imperial' : 'metric';
 
   return (
-    <html
+      <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5989420754611721"
-     crossorigin="anonymous"></script>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5989420754611721"
+          crossOrigin="anonymous"
+        ></script>
         <meta
           name="google-site-verification"
           content="nA6CNbhkt6FhyCDoQrXABe_G2lH00HfK4cikrh0TrWo"
