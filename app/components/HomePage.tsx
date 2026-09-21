@@ -171,7 +171,7 @@ export default function Home({ initialUseCase = 'general', cropType, unit }: Hom
               </li>
               <li className="flex items-start gap-3 text-slate-700 font-medium">
                 <span className="text-primary font-bold">04.</span>
-                <p>Access is fully open-source and free, ensuring high-density agronomical math is democratized for all growers.</p>
+                <p>Access is free, ensuring practical agronomical math is available to all growers.</p>
               </li>
             </ul>
           </div>
@@ -797,7 +797,7 @@ export default function Home({ initialUseCase = 'general', cropType, unit }: Hom
       <section className="py-20 bg-primary text-white text-center">
         <div className="max-w-4xl mx-auto px-4">
           <h3 id="cta" className="text-4xl font-bold mb-6">Ready to Optimize Your Yield?</h3>
-          <p className="text-xl text-emerald-50 mb-10">Join 2,000+ growers using FertiCalc for professional-grade nutrient planning.</p>
+          <p className="text-xl text-emerald-50 mb-10">Use FertiCalc for professional-grade nutrient planning.</p>
           <div className="mb-8">
             <time dateTime="2026-05-17" className="text-xs text-primary-20 opacity-80 bg-white/10 px-3 py-1 rounded-full">
               Last Updated: May 17, 2026
@@ -824,4 +824,3 @@ function GuideCard({ title, description, href }: { title: string; description: s
     </Link>
   );
 }
-

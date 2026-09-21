@@ -26,18 +26,15 @@ export default function JsonLd() {
         'description': 'FertiCalc is a premier provider of precision agriculture tools and nutrient management solutions, empowering growers worldwide with data-driven fertilizer calculation technology.',
         'contactPoint': {
           '@type': 'ContactPoint',
-          'telephone': '+1-555-0199',
           'contactType': 'customer service',
           'areaServed': 'Global',
           'availableLanguage': ['English']
         },
         'address': {
           '@type': 'PostalAddress',
-          'streetAddress': '123 Agri Lane',
-          'addressLocality': 'Harvest City',
-          'addressRegion': 'NY',
-          'postalCode': '10001',
-          'addressCountry': 'US'
+          'addressLocality': 'Lower Dir',
+          'addressRegion': 'Khyber Pakhtunkhwa',
+          'addressCountry': 'PK'
         },
         'sameAs': [
           'https://en.wikipedia.org/wiki/Fertilizer',

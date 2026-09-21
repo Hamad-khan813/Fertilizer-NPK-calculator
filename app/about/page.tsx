@@ -17,10 +17,10 @@ export default function AboutPage() {
       {/* Header */}
       <div className="text-center mb-16">
         <h1 className="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight mb-6">
-          Cultivating <span className="text-primary">Precision</span> in Every Drop
+          Precision nutrient math, free and open to every grower
         </h1>
         <p className="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
-          Ferti-Calc is a free, professional-grade online NPK fertilizer calculator designed to take the guesswork out of crop nutrition and empower growers worldwide.
+          FertiCalc is a free NPK fertilizer calculator built to close the gap between fertilizer labels and the nutrients a crop actually receives.
         </p>
       </div>
 
@@ -30,10 +30,10 @@ export default function AboutPage() {
           <h2 className="text-2xl font-bold text-slate-900 mb-4">Why We Created Ferti-Calc</h2>
           <div className="text-slate-600 space-y-4 leading-relaxed">
             <p>
-              Whether you are managing a large-scale commercial greenhouse or nurturing a backyard garden, understanding the precise chemical breakdown of your nutrients is critical. For years, the agricultural industry has relied on complex, offline spreadsheets and trial-and-error to calculate fertilizer recipes. 
+              Fertilizer labels commonly report phosphorus and potassium as P₂O₅ and K₂O rather than elemental nutrients. FertiCalc converts those values, scales recipes for tanks and areas, and helps growers make the arithmetic easier to verify.
             </p>
             <p>
-              We noticed that the gap between raw elemental needs and confusing commercial oxide labels (like the classic 10-10-10) was causing frequent overfeeding, root burn, and unnecessary chemical runoff into local water tables. Ferti-Calc was built to bridge this gap. By instantly performing elemental-to-oxide conversions, we provide an accessible, scientifically rigorous tool that saves time, saves money, and protects our environment from agricultural runoff.
+              The database covers common nitrogen, phosphorus, potassium, compound and organic sources. The tools include unit conversions, recipe scaling, crop-specific calculators, compatibility indicators and risk guidance. No account, signup or paywall is required.
             </p>
           </div>
         </section>
@@ -112,10 +112,10 @@ export default function AboutPage() {
             <h2 className="text-2xl font-bold mb-4">Meet the Creator</h2>
             <div className="space-y-4 text-slate-300 leading-relaxed text-sm sm:text-base">
               <p>
-                Ferti-Calc was built by Hamad Khan, a full-stack developer and agriculture technology enthusiast. Frustrated by the lack of modern, accessible software for small-to-medium scale farmers, Hamad combined his expertise in computer science with deep agronomic research to engineer a solution.
+                FertiCalc is built and maintained by Hamad Khan, a full-stack developer based in Lower Dir, Khyber Pakhtunkhwa, Pakistan.
               </p>
               <p>
-                What started as a simple script to calculate hydroponic tomato reservoirs quickly evolved into a comprehensive web application. Today, Ferti-Calc is maintained as an independent, solo-developer project driven by a single belief: that technology should make sustainable farming easier, not more complicated.
+                It is an independent one-person project and is not owned by, sponsored by, or affiliated with a fertilizer manufacturer, distributor or retailer. FertiCalc provides arithmetic and reference information; it cannot replace a soil test, water analysis, local regulations or professional agronomic advice.
               </p>
               <div className="pt-6">
                 <Link href="/" className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white font-bold py-3 px-6 rounded-xl transition-colors">
