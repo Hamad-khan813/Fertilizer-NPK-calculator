@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { getAllCombinations, BASE_URL, CROPS } from '@/lib/calculator-data';
+import { BASE_URL } from '@/lib/calculator-data';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Static root pages
@@ -16,24 +16,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'weekly' as const ,
       priority: 0.9,
     },
+    ...['about', 'contact', 'editorial-policy', 'methodology', 'privacy', 'terms', 'fertilizers'].map((route) => ({
+      url: `${BASE_URL}/${route}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.5,
+    })),
   ];
 
-  // One entry per crop category landing page
-  const categories = Array.from(new Set(CROPS.map(c => c.category)));
-  const categoryRoutes: MetadataRoute.Sitemap = categories.map(cat => ({
-    url: `${BASE_URL}/calculator/category/${cat}`,
-    lastModified: new Date(),
-    changeFrequency: 'monthly' as const,
-    priority: 0.85,
-  }));
-
-  // Full crop × unit matrix
-  const dynamicRoutes: MetadataRoute.Sitemap = getAllCombinations().map(({ url }) => ({
-    url,
-    lastModified: new Date(),
-    changeFrequency: 'monthly' as const,
-    priority: 0.8,
-  }));
-
-  return [...staticRoutes, ...categoryRoutes, ...dynamicRoutes];
+  return staticRoutes;
 }

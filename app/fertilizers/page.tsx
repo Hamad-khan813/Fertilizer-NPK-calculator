@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
-import fertilizersData from '@/data/fertilizers.json';
+import fertilizersData from '@/app/data/fertilizers.json';
 import { Fertilizer } from '@/app/lib/calculate';
 import { FERTILIZERS } from '@/lib/fertilizer-data';
 
@@ -43,7 +43,7 @@ export default function FertilizersPage() {
       <div className="bg-gradient-to-br from-primary/5 to-primary-20/40 py-12 sm:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-2">Fertilizer Database</h1>
-          <p className="text-lg text-slate-600">Browse all 52+ fertilizers with complete NPK specifications</p>
+          <p className="text-lg text-slate-600">Browse {fertilizers.length} fertilizer products and compare their listed N-P-K analyses.</p>
         </div>
       </div>
 
@@ -99,7 +99,9 @@ export default function FertilizersPage() {
                       {fertsInCategory.map((fert: Fertilizer, idx: number) => (
                         <tr key={fert.id} className={idx % 2 === 0 ? 'bg-white' : 'bg-slate-50'}>
                           <td className="px-6 py-4 text-sm font-medium text-slate-900">{fert.name}</td>
-                          <td className="px-6 py-4 text-center text-sm text-slate-600">{fert.code}</td>
+                          <td className="px-6 py-4 text-center text-sm text-slate-600">
+                            {fert.id === '902' ? 'No NPK. Supplies Mg and S' : fert.code}
+                          </td>
                           <td className="px-6 py-4 text-center text-sm text-slate-600">{fert.N}</td>
                           <td className="px-6 py-4 text-center text-sm text-slate-600">{fert.P}</td>
                           <td className="px-6 py-4 text-center text-sm text-slate-600">{fert.K}</td>

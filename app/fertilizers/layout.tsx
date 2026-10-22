@@ -1,12 +1,10 @@
-import FertilizersPage from './page';
-
 export const metadata = {
   title: 'Fertilizer NPK Database | FertiCalc',
-  description: 'Browse all 52 fertilizers with N, P₂O₅, and K₂O values. Find the perfect fertilizer for your NPK needs.',
-  keywords: 'NPK fertilizer database, nitrogen phosphorus potassium, fertilizer analysis, agricultural fertilizers',
+  description: 'Browse fertilizer products and compare their listed nitrogen, phosphate (P₂O₅), and potash (K₂O) analyses.',
+  alternates: { canonical: 'https://ferti-calc.vercel.app/fertilizers' },
   openGraph: {
     title: 'Fertilizer NPK Database | FertiCalc',
-    description: 'Browse all 52 fertilizers with N, P₂O₅, and K₂O values.',
+    description: 'Browse fertilizer products and compare their listed nitrogen, phosphate (P₂O₅), and potash (K₂O) analyses.',
     type: 'website',
   },
 };

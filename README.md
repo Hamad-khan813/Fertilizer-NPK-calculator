@@ -1,5 +1,11 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Project checks
+
+- `npm run lint` runs ESLint.
+- `npm run test:calculator` runs the fertilizer conversion and calculator arithmetic tests.
+- `npm run build` creates and validates the production build.
+
 ## Getting Started
 
 First, run the development server:
@@ -34,3 +40,9 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## AdSense
+
+TODO(owner): After AdSense approval, add the publisher-provided `/ads.txt` file and verify it at the deployed domain. Do not publish a placeholder `ads.txt` before approval.
+
+TODO(owner): Select and configure a Google-certified consent management platform that supports Consent Mode v2, then connect its consent updates to Google Tag Manager before enabling analytics or advertising tags.

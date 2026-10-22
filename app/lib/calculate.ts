@@ -20,9 +20,9 @@ export interface Fertilizer {
 }
 
 export interface CalcInput {
-  targetN: number;   // % P2O5 desired
-  targetP: number;   // % P2O5 desired
-  targetK: number;   // % K2O desired
+  targetN: number;   // target nutrient percentage by volume (% w/v)
+  targetP: number;   // target P2O5 percentage by volume (% w/v)
+  targetK: number;   // target K2O percentage by volume (% w/v)
   volumeLitres: number;
   fertilizer: Fertilizer;
 }
@@ -36,12 +36,24 @@ export interface CalcResult {
   warning: string | null;
 }
 
+export const P2O5_TO_ELEMENTAL_P = 0.4364;
+export const K2O_TO_ELEMENTAL_K = 0.8302;
+
+export function convertP2O5ToElementalP(p2o5: number): number {
+  return p2o5 * P2O5_TO_ELEMENTAL_P;
+}
+
+export function convertK2OToElementalK(k2o: number): number {
+  return k2o * K2O_TO_ELEMENTAL_K;
+}
+
 /**
  * Calculate how much fertilizer is needed to hit the target NPK.
  * Uses the binding (most limiting) nutrient as the constraint.
  *
- * Formula:  amount_g = (targetNutrient / fertilizerNutrient%) * volume * 10
- * Derived from:  targetNutrient% = (amount_g * fertNutrient%) / (volume * 1000g) * 100
+ * Targets and delivered values are percentages by volume (% w/v).
+ * Formula: amount_g = (target% / fertilizer nutrient%) * volume_L * 1000
+ * The factor 1000 converts the target fraction into grams per litre.
  */
 export function calcAmount(input: CalcInput): CalcResult {
   const { targetN, targetP, targetK, volumeLitres, fertilizer } = input;
@@ -50,13 +62,13 @@ export function calcAmount(input: CalcInput): CalcResult {
 
   // Only consider nutrients that are both requested AND present in fertilizer
   if (targetN > 0 && fertilizer.N > 0) {
-    candidates.push({ nutrient: "N", amount: (targetN / fertilizer.N) * volumeLitres * 10 });
+    candidates.push({ nutrient: "N", amount: (targetN / fertilizer.N) * volumeLitres * 1000 });
   }
   if (targetP > 0 && fertilizer.P > 0) {
-    candidates.push({ nutrient: "P", amount: (targetP / fertilizer.P) * volumeLitres * 10 });
+    candidates.push({ nutrient: "P", amount: (targetP / fertilizer.P) * volumeLitres * 1000 });
   }
   if (targetK > 0 && fertilizer.K > 0) {
-    candidates.push({ nutrient: "K", amount: (targetK / fertilizer.K) * volumeLitres * 10 });
+    candidates.push({ nutrient: "K", amount: (targetK / fertilizer.K) * volumeLitres * 1000 });
   }
 
   // Edge case: no matching nutrients

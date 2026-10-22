@@ -1,7 +1,6 @@
 'use client';
 
-import { useState, useEffect, Suspense, useCallback, useRef } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { Fertilizer, CalcResult, calcAmount } from '../lib/calculate';
 import fertilizersData from '../data/fertilizers.json';
 import UnitToggle from './UnitToggle';
@@ -37,13 +36,12 @@ function CalculatorContent({
   initialTargetP,
   initialTargetK
 }: CalculatorProps) {
-  const searchParams = useSearchParams();
-  const [targetN, setTargetN] = useState<number>(initialTargetN ?? 10);
-  const [targetP, setTargetP] = useState<number>(initialTargetP ?? 5);
-  const [targetK, setTargetK] = useState<number>(initialTargetK ?? 10);
+  const [targetN, setTargetN] = useState<number>(initialTargetN ?? 0.1);
+  const [targetP, setTargetP] = useState<number>(initialTargetP ?? 0);
+  const [targetK, setTargetK] = useState<number>(initialTargetK ?? 0);
   const [volumeLitres, setVolumeLitres] = useState<number>(initialVolume ?? 1);
   const [selectedFertilizerId, setSelectedFertilizerId] = useState<string>(
-    initialFertilizerId ?? (fertilizersData.length > 0 ? fertilizersData[0].id : '')
+    initialFertilizerId ?? '66'
   );
   
   const { system } = useUnitSystem();
@@ -57,6 +55,7 @@ function CalculatorContent({
 
   // Load from URL params
   useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
     const n = searchParams.get('n');
     const p = searchParams.get('p');
     const k = searchParams.get('k');
@@ -68,7 +67,7 @@ function CalculatorContent({
     if (k) setTargetK(parseFloat(k));
     if (v) setVolumeLitres(parseFloat(v));
     if (f) setSelectedFertilizerId(f);
-  }, [searchParams]);
+  }, []);
 
   const handleCalculate = useCallback(() => {
     if (!selectedFertilizer) {
@@ -159,6 +158,9 @@ function CalculatorContent({
   return (
     <div className="w-full">
       <UnitToggle />
+      <aside className="mb-6 rounded-2xl border border-blue-100 bg-blue-50 p-4 text-sm leading-relaxed text-slate-700">
+        <strong className="text-slate-900">Worked example:</strong> a 0.1% w/v nitrogen target in 1 litre using 46% N urea requires about 2.17 g of urea: (0.1 ÷ 46) × 1,000 = 2.17 g. This illustrates the calculation only; it is not an application recommendation.
+      </aside>
       <form 
         onSubmit={(e) => e.preventDefault()} 
         className="space-y-8"
@@ -172,7 +174,7 @@ function CalculatorContent({
           {/* Target N */}
           <div>
             <label htmlFor="targetN" className="block text-sm font-semibold text-slate-700 mb-2">
-              Target N <span className="text-xs text-slate-600 font-medium">(%)</span>
+              Target N <span className="text-xs text-slate-600 font-medium">(% w/v)</span>
             </label>
             <div className="relative">
               <input
@@ -196,7 +198,7 @@ function CalculatorContent({
           {/* Target P */}
           <div>
             <label htmlFor="targetP" className="block text-sm font-semibold text-slate-700 mb-2">
-              Target P <span className="text-xs text-slate-600 font-medium">(% P₂O₅)</span>
+              Target P <span className="text-xs text-slate-600 font-medium">(% P₂O₅ w/v)</span>
             </label>
             <div className="relative">
               <input
@@ -220,7 +222,7 @@ function CalculatorContent({
           {/* Target K */}
           <div>
             <label htmlFor="targetK" className="block text-sm font-semibold text-slate-700 mb-2">
-              Target K <span className="text-xs text-slate-600 font-medium">(% K₂O)</span>
+              Target K <span className="text-xs text-slate-600 font-medium">(% K₂O w/v)</span>
             </label>
             <div className="relative">
               <input
@@ -255,11 +257,14 @@ function CalculatorContent({
                 type="number"
                 min="0.1"
                 step="0.1"
-                value={volumeLitres}
-                onChange={(e) => setVolumeLitres(parseFloat(e.target.value) || 1)}
+                value={system === 'imperial' ? Number((volumeLitres / 3.78541).toFixed(3)) : volumeLitres}
+                onChange={(e) => {
+                  const enteredVolume = parseFloat(e.target.value) || 1;
+                  setVolumeLitres(system === 'imperial' ? enteredVolume * 3.78541 : enteredVolume);
+                }}
                 className="w-full py-3.5 px-5 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
                 placeholder="1"
-                aria-label="Target volume in litres"
+                aria-label={`Target volume in ${system === 'imperial' ? 'gallons' : 'litres'}`}
                 {...{ toolparamdescription: "The total target volume of the nutrient solution in litres." }}
               />
               <div className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-600">
@@ -294,7 +299,7 @@ function CalculatorContent({
                     <optgroup key={category} label={category.charAt(0).toUpperCase() + category.slice(1)}>
                       {fertsInCategory.map((fert) => (
                         <option key={fert.id} value={fert.id}>
-                          {fert.name} ({fert.code})
+                          {fert.id === '902' ? `${fert.name} (No NPK. Supplies Mg and S)` : `${fert.name} (${fert.code})`}
                         </option>
                       ))}
                     </optgroup>
@@ -321,9 +326,5 @@ function CalculatorContent({
 }
 
 export default function Calculator(props: CalculatorProps) {
-  return (
-    <Suspense fallback={<div className="h-64 flex items-center justify-center">Loading Calculator...</div>}>
-      <CalculatorContent {...props} />
-    </Suspense>
-  );
+  return <CalculatorContent {...props} />;
 }

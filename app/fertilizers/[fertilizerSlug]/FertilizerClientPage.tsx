@@ -7,16 +7,24 @@ import Calculator from '@/app/components/Calculator';
 import ResultCard from '@/app/components/ResultCard';
 import { Fertilizer, CalcResult } from '@/app/lib/calculate';
 
+interface CalculatorInputs {
+  targetN: number;
+  targetP: number;
+  targetK: number;
+  volumeLitres: number;
+  fertilizerId: string;
+}
+
 interface FertilizerClientPageProps {
   details: FertilizerDetails;
 }
 
 export default function FertilizerClientPage({ details }: FertilizerClientPageProps) {
   const [result, setResult] = useState<CalcResult | null>(null);
-  const [inputs, setInputs] = useState<any>(null);
+  const [inputs, setInputs] = useState<CalculatorInputs | null>(null);
   const [selectedFertilizer, setSelectedFertilizer] = useState<Fertilizer | null>(null);
 
-  const handleResult = (newResult: CalcResult | null, newInputs: any) => {
+  const handleResult = (newResult: CalcResult | null, newInputs: CalculatorInputs | null) => {
     setResult(newResult);
     setInputs(newInputs);
   };
@@ -29,6 +37,14 @@ export default function FertilizerClientPage({ details }: FertilizerClientPagePr
   // Render NPK Badge with elegant CSS
   const renderNpkBadge = () => {
     const [n, p, k] = details.npkArray;
+    if (n === 0 && p === 0 && k === 0) {
+      return (
+        <div className="my-8 inline-flex rounded-2xl border border-emerald-200 bg-emerald-50/50 px-6 py-4 text-sm font-bold text-emerald-800">
+          No NPK. Supplies Mg and S
+        </div>
+      );
+    }
+
     return (
       <div className="flex items-center justify-center gap-4 my-8">
         <div className="flex flex-col items-center bg-emerald-50/50 border border-emerald-200 rounded-2xl p-4 w-24 shadow-sm transition-all hover:scale-105">
@@ -84,24 +100,6 @@ export default function FertilizerClientPage({ details }: FertilizerClientPagePr
 
         {renderNpkBadge()}
 
-        {/* Solubility info */}
-        <div className="inline-flex flex-wrap items-center justify-center gap-6 bg-white border border-slate-200 rounded-2xl px-6 py-4 mt-2 shadow-sm">
-          <div className="flex items-center gap-2 text-slate-700">
-            <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 9.172V5L8 4z" />
-            </svg>
-            <span className="text-sm font-semibold">Solubility:</span>
-            <span className="text-sm font-extrabold text-slate-900">{details.solubility} g/L</span>
-          </div>
-          <div className="w-px h-5 bg-slate-200 hidden sm:block"></div>
-          <div className="flex items-center gap-2 text-slate-700">
-            <svg className="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-            </svg>
-            <span className="text-sm font-semibold">Standard Temp:</span>
-            <span className="text-sm font-extrabold text-slate-900">{details.solubilityTemp}°C</span>
-          </div>
-        </div>
       </header>
 
       {/* Embedded Calculator Container */}
@@ -117,9 +115,9 @@ export default function FertilizerClientPage({ details }: FertilizerClientPagePr
                 onSelectedFertilizer={setSelectedFertilizer}
                 initialFertilizerId={details.id}
                 initialVolume={100}
-                initialTargetN={initialTargetN}
-                initialTargetP={initialTargetP}
-                initialTargetK={initialTargetK}
+                initialTargetN={initialTargetN > 0 ? 0.1 : 0}
+                initialTargetP={initialTargetP > 0 ? 0.1 : 0}
+                initialTargetK={initialTargetK > 0 ? 0.1 : 0}
               />
             </div>
             <div className="lg:col-span-5 sticky top-24">
@@ -143,10 +141,10 @@ export default function FertilizerClientPage({ details }: FertilizerClientPagePr
                 1. What is {details.name}?
               </h2>
               <p className="text-slate-600 leading-relaxed text-lg">
-                {details.name} is a high-grade chemical source supplying essential plant nutrients. The standard NPK ratio of this fertilizer is <strong>{details.npk}</strong>, which signifies that it contains {details.npkArray[0]}% Nitrogen (N), {details.npkArray[1]}% Phosphorus as P₂O₅, and {details.npkArray[2]}% Potassium as K₂O by total product weight. Under agronomic standards, the phosphorus and potassium components are expressed in their oxide forms rather than elemental phosphorus and potassium.
+                {details.name} is a fertilizer product. Its listed analysis is <strong>{details.npk}</strong>. On fertilizer labels, the second and third numbers usually represent phosphate (P₂O₅) and potash (K₂O), rather than elemental phosphorus and potassium.
               </p>
               <p className="text-slate-600 leading-relaxed mt-4">
-                When dissolved in water, this fertilizer dissociates into plant-available ionic nutrients. This allows roots to absorb them instantly via active transport. Understanding the exact composition prevents chemical lockouts and guarantees optimal nutrient concentrations.
+                When dissolved in water, this fertilizer dissociates into plant-available ionic nutrients. This allows roots to absorb nutrients through the solution. Understanding the exact composition helps reduce mixing errors and supports more predictable application.
               </p>
             </div>
 
@@ -156,7 +154,7 @@ export default function FertilizerClientPage({ details }: FertilizerClientPagePr
                 2. Best Used For
               </h2>
               <p className="text-slate-600 leading-relaxed mb-4">
-                This fertilizer is highly effective when applied to crops and systems requiring quick, specific nutrient supply:
+                The listed uses depend on the product label, crop, soil or water test, and local recommendations. These examples are not application-rate recommendations:
               </p>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 list-none pl-0">
                 {details.crops.map((crop, idx) => (
@@ -173,19 +171,19 @@ export default function FertilizerClientPage({ details }: FertilizerClientPagePr
             {/* Section 3: Solubility & Mixing */}
             <div id="step3" className="scroll-mt-20">
               <h2 className="text-3xl font-bold text-slate-900 mb-4 border-b border-slate-100 pb-2">
-                3. Solubility &amp; Mixing Instructions
+                3. Handling &amp; Mixing Safety
               </h2>
               <p className="text-slate-600 leading-relaxed">
-                At a standard temperature of {details.solubilityTemp}°C, the maximum solubility limit of {details.name} is <strong>{details.solubility} grams per liter</strong> of water. Attempting to mix at concentrations above this threshold will result in precipitation, leaving undissolved particles at the bottom of your reservoir or mixing tank.
+                Follow the current product label and safety data sheet for handling, protective equipment, storage, solubility, and mixing instructions. Product grades and formulations can differ, so confirm details with the manufacturer before preparing a concentrated solution.
               </p>
               <div className="bg-emerald-50/50 border border-emerald-200 rounded-2xl p-6 my-6">
-                <h4 className="text-lg font-bold text-emerald-800 mb-2">Step-by-Step Dissolution Method</h4>
+                <h4 className="text-lg font-bold text-emerald-800 mb-2">Before mixing</h4>
                 <ol className="list-decimal pl-5 space-y-2 text-slate-700 text-sm sm:text-base">
-                  <li>Fill your clean mixing vessel or reservoir with 70% of the total target water volume.</li>
-                  <li>Using a digital scale with at least 0.1g precision, weigh out the required amount of {details.name} calculated above.</li>
-                  <li>Gradually pour the dry fertilizer granules into the water while continuously agitating or stirring.</li>
-                  <li>Stir until the crystals are completely dissolved, then top off the vessel with water to reach the final 100L volume.</li>
-                  <li>Measure the Electrical Conductivity (EC) or Total Dissolved Solids (TDS) using a calibrated meter to verify target ppm.</li>
+                  <li>Read the product label and safety data sheet before use.</li>
+                  <li>Use the protective equipment and handling precautions listed by the manufacturer.</li>
+                  <li>Check compatibility instructions before mixing fertilizers, especially in concentrated stock solutions.</li>
+                  <li>Use measuring equipment appropriate to the quantity and the product instructions.</li>
+                  <li>Store and dispose of the product as directed on its label and by local rules.</li>
                 </ol>
               </div>
             </div>
@@ -216,7 +214,7 @@ export default function FertilizerClientPage({ details }: FertilizerClientPagePr
                 5. Related Fertilizers
               </h2>
               <p className="text-slate-600 leading-relaxed mb-6">
-                Compare or blend {details.name} with other high-grade fertilizer materials to complete your custom recipe:
+                Compare {details.name} with the analyses and product instructions of other fertilizers before planning a blend:
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {details.relatedSlugs.map((slug) => {

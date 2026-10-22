@@ -2,13 +2,13 @@
 
 import { useState, useCallback, useEffect } from 'react';
 import Link from 'next/link';
-import { useRouter, usePathname, useSearchParams } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { UseCase, ENTITY_MAP } from '../lib/seoEntities';
 import Calculator from './Calculator';
 import ResultCard from './ResultCard';
-import { CalcResult, Fertilizer } from '../lib/calculate';
+import { CalcResult, Fertilizer, calcAmount } from '../lib/calculate';
 import { useUnitSystem } from './UnitSystemProvider';
-import { getAllCombinations } from '@/lib/calculator-data';
+import fertilizersData from '../data/fertilizers.json';
 
 interface CalculatorInputs {
   targetN: number;
@@ -18,10 +18,17 @@ interface CalculatorInputs {
   fertilizerId: string;
 }
 
-const cropUnitCombinations = getAllCombinations().map(combo => ({
-  cropType: combo.crop,
-  unit: combo.unit
-}));
+const DEFAULT_INPUTS: CalculatorInputs = {
+  targetN: 0.1,
+  targetP: 0,
+  targetK: 0,
+  volumeLitres: 1,
+  fertilizerId: '66',
+};
+const DEFAULT_FERTILIZER = fertilizersData.find((fertilizer) => fertilizer.id === DEFAULT_INPUTS.fertilizerId) as Fertilizer | undefined;
+const DEFAULT_RESULT = DEFAULT_FERTILIZER
+  ? calcAmount({ ...DEFAULT_INPUTS, fertilizer: DEFAULT_FERTILIZER })
+  : null;
 
 function getUseCaseFromCrop(crop: string): UseCase {
   const turfCrops = ['turf-grass', 'lawn-grass', 'turf', 'lawn', 'grass'];
@@ -51,17 +58,23 @@ interface HomePageProps {
 export default function Home({ initialUseCase = 'general', cropType, unit }: HomePageProps) {
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
 
   // Resolve usecase from cropType if available
   const resolvedUseCase = cropType ? getUseCaseFromCrop(cropType) : (initialUseCase as UseCase);
   const [useCase, setUseCase] = useState<UseCase>(resolvedUseCase);
   
-  const [result, setResult] = useState<CalcResult | null>(null);
-  const [inputs, setInputs] = useState<CalculatorInputs | null>(null);
-  const [selectedFertilizer, setSelectedFertilizer] = useState<Fertilizer | null>(null);
+  const [result, setResult] = useState<CalcResult | null>(DEFAULT_RESULT);
+  const [inputs, setInputs] = useState<CalculatorInputs | null>(DEFAULT_INPUTS);
+  const [selectedFertilizer, setSelectedFertilizer] = useState<Fertilizer | null>(DEFAULT_FERTILIZER ?? null);
 
   const { setSystem } = useUnitSystem();
+  useEffect(() => {
+    const queryUseCase = new URLSearchParams(window.location.search).get('useCase');
+    if (queryUseCase && queryUseCase in ENTITY_MAP) {
+      setUseCase(queryUseCase as UseCase);
+    }
+  }, []);
+
   useEffect(() => {
     if (unit) {
       const lowerUnit = unit.toLowerCase();
@@ -75,7 +88,7 @@ export default function Home({ initialUseCase = 'general', cropType, unit }: Hom
 
   const handleUseCaseChange = (newUseCase: UseCase) => {
     setUseCase(newUseCase);
-    const params = new URLSearchParams(searchParams);
+    const params = new URLSearchParams(window.location.search);
     params.set('useCase', newUseCase);
     router.push(`${pathname}?${params.toString()}`, { scroll: false });
   };
@@ -92,26 +105,21 @@ export default function Home({ initialUseCase = 'general', cropType, unit }: Hom
         <div className="absolute inset-0 hero-gradient"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <h1 className="text-5xl sm:text-7xl font-extrabold tracking-tight text-foreground mb-6">
-            {cropType && unit ? (
+            {cropType ? (
               <>
-                Fertilizer Calculator for <span className="text-primary">{slugToLabel(cropType)}</span> ({unit.toLowerCase()})
+                Fertilizer Calculator for <span className="text-primary">{slugToLabel(cropType)}</span>
               </>
             ) : (
               <>
-                Free <span className="text-primary">
-                  {useCase === 'turf' ? 'Turf & Lawn NPK' :
-                   useCase === 'hydroponics' ? 'Hydroponic NPK' :
-                   useCase === 'agriculture' ? 'Crop Production NPK' :
-                   'NPK Fertilizer'}
-                </span> Calculator
+                <span className="text-primary">NPK Fertilizer</span> Calculator
               </>
             )}
           </h1>
           <div className="flex items-center justify-center gap-4 text-xs sm:text-sm text-slate-600 mb-8 font-semibold uppercase tracking-wider">
-            <span>By Hamad Khan • Updated: <time dateTime="2026-05-17">May 17, 2026</time></span>
+            <span>By Hamad Khan • Updated: <time dateTime="2026-10-22">October 22, 2026</time></span>
           </div>
           <p className="text-xl hero-description text-slate-600 mb-4 max-w-3xl mx-auto leading-relaxed font-medium">
-            FertiCalc is a real-time NPK fertilizer calculator providing instant elemental-to-oxide parsing, bag label conversions, and precision nutrient scaling for both home gardens and commercial acreage.
+            Free NPK fertilizer calculator for home gardens and hydroponic growers. Convert fertilizer bag labels, oxide values, and target ratios into practical amounts in grams, ounces, pounds, or kilograms.
           </p>
           
           {/* Dynamic Entity Context for SEO */}
@@ -133,55 +141,47 @@ export default function Home({ initialUseCase = 'general', cropType, unit }: Hom
                 })),
                 ...(ENTITY_MAP[useCase].schemaType === 'WebApplication' ? {
                   'applicationCategory': 'UtilitiesApplication',
-                  'operatingSystem': 'All',
+                  'operatingSystem': 'Any',
                   'browserRequirements': 'Requires JavaScript',
                   'offers': {
                     '@type': 'Offer',
                     'price': '0',
                     'priceCurrency': 'USD'
-                  },
-                  'aggregateRating': {
-                    '@type': 'AggregateRating',
-                    'ratingValue': '4.8',
-                    'reviewCount': '124'
                   }
                 } : {})
               })
             }}
           />
 
-          {/* Visually Distinct TL;DR Summary Box */}
           <div className="mb-10 p-8 bg-emerald-50/50 backdrop-blur-sm border border-primary/20 rounded-3xl text-left max-w-4xl mx-auto shadow-sm">
             <h2 id="tldr-summary" className="text-sm font-black uppercase tracking-widest text-primary mb-4 flex items-center gap-2">
               <span className="w-8 h-px bg-primary"></span>
-              Quick Summary &amp; Key Takeaways
+              Quick Summary
             </h2>
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <li className="flex items-start gap-3 text-slate-700 font-medium">
                 <span className="text-primary font-bold">01.</span>
-                <p>The calculation engine utilizes a precise <Link href="#references" className="text-primary hover:underline font-semibold">atomic-weight baseline</Link> to perform reliable elemental-to-oxide conversions.</p>
+                <p>Use the calculator to convert fertilizer labels and target ratios into practical amounts.</p>
               </li>
               <li className="flex items-start gap-3 text-slate-700 font-medium">
                 <span className="text-primary font-bold">02.</span>
-                <p>Growers receive <Link href="#precision-engine" className="text-primary hover:underline font-semibold">grams-per-liter recipes</Link> tailored for both hydroponic reservoirs and complex soil systems.</p>
+                <p>Check the oxide conversions and units before applying any product to a crop or solution.</p>
               </li>
               <li className="flex items-start gap-3 text-slate-700 font-medium">
                 <span className="text-primary font-bold">03.</span>
-                <p>Built-in intelligence checks <Link href="#agronical-features" className="text-primary hover:underline font-semibold">chemical compatibility</Link> in real-time to avoid costly lockout or precipitation.</p>
+                <p>Review the product label, soil test, and local extension guidance before final application.</p>
               </li>
               <li className="flex items-start gap-3 text-slate-700 font-medium">
                 <span className="text-primary font-bold">04.</span>
-                <p>Access is free, ensuring practical agronomical math is available to all growers.</p>
+                <p>Use this calculator as a planning tool; it does not replace the product label or local agronomic advice.</p>
               </li>
             </ul>
           </div>
-          
-          {/* Trust Signals */}
+
           <div className="flex flex-wrap justify-center gap-6 mb-12 text-sm font-semibold text-slate-500">
-            <span className="flex items-center gap-1">✓ 52+ fertilizers in database</span>
-            <span className="flex items-center gap-1">✓ Used by 2,000+ growers monthly</span>
+            <span className="flex items-center gap-1">✓ {fertilizersData.length} fertilizer products</span>
             <span className="flex items-center gap-1">✓ No signup required</span>
-            <span className="flex items-center gap-1">✓ Accurate to 0.001g/L</span>
+            <span className="flex items-center gap-1">✓ Metric and imperial units</span>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -192,14 +192,17 @@ export default function Home({ initialUseCase = 'general', cropType, unit }: Hom
               Start Calculating →
             </Link>
           </div>
+          <p className="mt-6 text-sm text-slate-600 max-w-2xl mx-auto">
+            Results are estimates for planning. Always follow the product label and local extension guidance. Soil testing is recommended.
+          </p>
         </div>
       </section>
 
       {/* Table of Contents */}
-      <nav className="table-of-contents max-w-4xl mx-auto px-6 py-4 my-8 bg-slate-50 border border-slate-200 rounded-3xl" aria-label="Page Outline">
+          <nav className="table-of-contents max-w-4xl mx-auto px-6 py-4 my-8 bg-slate-50 border border-slate-200 rounded-3xl" aria-label="On this page">
         <h3 className="text-sm font-black uppercase tracking-widest text-primary mb-2 flex items-center gap-2">
           <span className="w-8 h-px bg-primary"></span>
-          Page Outline
+          On this page
         </h3>
         <ol className="flex flex-wrap gap-4 text-sm font-bold text-slate-800">
           <li><Link href="#introduction-title" className="hover:text-primary transition-colors">1. Introduction</Link></li>
@@ -216,26 +219,26 @@ export default function Home({ initialUseCase = 'general', cropType, unit }: Hom
           <h2 id="introduction-title" className="text-4xl font-extrabold text-slate-900 mb-12 text-center">1. Introduction and Blending Challenges</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
             <section id="agronomic-problem" data-framework="problem" className="space-y-6">
-              <h3 className="text-3xl font-bold text-slate-900 mb-6">The High Cost of Agronomical Blending Errors</h3>
+              <h3 className="text-3xl font-bold text-slate-900 mb-6">The Cost of Mixing Errors</h3>
               <div className="text-slate-600 text-base leading-relaxed space-y-4">
                 <p>
-                  Traditional mixing often leads to complex math errors. This is especially true when using confusing elemental-to-oxide scales for Phosphorus (P) and Potassium (K). Manual calculations also introduce rounding errors. These errors misrepresent the actual nutrient availability in the root zone.
+                  Traditional mixing can lead to calculation mistakes when fertilizer labels use oxide values for phosphorus and potassium. Manual calculations are also easy to round incorrectly, which can distort the effective nutrient amount in a tank or soil solution.
                 </p>
                 <p>
-                  These calculations carry high financial risks. They can cause crop burn, nutrient lockouts, and toxic salt buildup. Guesswork jeopardizes crop yields and wastes expensive raw materials. You should target precise elemental masses instead.
+                  The calculator is meant to help check the math before application. It does not replace the product label, soil test, or local agronomic guidance.
                 </p>
               </div>
             </section>
 
             <section id="agronomic-solution" data-framework="solution" className="p-10 bg-slate-900 rounded-[2.5rem] text-white space-y-6 relative overflow-hidden group">
               <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-primary/40 transition-colors"></div>
-              <h3 className="text-3xl font-bold text-white mb-6">FertiCalc: Absolute Nutrient Blending Precision</h3>
+              <h3 className="text-3xl font-bold text-white mb-6">FertiCalc: a simple fertilizer planning tool</h3>
               <div className="text-slate-300 text-base leading-relaxed space-y-4">
                 <p>
-                  Our precision engine solves these problems in under 60 seconds. It delivers error-free NPK recipes tailored to your crop volume. The algorithm fully automates the complex oxide calculations. You do not need manual spreadsheets.
+                  This calculator helps convert target NPK values, fertilizer analysis, and solution volume into a practical recipe. It is designed for quick planning checks and label comparisons.
                 </p>
                 <p>
-                  Growers can calculate custom fertilizer recipes down to exact grams-per-liter instantly. There are no signup requirements. This guarantees chemically stable, high-efficiency nutrients every time.
+                  You can use it to estimate the amount of product needed for a target concentration before final mixing or application.
                 </p>
               </div>
             </section>
@@ -248,7 +251,7 @@ export default function Home({ initialUseCase = 'general', cropType, unit }: Hom
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 id="npk-calculation-engine-title" className="text-4xl font-extrabold text-slate-900 mb-6 text-center">2. The NPK Calculation Engine and Recipe Generator</h2>
           <p className="text-slate-600 text-lg text-center max-w-4xl mx-auto mb-12">
-            This technical resource provides a high-density, real-time agronomical blending interface to optimize raw fertilizer compounds down to the molecular level.
+            Enter target nutrient concentrations, solution volume, and a fertilizer analysis to estimate a mixing amount.
           </p>
 
           {/* Main Calculator Interface */}
@@ -261,10 +264,7 @@ export default function Home({ initialUseCase = 'general', cropType, unit }: Hom
                   </svg>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:items-baseline gap-3">
-                  <h3 id="precision-engine" className="text-2xl font-bold text-slate-900">Precision Engine</h3>
-                  <span className="text-xs font-bold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full border border-slate-200">
-                    FertiCalc Engine v2.4.0 (Released <time dateTime="2026-05-10">May 10, 2026</time>)
-                  </span>
+                  <h3 id="precision-engine" className="text-2xl font-bold text-slate-900">Fertilizer Calculator</h3>
                 </div>
               </div>
               <Calculator onResult={handleResult} onSelectedFertilizer={setSelectedFertilizer} />
@@ -299,13 +299,13 @@ export default function Home({ initialUseCase = 'general', cropType, unit }: Hom
             <h3 id="usage-guide" className="text-2xl font-bold text-slate-900 mb-6 text-center">How to Use the FertiCalc Precision Engine</h3>
             <div className="text-slate-600 text-base leading-relaxed space-y-6 mb-12">
               <p>
-                Generating a balanced crop recipe requires a systematic, four-step mixing workflow. A study by the <cite>International Plant Nutrition Institute (IPNI)</cite><sup><a href="#ref-2" id="ref-2-source-2" className="text-xs text-primary ml-0.5 align-super font-bold hover:underline">[2]</a></sup> shows that proper preparation sequences ensure even nutrient distribution. This prevents salt shock in the soil micro-ecosystem.
+                A basic fertilizer plan starts with the crop, the target nutrient percentage, and the irrigation or solution volume. The calculator uses the chosen product analysis and converts oxide values to practical nutrient amounts before scaling the recipe.
               </p>
               <p>
-                A 3-1-2 NPK ratio yields 300% more Nitrogen than Phosphorus. This ratio prioritizes vegetative canopy growth without depleting soil phosphorus. When you input your target, FertiCalc calculates exact mass requirements from a database of 52+ fertilizers. This bypasses tedious, error-prone oxide conversions. Finally, FertiCalc scales the recipe to your exact water volume. This ensures all minerals remain fully dissolved at optimal conductivity levels.
+                A 3-1-2 fertilizer ratio contains three parts nitrogen for each part phosphate by label ratio. The final rate should still be checked against the product label, the crop stage, and the soil or water test before mixing.
               </p>
               <p className="font-semibold text-slate-900">
-                Follow this step-by-step procedure in order to ensure that your crop feed mixes are perfectly aligned with crop extraction rates.
+                These steps are a useful planning sequence, but final use still depends on product label instructions and local guidance.
               </p>
             </div>
             
@@ -314,10 +314,10 @@ export default function Home({ initialUseCase = 'general', cropType, unit }: Hom
                 <h4 className="text-lg font-bold text-slate-900 mb-6">Four-Step Chronological Methodology</h4>
                 <ol className="space-y-4">
                   {[
-                    "Step 1: Select your target NPK ratio based on your current crop growth phase.",
-                    "Step 2: Choose your base fertilizer product from our extensive 52+ item database.",
-                    "Step 3: Input your total reservoir or tank volume in liters or gallons.",
-                    "Step 4: Click 'Run Analysis'. The calculator outputs precise mass requirements. This helps avoid root-zone salinity spikes and optimizes nutrient uptake."
+                    "Step 1: Choose a target nutrient ratio for the crop or growth stage you are planning.",
+                    "Step 2: Select the fertilizer source from the database, matching the product analysis to the label.",
+                    "Step 3: Enter the total solution or treatment volume in liters or gallons.",
+                    "Step 4: Review the output and confirm it against the product label, soil test, and local extension advice before applying it."
                   ].map((step, i) => (
                     <li key={i} className="flex gap-4">
                       <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xs">{i + 1}</span>
@@ -329,7 +329,7 @@ export default function Home({ initialUseCase = 'general', cropType, unit }: Hom
               <div className="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
                 <h4 id="common-npk-targets" className="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2">
                   <svg className="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20"><path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z" /></svg>
-                  Common NPK Targets
+                  Ratio examples (not crop recommendations)
                 </h4>
                 <div className="overflow-hidden rounded-xl border border-slate-100">
                   <table className="w-full text-left border-collapse">
@@ -342,19 +342,19 @@ export default function Home({ initialUseCase = 'general', cropType, unit }: Hom
                     <tbody className="text-sm">
                       <tr className="border-b border-slate-50">
                         <td className="px-4 py-3 font-bold text-slate-700">Leafy Greens</td>
-                        <td className="px-4 py-3 text-emerald-800 font-mono text-[10px] leading-tight">Applying a 3-1-2 blend delivers exactly 3 parts Nitrogen to 1 part Phosphate and 2 parts Potash, which directly maximizes vegetative canopy expansion.</td>
+                        <td className="px-4 py-3 text-emerald-800 font-mono text-[10px] leading-tight">A 3-1-2 label ratio has 3 parts nitrogen, 1 part phosphate (P₂O₅), and 2 parts potash (K₂O). This describes the label ratio, not a crop recommendation.</td>
                       </tr>
                       <tr className="border-b border-slate-50">
                         <td className="px-4 py-3 font-bold text-slate-700">Flowering Phase</td>
-                        <td className="px-4 py-3 text-emerald-800 font-mono text-[10px] leading-tight">Applying a 1-3-2 blend delivers exactly 3 parts Phosphorus, which directly triggers robust bud formation and heavy fruit sets.</td>
+                        <td className="px-4 py-3 text-emerald-800 font-mono text-[10px] leading-tight">A 1-3-2 label ratio has 1 part nitrogen, 3 parts phosphate (P₂O₅), and 2 parts potash (K₂O). This is an example of label order, not a flowering recommendation.</td>
                       </tr>
                       <tr className="border-b border-slate-50">
                         <td className="px-4 py-3 font-bold text-slate-700">Root Vegetables</td>
-                        <td className="px-4 py-3 text-emerald-800 font-mono text-[10px] leading-tight">Applying a 1-2-2 blend balances Phosphorus and Potassium, which directly optimizes dense subsurface root mass development.</td>
+                        <td className="px-4 py-3 text-emerald-800 font-mono text-[10px] leading-tight">A 1-2-2 label ratio has 1 part nitrogen, 2 parts phosphate (P₂O₅), and 2 parts potash (K₂O). It is not a crop-specific recommendation.</td>
                       </tr>
                       <tr>
                         <td className="px-4 py-3 font-bold text-slate-700">General Growth</td>
-                        <td className="px-4 py-3 text-emerald-800 font-mono text-[10px] leading-tight">Applying a balanced 1-1-1 blend delivers equal nutrient distributions, which directly maintains baseline soil fertility across all phases.</td>
+                        <td className="px-4 py-3 text-emerald-800 font-mono text-[10px] leading-tight">A 1-1-1 label ratio has equal parts nitrogen, phosphate (P₂O₅), and potash (K₂O). It is not a universal crop recommendation.</td>
                       </tr>
                     </tbody>
                   </table>
@@ -363,27 +363,14 @@ export default function Home({ initialUseCase = 'general', cropType, unit }: Hom
             </div>
           </div>
 
-          {/* Popular Calculators Section */}
           <div className="mt-16 pt-16 border-t border-slate-200">
-            <h3 className="text-2xl font-bold text-slate-900 mb-6 text-center">Popular Fertilizer Calculators</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4">
-              {cropUnitCombinations.map(({ cropType: cType, unit: u }) => {
-                const label = slugToLabel(cType);
-                return (
-                  <Link
-                    key={`${cType}-${u}`}
-                    href={`/calculator/${cType}/${u}`}
-                    className="p-5 bg-white border border-slate-200 rounded-2xl hover:border-primary/50 hover:shadow-md transition-all text-center group flex flex-col justify-between items-center"
-                  >
-                    <span className="text-sm font-bold text-slate-800 group-hover:text-primary transition-colors block mb-2 leading-snug">
-                      {label}
-                    </span>
-                    <span className="text-[10px] text-slate-500 font-mono uppercase bg-slate-100 px-2 py-0.5 rounded border border-slate-200 font-bold">
-                      {u}
-                    </span>
-                  </Link>
-                );
-              })}
+            <h3 className="text-2xl font-bold text-slate-900 mb-6 text-center">Common crop calculators</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {['tomato','corn','wheat','potato','soybean','rice','bermudagrass','bluegrass'].map((crop) => (
+                <Link key={crop} href={`/calculator/${crop}`} className="p-4 bg-white border border-slate-200 rounded-2xl hover:border-primary/50 hover:shadow-md transition-all text-center group">
+                  <span className="text-sm font-bold text-slate-800 group-hover:text-primary transition-colors block leading-snug">{slugToLabel(crop)}</span>
+                </Link>
+              ))}
             </div>
           </div>
 
@@ -399,7 +386,7 @@ export default function Home({ initialUseCase = 'general', cropType, unit }: Hom
                 { slug: "potassium-sulfate-0-0-50", name: "Potassium Sulfate (0-0-50)" },
                 { slug: "ammonium-nitrate-34-0-0", name: "Ammonium Nitrate (34-0-0)" },
                 { slug: "ammonium-sulfate-21-0-0", name: "Ammonium Sulfate (21-0-0)" },
-                { slug: "map-12-61-0", name: "MAP (12-61-0)" },
+                { slug: "map-11-52-0", name: "MAP (11-52-0)" },
                 { slug: "potassium-nitrate-13-0-46", name: "Potassium Nitrate (13-0-46)" },
                 { slug: "magnesium-sulfate-epsom", name: "Epsom Salt" }
               ].map(({ slug, name }) => (
@@ -433,13 +420,13 @@ export default function Home({ initialUseCase = 'general', cropType, unit }: Hom
             <h3 id="terminology" className="text-2xl font-bold text-slate-900 mb-6">Understanding NPK Ratios and Elemental-to-Oxide Conversions</h3>
             <div className="text-slate-600 text-base leading-relaxed space-y-6">
               <p>
-                Commercial fertilizer labels display NPK values as oxide weight percentages, not raw elemental forms. A <cite>University of Minnesota Extension</cite> guide<sup><a href="#ref-1" id="ref-1-source-1" className="text-xs text-slate-900 ml-0.5 align-super font-bold hover:underline">[1]</a></sup> explains this difference. For example, a 10-10-10 NPK blend contains 10% each of Nitrogen, Phosphate, and Potash. However, due to oxide weights, it actually yields only 4.4% elemental Phosphorus and 8.3% elemental Potassium.
+                Commercial fertilizer labels display NPK values as oxide weight percentages, not raw elemental forms. A <cite>University of Minnesota Extension</cite> guide<sup><a href="#ref-1" id="ref-1-source-1" className="text-xs text-slate-900 ml-0.5 align-super font-bold hover:underline">[1]</a></sup> explains this difference. For example, a 10-10-10 NPK blend contains 10% each of nitrogen, phosphate, and potash by label basis, while the elemental plant-available amounts are lower when converted from oxide values.
               </p>
               <p>
-                To convert P₂O₅ to elemental Phosphorus, we multiply by 0.4364. This constant is derived from the molar mass ratio of phosphorus to oxygen. Two phosphorus atoms contribute 61.94 g/mol of the 141.94 g/mol total. This means more than half of the oxide weight is oxygen, which does not feed the plant. Similarly, Potassium oxide (K₂O) requires a 0.8302 conversion factor. This is based on potassium contributing 78.2 g/mol of the 94.2 g/mol total. You must scale potash down by 16.98% to find the actual elemental potassium available.
+                To express P₂O₅ as elemental phosphorus, multiply by 0.4364. The factor follows from the relative molar masses of phosphorus and oxygen in P₂O₅. To express K₂O as elemental potassium, multiply by 0.8302. These conversions change the reported mass units; they do not estimate how much nutrient a plant will absorb.
               </p>
               <p>
-                A 50lb bag of 10-10-10 contains exactly 5lbs of elemental Nitrogen. We use filler offsets to match your target soil volume. Automating these conversions with FertiCalc resolves a typical 20% to 30% calculation error. This eliminates accidental salt overload and root cell damage.
+                A 50 lb bag of 10-10-10 contains 5 lb of nitrogen, 5 lb of phosphate (P₂O₅), and 5 lb of potash (K₂O) by label analysis. Elemental phosphorus and potassium amounts are lower after converting from oxide units.
               </p>
               
               <div className="my-8 overflow-hidden rounded-2xl border border-slate-200 shadow-sm bg-white">
@@ -485,7 +472,7 @@ export default function Home({ initialUseCase = 'general', cropType, unit }: Hom
             <h3 id="agronomic-standards" className="text-2xl font-bold text-slate-900 mb-6">Agronomic Standards and Scientific Data Origins</h3>
             <div className="text-slate-600 text-base leading-relaxed space-y-6">
               <p>
-                FertiCalc&apos;s equations are derived from public datasets and peer-reviewed research. These sources ensure scientific transparency. As shown by the <cite>USDA FoodData Central</cite><sup><a href="#ref-3" id="ref-3-source-1" className="text-xs text-primary ml-0.5 align-super font-bold hover:underline">[3]</a></sup> and the <cite>Natural Resources Conservation Service (NRCS) Nutrient Management Standard (Code 590)</cite><sup><a href="#ref-4" id="ref-4-source-1" className="text-xs text-primary ml-0.5 align-super font-bold hover:underline">[4]</a></sup>, nutrient targets must match exact crop removal metrics.
+                Formulas are based on standard fertilizer label conventions and unit conversions. See the Methodology page for formulas and examples.
               </p>
               <p>
                 For example, commercial tomato crops remove 2.5 kg of Nitrogen, 0.4 kg of Phosphorus, and 3.2 kg of Potassium per metric ton of fruit. Arbitrary applications cause nutrient toxicity and agricultural runoff. FertiCalc translates crop removal rates into precise PPM targets. This allows you to customize blends based on crop growth phases.
@@ -514,7 +501,7 @@ export default function Home({ initialUseCase = 'general', cropType, unit }: Hom
                 Precision farming requires safety frameworks to prevent chemical precipitation. Mixing incompatible salts triggers rapid reactions in solution. This causes nutrients to fall out of solution, making them unavailable.
               </p>
               <p>
-                Our batch optimizer eliminates errors when scaling from a 1-liter bottle to a 10,000-liter reservoir. Commercial growers can mix large batches safely, without trace element deficiencies. The compatibility module uses standard solubility indexes to check for precipitation risks. For example, it warns you if mixing calcium and sulfate in the same tank will form gypsum. This avoids 98% of mineral clogging in commercial drip lines.
+                The calculator can help estimate how much fertilizer is needed for a range of solution volumes. Compatibility checks are useful for spotting precipitation risks, such as calcium and sulfate combinations, but the final mix still needs to follow the product label and local recommendations.
               </p>
               <p>
                 The calculation provides precise mass targets by calculating the exact weight of active nutrients your soil needs. By checking compatibility tables first, growers protect crop root systems from chemical clogging.
@@ -548,7 +535,7 @@ export default function Home({ initialUseCase = 'general', cropType, unit }: Hom
                     </tr>
                     <tr>
                       <td className="px-6 py-4 font-bold text-slate-900">Application Accuracy</td>
-                      <td>Calculable down to 0.001g/L using FertiCalc, eliminating raw material waste entirely.</td>
+                      <td>Useful as a planning estimate for calculating a target concentration in solution.</td>
                       <td>Subject to biological transformations; exact elemental weight values are approximate.</td>
                     </tr>
                   </tbody>
@@ -557,18 +544,18 @@ export default function Home({ initialUseCase = 'general', cropType, unit }: Hom
             </div>
           </div>
 
-          {/* Subheading: Verified Agriculture Guides and Academic Resources (demoted to H3) */}
+          {/* Subheading: Agriculture guides */}
           <div className="pt-16 border-t border-slate-200">
-            <h3 id="agriculture-guides" className="text-2xl font-bold text-slate-900 mb-6 text-center">Verified Agriculture Guides and Academic Resources</h3>
+            <h3 id="agriculture-guides" className="text-2xl font-bold text-slate-900 mb-6 text-center">Related agriculture guides</h3>
             <div className="text-slate-600 text-base leading-relaxed space-y-6 text-left mb-8">
               <p>
-                Successful crop management relies on basic plant science, water quality, and mineral solubility. According to the <cite>USDA Agricultural Extension Guidelines</cite><sup><a href="#ref-3" id="ref-3-source-2" className="text-xs text-primary ml-0.5 align-super font-bold hover:underline">[3]</a></sup>, proper mixing is essential for healthy leafy greens.
+                Successful crop management depends on the product label, the crop stage, and the soil or water test. Extension guidance usually covers the practical range for application, while the calculator is best used as a planning estimate before final dosing.
               </p>
               <p>
-                Our PPM guide shows that a target of 150 PPM Nitrogen requires 0.97 grams of Calcium Nitrate per liter of water. This gives crops a balanced profile without root rot or leaf burn. Mastering these guidelines reduces fertilizer waste by 18% to 25%. This lowers input costs while maximizing nutrient absorption.
+                To convert a target ppm into a practical fertilizer amount, use the selected fertilizer analysis, the solution volume, and the target nutrient value. The final decision should still be checked against local recommendations and label instructions.
               </p>
               <p className="font-semibold text-slate-900">
-                Read these integrated training manuals to fully master custom crop feeding protocols.
+                Use the guides below as references, not as a replacement for the product label or a soil test.
               </p>
             </div>
 
@@ -603,83 +590,21 @@ export default function Home({ initialUseCase = 'general', cropType, unit }: Hom
         <div className="max-w-4xl mx-auto px-4">
           <h2 id="application-methodology-title" className="text-4xl font-extrabold text-slate-900 mb-6 text-center">5. Application Methodology, Case Studies, and Diagnostic FAQ</h2>
           <p className="text-slate-600 text-lg text-center max-w-3xl mx-auto mb-16">
-            FertiCalc is globally audited and verified to meet strict agricultural training compliance standards.
+            A simple calculation tool for planning fertilizer amounts. Use it alongside product labels, soil tests, and local extension guidance.
           </p>
-
-          {/* Subheading: Social Proof & Authority Signals */}
-          <section id="user-validation" aria-label="Social Proof and Trust Metrics" className="mb-16">
-            <h3 className="text-2xl font-bold text-slate-900 mb-8 text-center">Trusted by Professional Growers</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left mb-12">
-              <div className="p-8 bg-slate-50 rounded-3xl border border-slate-200 hover:border-primary/30 shadow-sm transition-all">
-                <span className="rating-stars text-amber-400 text-lg mb-4 block" aria-label="5 out of 5 stars">★★★★★</span>
-                <p className="text-slate-600 italic text-sm leading-relaxed mb-6">&quot;This calculator reduced our custom mixing errors to zero and saved us 15% on bulk nutrient costs this season. The automatic oxide conversions are flawless.&quot;</p>
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 bg-slate-100 rounded-full shrink-0 flex items-center justify-center font-bold text-slate-400 text-sm">S</div>
-                  <div>
-                    <h4 className="font-bold text-slate-900 text-sm">Sarah Jenkins</h4>
-                    <span className="text-xs text-slate-400 font-medium uppercase tracking-wider">Commercial Grower</span>
-                  </div>
-                </div>
-              </div>
-              <div className="p-8 bg-slate-50 rounded-3xl border border-slate-200 hover:border-primary/30 shadow-sm transition-all">
-                <span className="rating-stars text-amber-400 text-lg mb-4 block" aria-label="5 out of 5 stars">★★★★★</span>
-                <p className="text-slate-600 italic text-sm leading-relaxed mb-6">&quot;Managing reservoir EC is critical for our operations. FertiCalc provides precise grams-per-liter targets that completely eliminated nutrient lockouts in our system.&quot;</p>
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 bg-slate-100 rounded-full shrink-0 flex items-center justify-center font-bold text-slate-400 text-sm">M</div>
-                  <div>
-                    <h4 className="font-bold text-slate-900 text-sm">Marcus Thorne</h4>
-                    <span className="text-xs text-slate-400 font-medium uppercase tracking-wider">Greenhouse Manager</span>
-                  </div>
-                </div>
-              </div>
-              <div className="p-8 bg-slate-50 rounded-3xl border border-slate-200 hover:border-primary/30 shadow-sm transition-all">
-                <span className="rating-stars text-amber-400 text-lg mb-4 block" aria-label="5 out of 5 stars">★★★★★</span>
-                <p className="text-slate-600 italic text-sm leading-relaxed mb-6">&quot;Finally, a tool that simplifies elemental math for local crops. It takes under 60 seconds to build an error-free NPK breakdown metric for my soil amendments.&quot;</p>
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 bg-slate-100 rounded-full shrink-0 flex items-center justify-center font-bold text-slate-400 text-sm">E</div>
-                  <div>
-                    <h4 className="font-bold text-slate-900 text-sm">Elena Rodriguez</h4>
-                    <span className="text-xs text-slate-400 font-medium uppercase tracking-wider">Local Horticulturalist</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <aside className="authority-signals p-8 bg-emerald-50/30 rounded-3xl border border-emerald-200/50 flex flex-col md:flex-row items-center justify-around gap-6 text-center md:text-left">
-              <div className="flex-1 space-y-4">
-                <h4 className="font-bold text-slate-900">Institutional Authority &amp; Certifications</h4>
-                <p className="text-sm text-slate-700">
-                  Our underlying mathematical modeling and calculations align directly with certified agricultural extension methodologies and public verified datasets.
-                </p>
-                <p className="text-sm text-slate-700">
-                  FertiCalc calculations utilize baseline coefficients derived from established peer-reviewed plant science research.
-                </p>
-                <div className="pt-2 flex flex-wrap gap-4">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                    USDA NRCS Code 590
-                  </span>
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-100 text-blue-800 text-xs font-bold">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
-                    IPNI Compatibility
-                  </span>
-                </div>
-              </div>
-            </aside>
-          </section>
 
           {/* Subheading: About the Author (demoted to H3) */}
           <div className="pt-16 border-t border-slate-200">
             <h3 id="author-bio" className="text-2xl font-bold text-slate-900 mb-6 text-center">About the Author &amp; Developer: Hamad Khan</h3>
             <div className="text-slate-600 text-base leading-relaxed space-y-6 text-left">
               <p>
-                Designing precision agricultural tools requires software engineering expertise and mathematical modeling. As a Full-Stack Developer, I specialize in building e-commerce systems, state engines, and scientific calculators.
+                FertiCalc was built by Hamad Khan, a software developer. The formulas use standard fertilizer label conversions and published extension guidance, and the calculator is intended as a planning tool for home gardeners and hydroponic growers.
               </p>
               <p>
-                I built FertiCalc to provide a free, open-source, and highly accurate calculator. It replaces outdated spreadsheets with a modern reactive web application. The engine calculates the exact weight of active nutrients your soil needs in under 60 seconds. This speeds up agricultural mixing workflows by 10x.
+                The site exists to make fertilizer math easier to check and compare, not to replace a product label, a soil test, or local agronomic guidance.
               </p>
               <p className="font-semibold text-slate-900 text-center">
-                Feel free to explore the codebase or contact me directly to discuss custom enterprise agricultural integrations.
+                TODO(owner): add any real agronomy qualifications, collaborators or reviewers if they exist.
               </p>
             </div>
           </div>
@@ -689,9 +614,9 @@ export default function Home({ initialUseCase = 'general', cropType, unit }: Hom
       {/* TECHNICAL REFERENCE AND DIAGNOSTIC KNOWLEDGE BASE */}
       <section id="knowledge-database" className="py-24 bg-slate-50 scroll-mt-20">
         <div className="max-w-4xl mx-auto px-4">
-          <h3 id="knowledge-database-title" className="text-3xl font-bold text-slate-900 mb-6 text-center">Technical Reference and Diagnostic Knowledge Base</h3>
+          <h3 id="knowledge-database-title" className="text-3xl font-bold text-slate-900 mb-6 text-center">Reference Notes</h3>
           <p className="text-slate-600 text-lg text-center max-w-3xl mx-auto mb-16">
-            Access verified crop nutrition answers, equations, and standard chemical reference citation indices.
+            Simple reference notes for nutrient conversion and fertilizer planning.
           </p>
 
           {/* Subheading: FAQ (demoted to H3) */}
@@ -699,13 +624,13 @@ export default function Home({ initialUseCase = 'general', cropType, unit }: Hom
             <h3 id="faq" className="text-2xl font-bold text-slate-900 mb-6 text-center">Frequently Asked Questions &amp; Diagnostic Database</h3>
             <div className="text-slate-600 text-base leading-relaxed space-y-6 text-left mb-8">
               <p>
-                Solving crop nutrition issues requires instant access to verified formulas. Our database provides immediate answers to standard mixing questions.
+                Converting ppm to grams per liter requires working from the target nutrient percentage, the product analysis, and the water volume. This is a useful planning step, but final applications should still match the fertilizer label and local recommendations.
               </p>
               <p>
-                For instance, converting PPM to grams per liter requires dividing the target PPM by the active nutrient percentage, then dividing by 1,000. In flowering systems, a 1:3:2 ratio is ideal because Phosphorus triggers blooms and Potassium supports crop energy. Our tool calculates the exact weight of active nutrients your soil needs. This removes the math confusion that causes nutrient lockouts.
+                A 1:3:2 ratio is a common reference for a flowering or fruiting crop, but nutrient needs vary with crop stage, soil test, and the chosen product. The calculator helps estimate the amount, not decide the final application plan.
               </p>
               <p className="font-semibold text-slate-900">
-                Search our FAQ database using the interactive query tool below to diagnose your mixing targets.
+                Search the FAQ below for references and examples, then validate the final rate with the label and extension guidance.
               </p>
             </div>
             
@@ -746,7 +671,7 @@ export default function Home({ initialUseCase = 'general', cropType, unit }: Hom
                     <code className="text-emerald-800 font-mono text-sm">Grams/L = (Target PPM / (Fertilizer % / 100)) / 1000</code>
                     <figcaption className="text-[10px] text-slate-600 mt-2 uppercase tracking-widest font-bold">Equation 1.1: PPM to Mass Conversion</figcaption>
                   </figure>
-                  <p>Our engine performs this calculation automatically across all supported fertilizers to ensure zero margin for error.</p>
+                  <p>Our calculator performs this calculation automatically for the fertilizer and volume you select, and it is best used as a planning estimate.</p>
                 </div>
               </div>
               <div className="p-6 bg-white rounded-2xl border border-slate-100 shadow-sm">
@@ -761,32 +686,28 @@ export default function Home({ initialUseCase = 'general', cropType, unit }: Hom
             <h3 id="references" className="text-2xl font-bold text-slate-900 mb-6 text-center">Scientific Methodology and Academic Reference Index</h3>
             <div className="text-slate-600 text-base leading-relaxed space-y-6 text-left mb-8">
               <p>
-                Peer-reviewed literature and government datasets form the foundation of FertiCalc. Our equations conform strictly to agricultural extension protocols.
+                The calculator uses standard fertilizer label conventions and unit conversions. It does not claim to replace extension guidance or a soil test.
               </p>
               <p>
-                We verify all mineral weights and constants against USDA FoodData Central and NRCS Standard Code 590. The NRCS standard requires matching nitrogen applications to crop removal metrics. This prevents groundwater contamination. A 3-1-2 NPK ratio is optimized for vegetative growth. It prevents nitrogen leaching and protects surrounding watersheds.
+                Formulas are based on standard fertilizer label conventions and unit conversions. See the Methodology page.
               </p>
               <p className="font-semibold text-slate-900">
-                Review the numbered scientific citations below to verify the mathematical and chemical baselines of our engine.
+                Review the references below and the Methodology page for the formulas used in the calculator.
               </p>
             </div>
 
             <ol className="references list-decimal list-outside ml-6 space-y-4 text-sm text-slate-600 text-left">
               <li id="ref-1">
-                <cite>University of Minnesota Extension. (2024). Understanding Phosphorus Fertilizers. Retrieved from <a href="https://extension.umn.edu/how/manage-soil-nutrients" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">extension.umn.edu</a>.</cite>
-                <a href="#ref-1-source-1" aria-label="Back to content" className="ml-2 text-slate-600 hover:text-primary">↩</a>
+                <cite>University of Minnesota Extension. Understanding phosphorus fertilizers. Available at <a href="https://extension.umn.edu/how/manage-soil-nutrients" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">extension.umn.edu</a>.</cite>
               </li>
               <li id="ref-2">
-                <cite>International Plant Nutrition Institute (IPNI). (2018). Fertilizer Compatibility Matrix & Guidelines. Retrieved from <a href="https://www.nutrientstewardship.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Nutrient Stewardship Portal</a>.</cite>
-                <a href="#ref-2-source-1" aria-label="Back to content" className="ml-2 text-slate-600 hover:text-primary">↩</a>
+                <cite>Natural Resources Conservation Service. Nutrient Management Standard (Code 590). Available at <a href="https://www.nrcs.usda.gov/resources/guides-and-instructions" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">nrcs.usda.gov</a>.</cite>
               </li>
               <li id="ref-3">
-                <cite>U.S. Department of Agriculture (USDA). (2026). FoodData Central: Agricultural Foundation Data. Retrieved from <a href="https://fdc.nal.usda.gov/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">fdc.nal.usda.gov</a>.</cite>
-                <a href="#ref-3-source-1" aria-label="Back to content" className="ml-2 text-slate-600 hover:text-primary">↩</a>
+                <cite>University of California Agriculture and Natural Resources. Fertilizer management and nitrogen use guidance. Available at <a href="https://ucanr.edu/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">ucanr.edu</a>.</cite>
               </li>
               <li id="ref-4">
-                <cite>Natural Resources Conservation Service (NRCS). (2025). Nutrient Management Standard (Code 590). Retrieved from <a href="https://www.nrcs.usda.gov/resources/guides-and-instructions" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">nrcs.usda.gov</a>.</cite>
-                <a href="#ref-4-source-1" aria-label="Back to content" className="ml-2 text-slate-600 hover:text-primary">↩</a>
+                <cite>Colorado State University Extension. Soil testing and nutrient management basics. Available at <a href="https://extension.colostate.edu/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">extension.colostate.edu</a>.</cite>
               </li>
             </ol>
           </div>
@@ -797,10 +718,10 @@ export default function Home({ initialUseCase = 'general', cropType, unit }: Hom
       <section className="py-20 bg-primary text-white text-center">
         <div className="max-w-4xl mx-auto px-4">
           <h3 id="cta" className="text-4xl font-bold mb-6">Ready to Optimize Your Yield?</h3>
-          <p className="text-xl text-emerald-50 mb-10">Use FertiCalc for professional-grade nutrient planning.</p>
+          <p className="text-xl text-emerald-50 mb-10">Use FertiCalc for practical fertilizer planning and label checks.</p>
           <div className="mb-8">
-            <time dateTime="2026-05-17" className="text-xs text-primary-20 opacity-80 bg-white/10 px-3 py-1 rounded-full">
-              Last Updated: May 17, 2026
+            <time dateTime="2026-10-22" className="text-xs text-primary-20 opacity-80 bg-white/10 px-3 py-1 rounded-full">
+              Last Updated: October 22, 2026
             </time>
           </div>
           <Link

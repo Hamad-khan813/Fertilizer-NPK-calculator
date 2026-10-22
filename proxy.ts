@@ -3,6 +3,30 @@ import type { NextRequest } from 'next/server';
 import { createServerClient } from '@supabase/ssr';
 
 export async function proxy(request: NextRequest) {
+  const pathname = request.nextUrl.pathname;
+  const validCropPages = new Set([
+    'tomato', 'corn', 'wheat', 'potato', 'soybean', 'rice', 'bermudagrass', 'bluegrass',
+  ]);
+
+  const cropUnitRoute = pathname.match(/^\/calculator\/([^/]+)\/([^/]+)(?:\/.*)?$/);
+  if (cropUnitRoute) {
+    const [, crop] = cropUnitRoute;
+    const destination = validCropPages.has(crop) ? `/calculator/${crop}` : '/calculator';
+    return NextResponse.redirect(new URL(destination, request.url), 301);
+  }
+
+  const fertilizerRedirects: Record<string, string> = {
+    '/fertilizers/map-12-61-0': '/fertilizers/map-11-52-0',
+    '/fertilizers/ammonium-phosphate-11-48-0': '/fertilizers/map-11-52-0',
+    '/fertilizers/calcium-nitrate-15-0-0': '/fertilizers/calcium-nitrate-15-5-0-0',
+    '/fertilizers/potassium-nitrate-14-0-44': '/fertilizers/potassium-nitrate-13-0-46',
+  };
+
+  const fertilizerDestination = fertilizerRedirects[pathname];
+  if (fertilizerDestination) {
+    return NextResponse.redirect(new URL(fertilizerDestination, request.url), 301);
+  }
+
   // --- Unit System Detection (existing logic) ---
   let response: NextResponse;
   const cookieSystem = request.cookies.get('unit-system')?.value;

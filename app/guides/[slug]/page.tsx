@@ -17,20 +17,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     return {
       title: `${guide.title} | FertiCalc Crop Guides`,
       description: guide.excerpt,
+      robots: { index: false, follow: true },
       alternates: {
         canonical: `/guides/${guide.slug}`,
-      },
-      robots: {
-        index: true,
-        follow: true,
-        nocache: true,
-        googleBot: {
-          index: true,
-          follow: true,
-          'max-video-preview': -1,
-          'max-image-preview': 'large',
-          'max-snippet': -1,
-        },
       },
     };
   } catch {
@@ -52,18 +41,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
       "@type": "Article",
       "headline": guide.title,
       "description": guide.excerpt,
-      "datePublished": "2026-05-15",
-      "dateModified": "2026-05-15",
-      "image": ["https://ferti-calc.vercel.app/assets/og-calculator-preview.png"],
-      "author": {
-        "@type": "Person",
-        "name": "Hamad Khan",
-        "jobTitle": "Full-Stack Developer & Agronomic Tools Architect",
-        "sameAs": [
-          "https://github.com/Hamad-khan813",
-          "https://linkedin.com/in/hamad-khan"
-        ]
-      },
+      "datePublished": guide.date,
       "publisher": {
         "@type": "Organization",
         "name": "FertiCalc",
@@ -91,7 +69,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
               {guide.title}
             </h1>
             <div className="flex items-center gap-6 text-slate-500 font-medium">
-              <span>Last Updated: May 2026</span>
+              <span>Published: {new Date(guide.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
               <span>•</span>
               <span>{guide.readTime}</span>
             </div>
@@ -154,15 +132,15 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
                   <ul className="space-y-3 text-sm text-slate-600">
                     <li className="flex items-center gap-2">
                       <svg className="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
-                      52+ Fertilizers in database
+                      Fertilizer analyses available for comparison
                     </li>
                     <li className="flex items-center gap-2">
                       <svg className="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
-                      Accuracy to 0.001g/L
+                      Useful for checking mix calculations
                     </li>
                     <li className="flex items-center gap-2">
                       <svg className="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
-                      Professional Agronomy Logic
+                      Practical planning guidance
                     </li>
                   </ul>
                 </div>

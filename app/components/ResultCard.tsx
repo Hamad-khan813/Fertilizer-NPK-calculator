@@ -20,6 +20,25 @@ interface ResultCardProps {
   useCase?: UseCase;
 }
 
+function formatDisplayAmount(amountG: number, form: Fertilizer['form'], system: 'metric' | 'imperial') {
+  const isLiquid = form === 'liquid';
+  if (system === 'imperial') {
+    if (isLiquid) {
+      return amountG >= 3785.41
+        ? { amount: (amountG / 3785.41).toFixed(2), unit: 'gal' }
+        : { amount: (amountG / 29.5735).toFixed(2), unit: 'fl oz' };
+    }
+    return amountG >= 453.592
+      ? { amount: (amountG / 453.592).toFixed(2), unit: 'lb' }
+      : { amount: (amountG / 28.3495).toFixed(2), unit: 'oz' };
+  }
+
+  if (amountG >= 1000) {
+    return { amount: (amountG / 1000).toFixed(2), unit: isLiquid ? 'L' : 'kg' };
+  }
+  return { amount: amountG.toFixed(2), unit: isLiquid ? 'ml' : 'g' };
+}
+
 export default function ResultCard({ result, fertilizer, inputs, useCase = 'general' }: ResultCardProps) {
   const [copied, setCopied] = useState(false);
   const [mdCopied, setMdCopied] = useState(false);
@@ -71,9 +90,13 @@ export default function ResultCard({ result, fertilizer, inputs, useCase = 'gene
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
           </div>
-          <p className="text-slate-500 font-medium">
-            Configure your targets and click &quot;Run Analysis&quot; to generate your fertilizer recipe.
+            <p className="text-slate-500 font-medium">
+            Example: 0.1% nitrogen in 1 litre using 46% N urea requires about 2.17 g of product.
           </p>
+            <div className="mt-4 rounded-xl bg-slate-50 p-4 text-left text-sm text-slate-700">
+              <p><strong>Example result:</strong> 2.17 g urea for 1 litre at 0.1% N (% w/v).</p>
+              <p className="mt-1">Calculation: (0.1 ÷ 46) × 1,000 = 2.17 g.</p>
+            </div>
         </div>
       ) : (
         <div className="bg-white rounded-2xl shadow-xl shadow-slate-200/50 border border-slate-100 overflow-hidden">
@@ -87,7 +110,6 @@ export default function ResultCard({ result, fertilizer, inputs, useCase = 'gene
               </div>
               <h3 className="text-white font-bold tracking-wide uppercase text-sm">Analysis Report</h3>
             </div>
-            <span className="text-slate-100 text-xs font-mono">{new Date().toLocaleDateString()}</span>
           </div>
 
           <div className="p-6 space-y-8">
@@ -96,41 +118,11 @@ export default function ResultCard({ result, fertilizer, inputs, useCase = 'gene
               <p className="text-slate-500 text-sm font-semibold uppercase tracking-wider mb-2">Required Amount</p>
               <div className="flex items-baseline justify-center gap-2">
                 {(() => {
-                  const g = result.amountG;
-                  const isLiquid = fertilizer.form === 'liquid';
-                  
-                  let displayAmount = g.toString();
-                  let displayUnit = isLiquid ? 'ml' : 'g';
-
-                  if (system === 'imperial') {
-                    if (isLiquid) {
-                      if (g < 3785.41) {
-                        displayAmount = (g / 29.5735).toFixed(2);
-                        displayUnit = 'fl oz';
-                      } else {
-                        displayAmount = (g / 3785.41).toFixed(2);
-                        displayUnit = 'gal';
-                      }
-                    } else {
-                      if (g < 453.592) {
-                        displayAmount = (g / 28.3495).toFixed(2);
-                        displayUnit = 'oz';
-                      } else {
-                        displayAmount = (g / 453.592).toFixed(2);
-                        displayUnit = 'lbs';
-                      }
-                    }
-                  } else {
-                    if (g >= 1000) {
-                      displayAmount = (g / 1000).toFixed(2);
-                      displayUnit = isLiquid ? 'L' : 'kg';
-                    }
-                  }
-
+                  const display = formatDisplayAmount(result.amountG, fertilizer.form, system);
                   return (
                     <>
-                      <span className="text-6xl font-black text-slate-900 tracking-tight">{displayAmount}</span>
-                      <span className="text-2xl font-bold text-slate-600">{displayUnit}</span>
+                      <span className="text-6xl font-black text-slate-900 tracking-tight">{display.amount}</span>
+                      <span className="text-2xl font-bold text-slate-600">{display.unit}</span>
                     </>
                   );
                 })()}

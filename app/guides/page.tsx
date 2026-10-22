@@ -3,7 +3,8 @@ import { getAllGuides } from '@/lib/guides';
 
 export const metadata = {
   title: 'Agriculture Guides — FertiCalc Resource Center',
-  description: 'Master crop nutrition with our professional guides. From NPK basics to advanced hydroponic nutrient management.',
+  description: 'Read practical explainers about fertilizer labels, NPK values, nutrient calculations, and fertilizer handling.',
+  robots: { index: false, follow: true },
 };
 
 export default async function GuidesPage() {
@@ -18,7 +19,7 @@ export default async function GuidesPage() {
             Agriculture <span className="text-primary">Guides</span>
           </h1>
           <p className="text-xl text-slate-600 max-w-3xl leading-relaxed">
-            Science-backed resources to help you master fertilizer math, soil chemistry, and crop productivity.
+            Reference articles about fertilizer labels, nutrient calculations, and handling. Check product labels and local guidance before applying fertilizer.
           </p>
         </div>
       </div>

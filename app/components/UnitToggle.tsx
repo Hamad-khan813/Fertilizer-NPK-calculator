@@ -14,7 +14,7 @@ export default function UnitToggle() {
         className={`text-sm font-medium ${system === 'imperial' ? 'text-gray-900 font-bold' : 'text-gray-500'}`}
         aria-hidden="true"
       >
-        Imperial (lbs/sq ft)
+        Imperial
       </span>
       
       <button
@@ -39,7 +39,7 @@ export default function UnitToggle() {
         className={`text-sm font-medium ${system === 'metric' ? 'text-gray-900 font-bold' : 'text-gray-500'}`}
         aria-hidden="true"
       >
-        Metric (kg/sq m)
+        Metric
       </span>
     </div>
   );

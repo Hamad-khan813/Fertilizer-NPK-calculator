@@ -79,8 +79,6 @@ export default function BlogCard({ blog }: BlogCardProps) {
           {/* Meta Footer */}
           <div className="flex items-center justify-between text-xs text-slate-500 mt-auto pt-4 border-t border-slate-100">
             <div className="flex gap-3">
-              <span>{blog.author}</span>
-              <span>•</span>
               <span>{new Date(blog.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
             </div>
             <span>{blog.readTime}</span>

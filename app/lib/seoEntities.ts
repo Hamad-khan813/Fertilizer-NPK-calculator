@@ -23,7 +23,7 @@ export const ENTITY_MAP: Record<UseCase, { entities: string[], schemaType: strin
     shortName: 'General Application',
     entities: ["NPK", "Soil Amendment", "Fertilizer Blending", "Agronomy"],
     schemaType: "WebApplication",
-    contextContent: "Professional agronomical fertilizer blending ensures optimal soil amendment and crop yields globally."
+    contextContent: "Fertilizer planning calculations should be checked against product labels, soil tests, and local recommendations."
   }
 };
 

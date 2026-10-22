@@ -3,8 +3,6 @@ export interface FertilizerDetails {
   name: string;
   npk: string;
   npkArray: [number, number, number];
-  solubility: number; // g/L
-  solubilityTemp: number; // °C
   description: string;
   crops: string[];
   compatibilityWarnings: string[];
@@ -18,8 +16,6 @@ export const FERTILIZERS: FertilizerDetails[] = [
     name: "Urea",
     npk: "46-0-0",
     npkArray: [46, 0, 0],
-    solubility: 1079,
-    solubilityTemp: 20,
     description: "Urea is the most concentrated solid nitrogen fertilizer, widely used in agriculture and turf applications for fast, economic green-up and vegetative growth.",
     crops: ["Turf Grass", "Wheat", "Maize (Corn)", "Sugarcane", "Rice"],
     compatibilityWarnings: [
@@ -35,8 +31,6 @@ export const FERTILIZERS: FertilizerDetails[] = [
     name: "Calcium Nitrate",
     npk: "15.5-0-0",
     npkArray: [15.5, 0, 0],
-    solubility: 1200,
-    solubilityTemp: 20,
     description: "Calcium Nitrate is a highly soluble fertilizer providing fast-acting nitrate nitrogen and essential calcium, ideal for greenhouse crops, tomatoes, and hydroponic systems.",
     crops: ["Hydroponic Tomato", "Pepper", "Lettuce", "Strawberry", "Bermudagrass"],
     compatibilityWarnings: [
@@ -51,15 +45,13 @@ export const FERTILIZERS: FertilizerDetails[] = [
     name: "Diammonium Phosphate (DAP)",
     npk: "18-46-0",
     npkArray: [18, 46, 0],
-    solubility: 588,
-    solubilityTemp: 20,
     description: "Diammonium Phosphate is the world's most widely used phosphorus fertilizer, combining high phosphorus content with ammoniacal nitrogen for initial root development.",
     crops: ["Wheat", "Maize (Corn)", "Rice", "Soybean", "Potato"],
     compatibilityWarnings: [
       "Do not mix with calcium-based fertilizers in concentrated solution to avoid calcium phosphate fallout.",
       "Avoid applying in direct contact with seeds due to potential ammonia release injury."
     ],
-    relatedSlugs: ["map-12-61-0", "mop-0-0-60", "potassium-sulfate-0-0-50"],
+    relatedSlugs: ["map-11-52-0", "mop-0-0-60", "potassium-sulfate-0-0-50"],
     id: "203"
   },
   {
@@ -67,8 +59,6 @@ export const FERTILIZERS: FertilizerDetails[] = [
     name: "Muriate of Potash (MOP)",
     npk: "0-0-60",
     npkArray: [0, 0, 60],
-    solubility: 344,
-    solubilityTemp: 20,
     description: "Muriate of Potash (Potassium Chloride) is the most abundant and cost-effective potassium source for field crops, enhancing drought resistance and stem strength.",
     crops: ["Wheat", "Maize (Corn)", "Sugarcane", "Rice", "Cotton"],
     compatibilityWarnings: [
@@ -83,8 +73,6 @@ export const FERTILIZERS: FertilizerDetails[] = [
     name: "Potassium Sulfate (SOP)",
     npk: "0-0-50",
     npkArray: [0, 0, 50],
-    solubility: 111,
-    solubilityTemp: 20,
     description: "Potassium Sulfate (Sulfate of Potash) is a premium, chloride-free potassium source that also supplies essential sulfur, ideal for high-value sensitive crops.",
     crops: ["Potato", "Hydroponic Tomato", "Bluegrass", "Strawberry", "Cotton"],
     compatibilityWarnings: [
@@ -99,8 +87,6 @@ export const FERTILIZERS: FertilizerDetails[] = [
     name: "Ammonium Nitrate",
     npk: "34-0-0",
     npkArray: [34, 0, 0],
-    solubility: 1900,
-    solubilityTemp: 20,
     description: "Ammonium Nitrate is a highly soluble dry fertilizer providing equal parts fast-acting nitrate and sustained-release ammonium nitrogen for active crop growth.",
     crops: ["Turf Grass", "Wheat", "Maize (Corn)", "Barley", "Bermudagrass"],
     compatibilityWarnings: [
@@ -115,8 +101,6 @@ export const FERTILIZERS: FertilizerDetails[] = [
     name: "Ammonium Sulfate",
     npk: "21-0-0",
     npkArray: [21, 0, 0],
-    solubility: 754,
-    solubilityTemp: 20,
     description: "Ammonium Sulfate supplies fast-acting ammoniacal nitrogen and a rich source of plant-available sulfur, excellent for acidifying alkaline soils.",
     crops: ["Rice", "Potato", "Turf Grass", "Bluegrass", "Soybean"],
     compatibilityWarnings: [
@@ -127,28 +111,24 @@ export const FERTILIZERS: FertilizerDetails[] = [
     id: "24"
   },
   {
-    slug: "map-12-61-0",
-    name: "Mono Ammonium Phosphate (MAP)",
-    npk: "12-61-0",
-    npkArray: [12, 61, 0],
-    solubility: 370,
-    solubilityTemp: 20,
-    description: "Mono Ammonium Phosphate 12-61-0 is a high-analysis, highly soluble phosphorus starter fertilizer ideal for fertigation and root development in young seedlings.",
+    slug: "map-11-52-0",
+    name: "Monoammonium Phosphate (MAP)",
+    npk: "11-52-0",
+    npkArray: [11, 52, 0],
+    description: "Monoammonium phosphate (MAP) is a nitrogen and phosphate fertilizer. Its label analysis is 11-52-0, with phosphorus expressed as P₂O₅.",
     crops: ["Hydroponic Tomato", "Maize (Corn)", "Potato", "Lettuce", "Pepper"],
     compatibilityWarnings: [
       "Do not mix with Calcium Nitrate or other calcium inputs in concentrated tanks to prevent calcium phosphate precipitation.",
       "Slightly acidic; check solution pH when mixing in large quantities."
     ],
     relatedSlugs: ["dap-18-46-0", "potassium-nitrate-13-0-46", "magnesium-sulfate-epsom"],
-    id: "901"
+    id: "209"
   },
   {
     slug: "potassium-nitrate-13-0-46",
     name: "Potassium Nitrate",
     npk: "13-0-46",
     npkArray: [13, 0, 46],
-    solubility: 316,
-    solubilityTemp: 20,
     description: "Potassium Nitrate (KNO3) is a highly soluble fertilizer providing dual macronutrients (Nitrogen & Potassium), essential for fruit sizing, bloom quality, and disease resistance.",
     crops: ["Hydroponic Tomato", "Pepper", "Potato", "Strawberry", "Sugarcane"],
     compatibilityWarnings: [
@@ -161,10 +141,8 @@ export const FERTILIZERS: FertilizerDetails[] = [
   {
     slug: "magnesium-sulfate-epsom",
     name: "Magnesium Sulfate (Epsom Salt)",
-    npk: "0-0-0",
+    npk: "No NPK. Supplies Mg and S",
     npkArray: [0, 0, 0],
-    solubility: 710,
-    solubilityTemp: 20,
     description: "Magnesium Sulfate (Epsom Salt) is a highly soluble mineral compound that corrects magnesium and sulfur deficiencies, promoting chlorophyll synthesis and photosynthesis.",
     crops: ["Hydroponic Tomato", "Pepper", "Lawn", "Bermudagrass", "Bluegrass"],
     compatibilityWarnings: [

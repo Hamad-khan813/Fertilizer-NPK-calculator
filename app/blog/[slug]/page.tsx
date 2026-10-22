@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { getBlogBySlug, getAllBlogs } from '@/lib/blogs';
 import BlogCard from '@/app/components/BlogCard';
-import Script from 'next/script';
 
 export async function generateStaticParams() {
   const blogs = await getAllBlogs();
@@ -17,20 +16,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     return {
       title: `${blog.title} | FertiCalc Blog`,
       description: blog.excerpt,
+      robots: { index: false, follow: true },
       alternates: {
         canonical: `/blog/${blog.slug}`,
-      },
-      robots: {
-        index: true,
-        follow: true,
-        nocache: true,
-        googleBot: {
-          index: true,
-          follow: true,
-          'max-video-preview': -1,
-          'max-image-preview': 'large',
-          'max-snippet': -1,
-        },
       },
     };
   } catch {
@@ -47,37 +35,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     const blog = await getBlogBySlug(slug);
     const allBlogs = await getAllBlogs();
     const relatedBlogs = allBlogs.filter((b) => b.slug !== blog.slug).slice(0, 2);
-
-    const blogSchema = {
-      "@context": "https://schema.org",
-      "@type": "BlogPosting",
-      "headline": blog.title,
-      "description": blog.excerpt,
-      "datePublished": blog.date,
-      "dateModified": blog.date,
-      "image": blog.coverImage ? [blog.coverImage] : ["https://ferti-calc.vercel.app/assets/og-calculator-preview.png"],
-      "author": {
-        "@type": "Person",
-        "name": blog.author || "Hamad Khan",
-        "jobTitle": "Full-Stack Developer & Agronomic Tools Architect",
-        "sameAs": [
-          "https://github.com/Hamad-khan813",
-          "https://linkedin.com/in/hamad-khan"
-        ]
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "FertiCalc",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://ferti-calc.vercel.app/favicon.svg"
-        }
-      },
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": `https://ferti-calc.vercel.app/blog/${blog.slug}`
-      }
-    };
 
     return (
       <div className="min-h-screen bg-slate-50">
@@ -103,8 +60,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-4">{blog.title}</h1>
 
             <div className="flex flex-wrap items-center gap-4 text-sm text-slate-600">
-              <span>{blog.author}</span>
-              <span>•</span>
               <span>{new Date(blog.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
               <span>•</span>
               <span>{blog.readTime}</span>
@@ -239,11 +194,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             </Link>
           </div>
         </section>
-        <Script
-          id="blog-schema"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
-        />
       </div>
     );
   } catch {

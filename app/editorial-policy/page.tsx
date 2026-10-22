@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Editorial Policy | Ferti-Calc',
-  description: 'Our commitment to scientific accuracy, transparent calculation methods, and trusted agricultural sources.',
+  description: 'How FertiCalc content and calculator changes are prepared, checked, and updated.',
 };
 
 export default function EditorialPolicyPage() {
@@ -10,43 +10,38 @@ export default function EditorialPolicyPage() {
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
       <div className="mb-12">
         <h1 className="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight mb-6">Editorial Policy</h1>
-        <p className="text-slate-500 text-sm font-semibold uppercase tracking-wider mb-6">Last Updated: May 17, 2026</p>
         <p className="text-xl text-slate-600 leading-relaxed">
-          At Ferti-Calc, we are dedicated to providing the agricultural community with accurate, transparent, and scientifically sound information.
+          FertiCalc is maintained by its owner. This policy explains the limits of the content review process and how corrections can be requested.
         </p>
       </div>
 
       <div className="space-y-12 text-slate-600 leading-relaxed">
         <section>
-          <h2 className="text-2xl font-bold text-slate-900 mb-4">Our Commitment to Accuracy</h2>
+          <h2 className="text-2xl font-bold text-slate-900 mb-4">Content and calculations</h2>
           <p>
-            Precision is critical in agriculture. We ensure that every calculation, ratio, and educational guide provided on our platform is rooted in validated horticultural science. Our content goes through a strict review process to verify atomic-weight baselines and conversion ratios before publication.
+            Calculator formulas are documented on the Methodology page. Articles and guides are informational material, not a substitute for product-label directions, soil or water testing, or local extension recommendations. No independent expert review is claimed unless a named reviewer is shown on the specific page.
           </p>
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold text-slate-900 mb-4">Content Creation & Review Process</h2>
+          <h2 className="text-2xl font-bold text-slate-900 mb-4">Writing, review, and corrections</h2>
           <p>
-            All educational content and calculator logic is developed by agronomic tech specialists. When we publish a new guide or add a feature, we:
+            Content is prepared and maintained by the site owner. Before relying on a calculation, compare it with the product analysis and verify it for your own conditions. Readers can report errors or suggest updates through the contact page.
           </p>
-          <ul className="list-disc pl-6 mt-4 space-y-2">
-            <li>Cross-reference formulas against standard agricultural textbooks and university extension documentation.</li>
-            <li>Test calculator outputs against real-world, commercial hydroponic and soil-based scenarios.</li>
-            <li>Regularly update our fertilizer database to reflect the latest manufacturer specifications.</li>
-          </ul>
+          <p className="mt-4">TODO(owner): confirm whether AI tools are used for drafting and update this policy to describe the owner&apos;s actual review process.</p>
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold text-slate-900 mb-4">Sources and Standards</h2>
+          <h2 className="text-2xl font-bold text-slate-900 mb-4">Sources</h2>
           <p>
-            We do not rely on anecdotal evidence. Our references include peer-reviewed scientific studies, university agricultural extensions (such as the University of Minnesota and Cornell University), and standard compliance documentation from the USDA NRCS.
+            Sources are linked on the pages where they are used. The Methodology page includes a University of Minnesota Extension resource for general nutrient-management context. No university or government body endorses FertiCalc.
           </p>
         </section>
 
         <section>
           <h2 className="text-2xl font-bold text-slate-900 mb-4">Transparency and Disclaimers</h2>
           <p>
-            While we strive for 100% accuracy, agricultural environments vary widely. The outputs provided by Ferti-Calc should be used as a primary guideline, but growers should always verify pH and EC levels manually before widespread application. Ferti-Calc is an educational tool and does not replace certified agronomist consultation.
+            Please report a suspected factual or calculation error by email. The calculator is a planning aid only; users are responsible for checking each result against product instructions and local guidance.
           </p>
         </section>
       </div>

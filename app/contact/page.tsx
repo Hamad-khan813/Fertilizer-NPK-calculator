@@ -34,6 +34,7 @@ export default function ContactPage() {
             <p className="text-xl font-bold text-primary mt-2">
               <a href="mailto:hamadkhan9996310@gmail.com" className="hover:underline">hamadkhan9996310@gmail.com</a>
             </p>
+            <p className="mt-2 text-sm text-slate-500">TODO(owner): replace the Gmail address with a domain email when available.</p>
           </div>
           <div className="bg-emerald-50 text-emerald-800 p-6 rounded-2xl border border-emerald-100">
             <h3 className="font-bold mb-2">Expected Response Time</h3>

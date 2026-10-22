@@ -3,7 +3,6 @@ const nextConfig = {
   turbopack: {
     root: process.cwd(),
   },
-  /* config options here */
   async headers() {
     return [
       {

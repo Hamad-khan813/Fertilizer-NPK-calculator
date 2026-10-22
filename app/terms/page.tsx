@@ -10,7 +10,7 @@ export default function TermsPage() {
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
       <div className="mb-12">
         <h1 className="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight mb-6">Terms of Use</h1>
-        <p className="text-slate-500 text-sm font-semibold uppercase tracking-wider mb-6">Effective date: September 21, 2026 · Last updated: September 21, 2026</p>
+        <p className="text-slate-500 text-sm font-semibold uppercase tracking-wider mb-6">Last updated: October 22, 2026</p>
       </div>
 
       <div className="space-y-10 text-slate-600 leading-relaxed">
@@ -29,23 +29,23 @@ export default function TermsPage() {
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold text-slate-900 mb-4">3. Disclaimer About Calculation Accuracy</h2>
+          <h2 className="text-2xl font-bold text-slate-900 mb-4">3. Calculator and agronomic disclaimer</h2>
           <p>
-            While we strive for the highest degree of scientific accuracy, the calculations provided by Ferti-Calc are meant as a theoretical guide. Variables such as water quality, temperature, existing soil chemistry, and equipment calibration can alter actual outcomes. Always verify electrical conductivity (EC) and pH levels manually before applying solutions to crops.
+            Calculator results and educational material are estimates and general information only, not agronomic, safety, legal, or regulatory advice. Results may be affected by input errors, product composition, water or soil conditions, units, measurement, and mixing. Always follow the current product label and local recommendations, and verify the calculation before use.
           </p>
         </section>
 
         <section>
           <h2 className="text-2xl font-bold text-slate-900 mb-4">4. No Warranties</h2>
           <p>
-            The Service is provided on an "AS IS" and "AS AVAILABLE" basis without any representations or warranties, expressed or implied. Ferti-Calc makes no warranties regarding the complete accuracy, reliability, or suitability of the information and calculations provided.
+            The Service is provided on an &quot;AS IS&quot; and &quot;AS AVAILABLE&quot; basis without representations or warranties, express or implied. FertiCalc makes no warranty that information or calculations are complete, accurate, current, or suitable for a particular use.
           </p>
         </section>
 
         <section>
           <h2 className="text-2xl font-bold text-slate-900 mb-4">5. Limitation of Liability</h2>
           <p>
-            In no event shall Ferti-Calc, its developers, or affiliates be liable for any direct, indirect, incidental, consequential, or punitive damages—including crop loss, equipment damage, or financial loss—arising out of your use of or inability to use the Service.
+            To the extent permitted by applicable law, FertiCalc and its operator are not liable for losses or damages arising from reliance on calculator results, educational content, fertilizer use, crop loss, equipment damage, or inability to use the Service. Nothing in these Terms excludes liability that cannot legally be excluded.
           </p>
         </section>
 

@@ -3,7 +3,8 @@ import BlogCard from '@/app/components/BlogCard';
 
 export const metadata = {
   title: 'Blog — Fertilizer Guides & Agronomic Tips',
-  description: 'Practical guides on fertilizers, NPK ratios, crop nutrition, and more.',
+  description: 'Articles about fertilizer labels, NPK ratios, crop nutrition, and calculations.',
+  robots: { index: false, follow: true },
 };
 
 export default async function BlogPage() {

@@ -119,7 +119,7 @@ export default function UserGuide() {
             <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-6">
               <h3 className="text-lg font-bold text-slate-900 mb-3">Actual NPK Delivered</h3>
               <p className="text-slate-700 text-sm">
-                May differ slightly from your targets because one fertilizer cannot always perfectly match all three nutrients simultaneously.
+                May differ from your targets because one fertilizer may not match all three requested nutrients at the same time.
               </p>
             </div>
 

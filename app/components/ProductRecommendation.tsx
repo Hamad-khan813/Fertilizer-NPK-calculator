@@ -20,29 +20,29 @@ interface ProductCategory {
 const PRODUCT_CATEGORIES: ProductCategory[] = [
   {
     id: 'veg-hydro',
-    name: 'Smart Leafy Greens Hydroponic Setup',
-    description: 'Optimized for high-nitrogen vegetative growth, perfect for herbs and leafy greens.',
+    name: 'Higher-nitrogen ratio example',
+    description: 'A reference ratio for comparing N-P-K proportions. It is not a crop-specific recommendation.',
     idealRatio: [3, 1, 2],
     urlSlug: 'hydroponic-nutrients'
   },
   {
     id: 'bloom-planter',
-    name: 'Advanced Bloom Planter Kit',
-    description: 'Designed for high-phosphorus flowering and fruiting cycles to maximize yields.',
+    name: 'Higher-phosphate ratio example',
+    description: 'A reference ratio for comparing N-P-K proportions. It is not a crop-specific recommendation.',
     idealRatio: [1, 3, 2],
     urlSlug: 'flowering-npk'
   },
   {
     id: 'root-system',
-    name: 'Deep Root Aeration Planter',
-    description: 'Focuses on phosphorus and potassium balance for robust subsurface root development.',
+    name: 'Root-crop ratio example',
+    description: 'A reference ratio for comparing N-P-K proportions. It is not a crop-specific recommendation.',
     idealRatio: [1, 2, 2],
     urlSlug: 'fertilizer-compatibility'
   },
   {
     id: 'general-utility',
-    name: 'Home Utility Garden Starter Kit',
-    description: 'A perfectly balanced system for general-purpose home gardening and maintenance.',
+    name: 'Equal-parts ratio example',
+    description: 'A reference ratio for comparing N-P-K proportions. It is not a crop-specific recommendation.',
     idealRatio: [1, 1, 1],
     urlSlug: 'what-is-npk'
   }
@@ -66,10 +66,7 @@ function calculateProximityScore(userNPK: [number, number, number], targetNPK: [
 export default function ProductRecommendation({ targetN, targetP, targetK }: ProductRecommendationProps) {
   const bestMatch = useMemo(() => {
     if (targetN === 0 && targetP === 0 && targetK === 0) {
-      return {
-        ...PRODUCT_CATEGORIES[3],
-        matchPercentage: 100,
-      };
+      return PRODUCT_CATEGORIES[3];
     }
 
     let minScore = Infinity;
@@ -83,14 +80,7 @@ export default function ProductRecommendation({ targetN, targetP, targetK }: Pro
       }
     }
 
-    // Proximity score of 0 means perfect match (100%). Maximum possible distance between two normalized 3D vectors is sqrt(2) ≈ 1.414.
-    // Let's calculate ratio match percentage.
-    const matchPercentage = Math.max(0, Math.min(100, Math.round((1 - minScore / 1.414) * 100)));
-
-    return {
-      ...closestCategory,
-      matchPercentage,
-    };
+    return closestCategory;
   }, [targetN, targetP, targetK]);
 
   return (
@@ -100,10 +90,7 @@ export default function ProductRecommendation({ targetN, targetP, targetK }: Pro
           <svg className="w-3.5 h-3.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
           </svg>
-          Recommended Setup
-        </span>
-        <span className="text-xs font-bold text-slate-500 font-mono">
-          {bestMatch.matchPercentage}% Ratio Match
+          Closest example ratio
         </span>
       </div>
 
@@ -118,7 +105,7 @@ export default function ProductRecommendation({ targetN, targetP, targetK }: Pro
           href={`/guides/${bestMatch.urlSlug}`}
           className="inline-flex items-center gap-1 text-xs font-bold text-primary hover:text-primary-dark transition-colors"
         >
-          View Growth Guide
+          Read related guide
           <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
           </svg>

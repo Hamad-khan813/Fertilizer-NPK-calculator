@@ -130,19 +130,6 @@
     "notes": "17-20.5% N. Less acidifying than ammonium sulfate."
   },
   {
-    "id": "43",
-    "name": "Calcium Nitrate",
-    "code": "15-0-0",
-    "N": 15.5,
-    "P": 0.0,
-    "K": 0.0,
-    "form": "granular",
-    "category": "nitrogen",
-    "p_unit": "P2O5",
-    "k_unit": "K2O",
-    "notes": "15-15.5% N. Also supplies calcium. Good for fertigation."
-  },
-  {
     "id": "46",
     "name": "Calcium Nitrate-Urea",
     "code": "34-0-0",
@@ -252,19 +239,6 @@
     "code": "12-51-0",
     "N": 12.0,
     "P": 51.0,
-    "K": 0.0,
-    "form": "granular",
-    "category": "phosphorus",
-    "p_unit": "P2O5",
-    "k_unit": "K2O",
-    "notes": "P expressed as P2O5."
-  },
-  {
-    "id": "202",
-    "name": "Ammonium Phosphate",
-    "code": "11-48-0",
-    "N": 11.0,
-    "P": 48.0,
     "K": 0.0,
     "form": "granular",
     "category": "phosphorus",
@@ -494,19 +468,6 @@
     "notes": "P as P2O5, K as K2O."
   },
   {
-    "id": "453",
-    "name": "Potassium Nitrate (KNO3)",
-    "code": "14-0-44",
-    "N": 14.0,
-    "P": 0.0,
-    "K": 44.0,
-    "form": "granular",
-    "category": "compound",
-    "p_unit": "P2O5",
-    "k_unit": "K2O",
-    "notes": "12-14% N, 44-46% K2O. Excellent for fertigation and foliar."
-  },
-  {
     "id": "458",
     "name": "Potassium-Sodium Nitrate",
     "code": "15-0-14",
@@ -674,19 +635,6 @@
     "p_unit": "P2O5",
     "k_unit": "K2O",
     "notes": "By-product of linseed oil production."
-  },
-  {
-    "id": "901",
-    "name": "Monoammonium Phosphate (MAP)",
-    "code": "12-61-0",
-    "N": 12.0,
-    "P": 61.0,
-    "K": 0.0,
-    "form": "granular",
-    "category": "compound",
-    "p_unit": "P2O5",
-    "k_unit": "K2O",
-    "notes": "Monoammonium Phosphate 12-61-0, high-analysis phosphorus source."
   },
   {
     "id": "902",
